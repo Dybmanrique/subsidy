@@ -338,7 +338,7 @@ return [
         ],
         [
             'text' => 'Requisitos',
-            'url' => 'admin/dashboard',
+            'route' => 'admin.requirements.index',
             'icon' => 'far fa-fw fa-file',
         ],
         [
