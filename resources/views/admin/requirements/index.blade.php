@@ -77,7 +77,7 @@
                             `<div class="d-flex flex-row justify-content-start">
                                 <a class="btn btn-primary btn-sm mr-2 btn-edit" href="{{ route('admin.requirements.edit', ':id') }}"><i class="far fa-edit"></i> Editar</a>
                                 <button class="btn btn-sm btn-danger btn-delete" type="button"><i class=" fas fa-trash"></i> Eliminar</button>
-                            </div>`
+                            </div>`.replace(':id', data.id)
                         );
                     }
                 }
