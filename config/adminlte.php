@@ -311,30 +311,13 @@ return [
             'text' => 'search',
         ],
         [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-        ],
-        [
-            'text' => 'pages',
-            'url' => 'admin/pages',
+            'text' => 'Dashboard',
+            'route' => 'admin.dashboard',
             'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'POSTULACIONES'],
         [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'multilevel',
+            'text' => 'Intercambios',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [
@@ -344,48 +327,56 @@ return [
                 [
                     'text' => 'level_one',
                     'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
                 ],
             ],
         ],
-        ['header' => 'labels'],
+        ['header' => 'SUBVENCIONES'],
         [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
+            'text' => 'Subvenciones',
+            'url' => 'admin/dashboard',
+            'icon' => 'far fa-fw fa-file',
         ],
         [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
+            'text' => 'Requisitos',
+            'url' => 'admin/dashboard',
+            'icon' => 'far fa-fw fa-file',
         ],
         [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
+            'text' => 'Convocatorias',
+            'url' => 'admin/dashboard',
+            'icon' => 'far fa-fw fa-file',
+        ],
+        [
+            'text' => 'Vicerrectores',
+            'url' => 'admin/dashboard',
+            'icon' => 'far fa-fw fa-file',
+        ],
+        ['header' => 'UNIVERSIDAD'],
+        [
+            'text' => 'Estudiantes',
+            'url' => 'admin/dashboard',
+            'icon' => 'far fa-fw fa-file',
+        ],
+        [
+            'text' => 'Escuelas',
+            'url' => 'admin/dashboard',
+            'icon' => 'far fa-fw fa-file',
+        ],
+        [
+            'text' => 'Facultades',
+            'url' => 'admin/dashboard',
+            'icon' => 'far fa-fw fa-file',
+        ],
+        ['header' => 'SISTEMA'],
+        [
+            'text' => 'Usuarios',
+            'url' => 'admin/dashboard',
+            'icon' => 'far fa-fw fa-file',
+        ],
+        [
+            'text' => 'Roles',
+            'url' => 'admin/dashboard',
+            'icon' => 'far fa-fw fa-file',
         ],
     ],
 
