@@ -59,7 +59,10 @@
                     }
                 },
                 {
-                    "data": "max_megabytes"
+                    "data": "max_megabytes",
+                    "render": function(data, type, row, meta) {
+                        return `${data} MB`;
+                    }
                 },
                 {
                     "data": "name"
