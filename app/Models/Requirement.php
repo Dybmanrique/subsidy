@@ -14,4 +14,8 @@ class Requirement extends Model
         'description',
         'max_megabytes'
     ];
+
+    public function subsidies(){
+        return $this->belongsToMany(Subsidy::class)->withPivot('is_required');
+    }
 }
