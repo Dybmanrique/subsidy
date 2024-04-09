@@ -59,22 +59,27 @@ class FormEdit extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            // 'status' => 'required',
+            'status' => 'required',
         ]);
 
-        $this->subsidy->update([
-            'name' => $this->name,
-            'status' => $this->status,
-            'description' => null,
-        ]);
-
-        $requirements_list_map = [];
-        foreach ($this->requirements_list as $key => $value) {
-            $requirements_list_map[$key] = ['is_required' => $value['is_required']];
+        try {
+            $description = (trim($this->description) == "") ? null : $this->description;
+            $this->subsidy->update([
+                'name' => $this->name,
+                'status' => $this->status,
+                'description' => $description,
+            ]);
+    
+            $requirements_list_map = [];
+            foreach ($this->requirements_list as $key => $value) {
+                $requirements_list_map[$key] = ['is_required' => $value['is_required']];
+            }
+    
+            $this->subsidy->requirements()->sync($requirements_list_map);
+            $this->dispatch('message', code: '200', content: 'Se ha actualizado el registro');   
+        } catch (\Exception $ex) {
+            $this->dispatch('message', code: '500', content: 'No se pudo actualizar');
         }
-
-        $this->subsidy->requirements()->sync($requirements_list_map);
-        $this->dispatch('message', code: '200', content: 'Se ha editado el registro');
     }
 
     public function render()
