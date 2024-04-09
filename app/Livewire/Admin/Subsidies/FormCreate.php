@@ -34,7 +34,7 @@ class FormCreate extends Component
     #[On('delete-requirement')]
     public function deleteRequirement($id)
     {
-        $this->requirements_list = array_filter($this->requirements_list, fn ($value, $key) => $value['id'] !== $id, ARRAY_FILTER_USE_BOTH);
+        $this->requirements_list = array_filter($this->requirements_list, fn ($value, $key) => $key !== $id, ARRAY_FILTER_USE_BOTH);
     }
 
     #[On('change-requirement')]
@@ -48,19 +48,18 @@ class FormCreate extends Component
         }
     }
 
-
-
     public function save()
     {
 
         $this->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            // 'status' => 'required',
+            'status' => 'required',
         ]);
 
         $subsidy = Subsidy::create([
             'name' => $this->name,
+            'status' => $this->status,
             'description' => null,
         ]);
 

@@ -15,6 +15,24 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <p class="text-bold">Estado*:</p>
+                                    <div class="form-group border p-2 mb-1 rounded">
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="active_status" wire:model='status' class="custom-control-input"
+                                                value="activo" name="statusRadio" required>
+                                            <label class="custom-control-label" for="active_status">Activo</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="inactive_status" wire:model='status' class="custom-control-input"
+                                                value="inactivo" name="statusRadio">
+                                            <label class="custom-control-label" for="inactive_status">Inactivo</label>
+                                        </div>
+                                    </div>
+                                    @error('status')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="description">Descripción:</label>
                                     <textarea wire:model='description' id="description" rows="6" class="form-control"
                                         placeholder="Ingrese una descripción"></textarea>
