@@ -333,7 +333,7 @@ return [
         ['header' => 'SUBVENCIONES'],
         [
             'text' => 'Subvenciones',
-            'url' => 'admin/dashboard',
+            'route' => 'admin.subsidies.index',
             'icon' => 'far fa-fw fa-file',
         ],
         [
