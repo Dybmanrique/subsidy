@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('requirement_subsidy', function (Blueprint $table) {
-            $table->foreignId('requirement_id')->constrained();
-            $table->foreignId('subsidy_id')->constrained();
+            $table->foreignId('requirement_id')->constrained()->onDelete('cascade');
+            $table->foreignId('subsidy_id')->constrained()->onDelete('cascade');
             $table->boolean('is_required');
             $table->timestamps();
         });

@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('postulation_requirement', function (Blueprint $table) {
-            $table->foreignId('postulation_id')->constrained();
-            $table->foreignId('requirement_id')->constrained();
+            $table->foreignId('postulation_id')->constrained()->onDelete('cascade');
+            $table->foreignId('requirement_id')->constrained()->onDelete('cascade');
             $table->string('file');
             $table->timestamps();
         });
