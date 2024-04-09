@@ -17,5 +17,5 @@ Route::post('/admin/requisitos/eliminar', [RequirementController::class, 'destro
 Route::get('/admin/subvenciones', [SubsidyController::class, 'index'])->name('admin.subsidies.index');
 Route::get('/admin/subvenciones/data', [SubsidyController::class, 'data'])->name('admin.subsidies.data');
 Route::get('/admin/subvenciones/crear', [SubsidyController::class, 'create'])->name('admin.subsidies.create');
-Route::get('/admin/subvenciones/{requirement}/editar', [SubsidyController::class, 'edit'])->name('admin.subsidies.edit');
+Route::get('/admin/subvenciones/{subsidy}/editar', [SubsidyController::class, 'edit'])->name('admin.subsidies.edit');
 Route::post('/admin/subvenciones/eliminar', [SubsidyController::class, 'destroy'])->name('admin.subsidies.destroy');
