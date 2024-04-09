@@ -57,20 +57,25 @@ class FormCreate extends Component
             'status' => 'required',
         ]);
 
-        $subsidy = Subsidy::create([
-            'name' => $this->name,
-            'status' => $this->status,
-            'description' => null,
-        ]);
+        try {
+            $description = (trim($this->description) == "") ? null : $this->description;
+            $subsidy = Subsidy::create([
+                'name' => $this->name,
+                'status' => $this->status,
+                'description' => $description,
+            ]);
 
-        $requirements_list_map = [];
-        foreach ($this->requirements_list as $key => $value) {
-            $requirements_list_map[$key] = ['is_required' => $value['is_required']];
+            $requirements_list_map = [];
+            foreach ($this->requirements_list as $key => $value) {
+                $requirements_list_map[$key] = ['is_required' => $value['is_required']];
+            }
+
+            $subsidy->requirements()->attach($requirements_list_map);
+            $this->reset(['name', 'description', 'requirements_list', 'status']);
+            $this->dispatch('message', code: '200', content: 'Se ha creado');
+        } catch (\Exception $ex) {
+            $this->dispatch('message', code: '500', content: 'No se pudo crear la sede');
         }
-
-        $subsidy->requirements()->attach($requirements_list_map);
-        $this->reset(['name', 'description', 'requirements_list', 'status']);
-        $this->dispatch('message', code: '200', content: 'Se ha guardado el registro');
     }
 
     public function render()
