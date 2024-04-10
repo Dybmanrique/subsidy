@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\RequirementController;
 use App\Http\Controllers\Admin\SubsidyController;
 use App\Http\Controllers\Admin\VicerrectorController;
@@ -26,3 +27,9 @@ Route::get('/admin/vicerrectores/data', [VicerrectorController::class, 'data'])-
 Route::get('/admin/vicerrectores/crear', [VicerrectorController::class, 'create'])->name('admin.vicerrectors.create');
 Route::get('/admin/vicerrectores/{vicerrector}/editar', [VicerrectorController::class, 'edit'])->name('admin.vicerrectors.edit');
 Route::post('/admin/vicerrectores/eliminar', [VicerrectorController::class, 'destroy'])->name('admin.vicerrectors.destroy');
+
+Route::get('/admin/convocatorias', [AnnouncementController::class, 'index'])->name('admin.announcements.index');
+Route::get('/admin/convocatorias/data', [AnnouncementController::class, 'data'])->name('admin.announcements.data');
+Route::get('/admin/convocatorias/crear', [AnnouncementController::class, 'create'])->name('admin.announcements.create');
+Route::get('/admin/convocatorias/{announcement}/editar', [AnnouncementController::class, 'edit'])->name('admin.announcements.edit');
+Route::post('/admin/convocatorias/eliminar', [AnnouncementController::class, 'destroy'])->name('admin.announcements.destroy');
