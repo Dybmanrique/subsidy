@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+            $table->string('dni',8)->unique();
+            $table->string('phone');
             $table->enum('condition',['estudiante','egresado']);
             $table->foreignId('school_id')->constrained();
             $table->foreignId('user_id')->constrained();
