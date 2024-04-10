@@ -38,6 +38,7 @@ class FormCreate extends Component
                 'name' => $this->name,
                 'last_name' => $this->last_name,
                 'email' => $this->email,
+                'email_verified_at' => date('Y-m-d H:i:s'),
                 'password' => Hash::make($this->password),
             ]);
     
