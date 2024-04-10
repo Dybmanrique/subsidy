@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\RequirementController;
 use App\Http\Controllers\Admin\SubsidyController;
+use App\Http\Controllers\Admin\VicerrectorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,3 +20,9 @@ Route::get('/admin/subvenciones/data', [SubsidyController::class, 'data'])->name
 Route::get('/admin/subvenciones/crear', [SubsidyController::class, 'create'])->name('admin.subsidies.create');
 Route::get('/admin/subvenciones/{subsidy}/editar', [SubsidyController::class, 'edit'])->name('admin.subsidies.edit');
 Route::post('/admin/subvenciones/eliminar', [SubsidyController::class, 'destroy'])->name('admin.subsidies.destroy');
+
+Route::get('/admin/vicerrectores', [VicerrectorController::class, 'index'])->name('admin.vicerrectors.index');
+Route::get('/admin/vicerrectores/data', [VicerrectorController::class, 'data'])->name('admin.vicerrectors.data');
+Route::get('/admin/vicerrectores/crear', [VicerrectorController::class, 'create'])->name('admin.vicerrectors.create');
+Route::get('/admin/vicerrectores/{vicerrector}/editar', [VicerrectorController::class, 'edit'])->name('admin.vicerrectors.edit');
+Route::post('/admin/vicerrectores/eliminar', [VicerrectorController::class, 'destroy'])->name('admin.vicerrectors.destroy');
