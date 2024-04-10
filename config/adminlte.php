@@ -343,7 +343,7 @@ return [
         ],
         [
             'text' => 'Convocatorias',
-            'url' => 'admin/dashboard',
+            'route' => 'admin.announcements.index',
             'icon' => 'far fa-fw fa-file',
         ],
         [
