@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\RequirementController;
+use App\Http\Controllers\Admin\SchoolController;
 use App\Http\Controllers\Admin\SubsidyController;
 use App\Http\Controllers\Admin\VicerrectorController;
 use Illuminate\Support\Facades\Route;
@@ -40,3 +41,9 @@ Route::get('/admin/facultades/data', [FacultyController::class, 'data'])->name('
 Route::get('/admin/facultades/crear', [FacultyController::class, 'create'])->name('admin.faculties.create');
 Route::get('/admin/facultades/{faculty}/editar', [FacultyController::class, 'edit'])->name('admin.faculties.edit');
 Route::post('/admin/facultades/eliminar', [FacultyController::class, 'destroy'])->name('admin.faculties.destroy');
+
+Route::get('/admin/escuelas', [SchoolController::class, 'index'])->name('admin.schools.index');
+Route::get('/admin/escuelas/data', [SchoolController::class, 'data'])->name('admin.schools.data');
+Route::get('/admin/escuelas/crear', [SchoolController::class, 'create'])->name('admin.schools.create');
+Route::get('/admin/escuelas/{school}/editar', [SchoolController::class, 'edit'])->name('admin.schools.edit');
+Route::post('/admin/escuelas/eliminar', [SchoolController::class, 'destroy'])->name('admin.schools.destroy');
