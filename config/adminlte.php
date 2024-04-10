@@ -313,7 +313,7 @@ return [
         [
             'text' => 'Dashboard',
             'route' => 'admin.dashboard',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-tachometer-alt',
         ],
         ['header' => 'POSTULACIONES'],
         [
@@ -334,49 +334,49 @@ return [
         [
             'text' => 'Subvenciones',
             'route' => 'admin.subsidies.index',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-wallet',
         ],
         [
             'text' => 'Requisitos',
             'route' => 'admin.requirements.index',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-folder-open',
         ],
         [
             'text' => 'Convocatorias',
             'route' => 'admin.announcements.index',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-calendar-alt',
         ],
         [
             'text' => 'Vicerrectores',
             'route' => 'admin.vicerrectors.index',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-street-view',
         ],
         ['header' => 'UNIVERSIDAD'],
         [
             'text' => 'Estudiantes',
             'route' => 'admin.students.index',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-user-graduate',
         ],
         [
             'text' => 'Escuelas',
             'route' => 'admin.schools.index',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-school',
         ],
         [
             'text' => 'Facultades',
             'route' => 'admin.faculties.index',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-building',
         ],
         ['header' => 'SISTEMA'],
         [
-            'text' => 'Usuarios',
+            'text' => 'Usuarios administrativos',
             'url' => 'admin/dashboard',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-users-cog',
         ],
         [
             'text' => 'Roles',
             'url' => 'admin/dashboard',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-cogs',
         ],
     ],
 
