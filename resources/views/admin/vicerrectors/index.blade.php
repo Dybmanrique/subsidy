@@ -57,7 +57,10 @@
                     }
                 },
                 {
-                    "data": "name"
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return `${data.lastname} ${data.name}`;
+                    }
                 },
                 {
                     "data": null,
