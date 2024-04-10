@@ -359,7 +359,7 @@ return [
         ],
         [
             'text' => 'Escuelas',
-            'url' => 'admin/dashboard',
+            'route' => 'admin.schools.index',
             'icon' => 'far fa-fw fa-file',
         ],
         [
