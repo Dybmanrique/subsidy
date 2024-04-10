@@ -11,6 +11,6 @@ class Vicerrector extends Model
 
     protected $fillable = [
         'name',
-        'lastname'
+        'last_name'
     ];
 }

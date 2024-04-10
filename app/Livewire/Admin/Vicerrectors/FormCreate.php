@@ -12,16 +12,16 @@ class FormCreate extends Component
     public $name;
 
     #[Validate('required|string|max:255')] 
-    public $lastname;
+    public $last_name;
 
     public function save(){
         $this->validate();
         try {
             Vicerrector::create([
                 "name" => $this->name,
-                "lastname" => $this->lastname,
+                "last_name" => $this->last_name,
             ]);
-            $this->reset('name','lastname');
+            $this->reset('name','last_name');
             $this->dispatch('message', code: '200', content: 'Se ha creado');    
         } catch (\Exception $ex) {
             $this->dispatch('message', code: '500', content: 'No se pudo crear');    

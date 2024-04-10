@@ -11,10 +11,10 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="lastname">Apellidos*:</label>
-                    <input type="text" wire:model='lastname' id="lastname" class="form-control"
+                    <label for="last_name">Apellidos*:</label>
+                    <input type="text" wire:model='last_name' id="last_name" class="form-control"
                         placeholder="Ingrese el nombre" required>
-                    @error('lastname')
+                    @error('last_name')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>

@@ -59,7 +59,7 @@
                 {
                     "data": null,
                     "render": function(data, type, row, meta) {
-                        return `${data.lastname} ${data.name}`;
+                        return `${data.last_name} ${data.name}`;
                     }
                 },
                 {

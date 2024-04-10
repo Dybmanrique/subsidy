@@ -13,11 +13,11 @@ class FormEdit extends Component
     public $name;
 
     #[Validate('required|string|max:255')] 
-    public $lastname;
+    public $last_name;
 
     public function mount() {
         $this->name = $this->vicerrector->name;
-        $this->lastname = $this->vicerrector->lastname;
+        $this->last_name = $this->vicerrector->last_name;
     }
 
     public function save(){
@@ -25,7 +25,7 @@ class FormEdit extends Component
         try {
             $this->vicerrector->update([
                 "name" => $this->name,
-                "lastname" => $this->lastname,
+                "last_name" => $this->last_name,
             ]);
             $this->dispatch('message', code: '200', content: 'Se ha actualizado');    
         } catch (\Exception $ex) {
