@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AnnouncementController;
+use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\RequirementController;
 use App\Http\Controllers\Admin\SubsidyController;
 use App\Http\Controllers\Admin\VicerrectorController;
@@ -33,3 +34,9 @@ Route::get('/admin/convocatorias/data', [AnnouncementController::class, 'data'])
 Route::get('/admin/convocatorias/crear', [AnnouncementController::class, 'create'])->name('admin.announcements.create');
 Route::get('/admin/convocatorias/{announcement}/editar', [AnnouncementController::class, 'edit'])->name('admin.announcements.edit');
 Route::post('/admin/convocatorias/eliminar', [AnnouncementController::class, 'destroy'])->name('admin.announcements.destroy');
+
+Route::get('/admin/facultades', [FacultyController::class, 'index'])->name('admin.faculties.index');
+Route::get('/admin/facultades/data', [FacultyController::class, 'data'])->name('admin.faculties.data');
+Route::get('/admin/facultades/crear', [FacultyController::class, 'create'])->name('admin.faculties.create');
+Route::get('/admin/facultades/{faculty}/editar', [FacultyController::class, 'edit'])->name('admin.faculties.edit');
+Route::post('/admin/facultades/eliminar', [FacultyController::class, 'destroy'])->name('admin.faculties.destroy');
