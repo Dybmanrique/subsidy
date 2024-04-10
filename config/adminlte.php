@@ -348,7 +348,7 @@ return [
         ],
         [
             'text' => 'Vicerrectores',
-            'url' => 'admin/dashboard',
+            'route' => 'admin.vicerrectors.index',
             'icon' => 'far fa-fw fa-file',
         ],
         ['header' => 'UNIVERSIDAD'],
