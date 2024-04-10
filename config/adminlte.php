@@ -364,7 +364,7 @@ return [
         ],
         [
             'text' => 'Facultades',
-            'url' => 'admin/dashboard',
+            'route' => 'admin.faculties.index',
             'icon' => 'far fa-fw fa-file',
         ],
         ['header' => 'SISTEMA'],
