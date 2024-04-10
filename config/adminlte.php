@@ -354,7 +354,7 @@ return [
         ['header' => 'UNIVERSIDAD'],
         [
             'text' => 'Estudiantes',
-            'url' => 'admin/dashboard',
+            'route' => 'admin.students.index',
             'icon' => 'far fa-fw fa-file',
         ],
         [
