@@ -119,7 +119,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{route('admin.subsidies.destroy')}}",
+                            url: "{{ route('admin.subsidies.destroy') }}",
                             type: "POST",
                             dataType: 'json',
                             data: {
@@ -133,6 +133,9 @@
                                     icon: 'success',
                                     title: response.message
                                 });
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 1000);
                             } else if (response.code == '500') {
                                 Toast.fire({
                                     icon: 'info',
