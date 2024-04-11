@@ -32,11 +32,11 @@ class AppServiceProvider extends ServiceProvider
                     'submenu' => [
                         [
                             'text' => 'Última convocatoria',
-                            'url' => '#',
+                            'url' => "#",
                         ],
                         [
                             'text' => 'Todos',
-                            'url' => '#',
+                            'url' => route('admin.postulations.all_index', $subsidy['id']),
                         ],
                     ],
                 ];
