@@ -315,21 +315,8 @@ return [
             'route' => 'admin.dashboard',
             'icon' => 'fas fa-fw fa-tachometer-alt',
         ],
-        ['header' => 'POSTULACIONES'],
-        [
-            'text' => 'Intercambios',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
+        ['header' => 'POSTULACIONES', 'key' => 'postulations'],
+        //The options in this section are added dynamically in AppServiceProvider
         ['header' => 'SUBVENCIONES'],
         [
             'text' => 'Subvenciones',
