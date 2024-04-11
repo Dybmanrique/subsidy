@@ -144,5 +144,11 @@
                 checked: this.checked
             })
         });
+
+        Livewire.on('created', function(message) {
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+        })
     </script>
 @stop

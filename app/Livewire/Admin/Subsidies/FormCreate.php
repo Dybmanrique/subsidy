@@ -72,7 +72,8 @@ class FormCreate extends Component
 
             $subsidy->requirements()->attach($requirements_list_map);
             $this->reset(['name', 'description', 'requirements_list', 'status']);
-            $this->dispatch('message', code: '200', content: 'Se ha creado');
+            $this->dispatch('message', code: '200', content: 'Creado, se actualizará la página');
+            $this->dispatch('created');
         } catch (\Exception $ex) {
             $this->dispatch('message', code: '500', content: 'No se pudo crear la sede');
         }
