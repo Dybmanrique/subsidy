@@ -18,13 +18,13 @@
                                     <p class="text-bold">Estado*:</p>
                                     <div class="form-group border p-2 mb-1 rounded">
                                         <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="active_status" wire:model='status' class="custom-control-input"
-                                                value="activo" name="statusRadio" required>
+                                            <input type="radio" id="active_status" wire:model='status'
+                                                class="custom-control-input" value="activo" name="statusRadio" required>
                                             <label class="custom-control-label" for="active_status">Activo</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="inactive_status" wire:model='status' class="custom-control-input"
-                                                value="inactivo" name="statusRadio">
+                                            <input type="radio" id="inactive_status" wire:model='status'
+                                                class="custom-control-input" value="inactivo" name="statusRadio">
                                             <label class="custom-control-label" for="inactive_status">Inactivo</label>
                                         </div>
                                     </div>
@@ -66,41 +66,41 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    @if (count($requirements_list)>0)
-                                        
-                                    <table class="table table-sm">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Requisito</th>
-                                                <th scope="col">Obligatorio</th>
-                                                <th scope="col">Eliminar</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($requirements_list as $id => $requirement)
+                                    @if (count($requirements_list) > 0)
+
+                                        <table class="table table-sm">
+                                            <thead>
                                                 <tr>
-                                                    <td>{{ $requirement['name'] }}</td>
-                                                    <td>
-                                                        <div class="custom-control custom-switch">
-                                                            <input type="checkbox"
-                                                                class="custom-control-input check-is-required"
-                                                                id="customSwitch{{ $id }}"
-                                                                data-id='{{ $id }}'
-                                                                @php echo ($requirement['is_required']) ? 'checked' : '' @endphp>
-                                                            <label class="custom-control-label"
-                                                                for="customSwitch{{ $id }}"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" data-id='{{ $id }}'
-                                                            class="btn btn-sm btn-danger btn-delete-requirement">x</button>
-                                                    </td>
+                                                    <th scope="col">Requisito</th>
+                                                    <th scope="col">Obligatorio</th>
+                                                    <th scope="col">Eliminar</th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($requirements_list as $id => $requirement)
+                                                    <tr>
+                                                        <td>{{ $requirement['name'] }}</td>
+                                                        <td>
+                                                            <div class="custom-control custom-switch">
+                                                                <input type="checkbox"
+                                                                    class="custom-control-input check-is-required"
+                                                                    id="customSwitch{{ $id }}"
+                                                                    data-id='{{ $id }}'
+                                                                    @php echo ($requirement['is_required']) ? 'checked' : '' @endphp>
+                                                                <label class="custom-control-label"
+                                                                    for="customSwitch{{ $id }}"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" data-id='{{ $id }}'
+                                                                class="btn btn-sm btn-danger btn-delete-requirement">x</button>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     @else
-                                    <p class="mb-0">Aquí aparecerán los requisitos que desee agregar.</p>
+                                        <p class="mb-0">Aquí aparecerán los requisitos que desee agregar.</p>
                                     @endif
                                 </div>
                             </div>
@@ -144,5 +144,11 @@
                 checked: this.checked
             })
         });
+
+        Livewire.on('updated', function(message) {
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+        })
     </script>
 @stop

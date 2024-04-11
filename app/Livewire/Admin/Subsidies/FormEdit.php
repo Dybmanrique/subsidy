@@ -76,7 +76,8 @@ class FormEdit extends Component
             }
     
             $this->subsidy->requirements()->sync($requirements_list_map);
-            $this->dispatch('message', code: '200', content: 'Se ha actualizado el registro');   
+            $this->dispatch('message', code: '200', content: 'Hecho, se actualizará la página');
+            $this->dispatch('updated');
         } catch (\Exception $ex) {
             $this->dispatch('message', code: '500', content: 'No se pudo actualizar');
         }
