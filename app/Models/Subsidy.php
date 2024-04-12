@@ -18,4 +18,8 @@ class Subsidy extends Model
     public function requirements(){
         return $this->belongsToMany(Requirement::class)->withPivot('is_required');
     }
+
+    public function announcement(){
+        return $this->hasMany(Announcement::class);
+    }
 }
