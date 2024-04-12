@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('postulations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('advicer')->nullable();
-            $table->enum('status',['pendiente']);
+            $table->enum('status',['pendiente'])->default('pendiente');
             $table->foreignId('student_id')->constrained();
             $table->foreignId('announcement_id')->constrained();
             $table->timestamps();
