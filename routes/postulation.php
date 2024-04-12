@@ -1,7 +1,6 @@
 <?php
 
+use App\Http\Controllers\Postulation\PostulationController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return 'hol';
-});
+Route::get('/', [PostulationController::class, 'index'])->middleware(['auth', 'verified'])->name('postulations.index');
