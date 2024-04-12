@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Postulation extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'advicer',
+        'status',
+        'student_id',
+        'announcement_id',
+    ];
 }
