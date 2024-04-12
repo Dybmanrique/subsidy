@@ -15,7 +15,7 @@ class AnnouncementController extends Controller
 
     public function data()
     {
-        return Announcement::select('id','name','start','end','vicerrector_id','subsidy_id')->with(['vicerrector:id,name,lastname','subsidy:id,name'])->get();
+        return Announcement::select('id','name','start','end','vicerrector_id','subsidy_id')->with(['vicerrector:id,name,last_name','subsidy:id,name'])->get();
     }
 
     public function create()
