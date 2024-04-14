@@ -18,12 +18,12 @@ class SubventionsList extends Component
         $subsidy = Subsidy::find($subsidy_id);
         $announcement = $subsidy->announcement()->latest()->first();
         
-        Postulation::create([
+        $postulation = Postulation::create([
             'student_id' => auth()->user()->student->id,
             'announcement_id' => $announcement->id,
         ]);
 
-        $this->dispatch('message', code: '200', content: 'Usted ha postulado correctamente, suba sus archivos');
+        redirect()->route('postulations.postulate', $postulation);
     }
 
     public function render()
