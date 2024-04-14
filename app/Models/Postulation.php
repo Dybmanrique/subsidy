@@ -16,4 +16,12 @@ class Postulation extends Model
         'student_id',
         'announcement_id',
     ];
+
+    public function announcement(){
+        return $this->belongsTo(Announcement::class);
+    }
+
+    public function requirements(){
+        return $this->belongsToMany(Requirement::class)->withPivot('file');
+    }
 }
