@@ -14,7 +14,6 @@ class PostulationController extends Controller
         return view('postulations.index', compact('subsidies'));
     }
     public function postulate(Postulation $postulation) {
-        // dd($postulation->requirements()->where('requirement_id',1)->first());
         return view('postulations.postulate', compact('postulation'));
     }
 }
