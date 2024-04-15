@@ -13,6 +13,11 @@ class PostulationController extends Controller
         $subsidies = Subsidy::where('status','activo')->get();
         return view('postulations.index', compact('subsidies'));
     }
+
+    public function my_postulations(){
+        return view('postulations.my_postulations');
+    }
+
     public function postulate(Postulation $postulation) {
         return view('postulations.postulate', compact('postulation'));
     }
