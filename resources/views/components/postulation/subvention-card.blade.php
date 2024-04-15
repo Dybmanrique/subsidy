@@ -1,16 +1,14 @@
 <div>
-    <div class="p-6 lg:p-8 bg-white border-b border-gray-200 grid grid-cols-5 gap-4">
-        <div class="col-span-1">
-            <img class="img-fluid rounded" src="{{$img}}"
-                alt="Imagen de subvención">
+      
+    <div class="w-full my-1 bg-white border border-gray-200 rounded-lg shadow ">
+        <a href="#">
+            <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
+        </a>
+        <div class="p-5">
+            <a href="#">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">{{$title}}</h5>
+            </a>
+            <p class="mb-3 font-normal text-gray-700 ">{{ $slot }}</p>
         </div>
-        <div class="col-span-4">
-            <h2 class="text-1xl font-medium text-gray-900">
-                {{$title}}
-            </h2>
-            <div class="mt-4 text-gray-500 leading-relaxed">
-                {{ $slot }}
-            </div>
-        </div>
-    </div>    
+    </div> 
 </div>

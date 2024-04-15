@@ -1,18 +1,24 @@
 <div>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                @foreach ($subsidies as $subsidy)
-                    <x-postulation.subvention-card
-                        img="https://unasam.edu.pe/web/noticiaunasam/noticia-04-04-2023-11-24-23.png"
-                        title="{{ $subsidy->name }}">
-                        <span class="whitespace-pre-wrap">{{ $subsidy->description }}</span>
-                        <div class="flex justify-end items-end h-full mt-2">
-                            <x-primary-button onclick="postulate({{ $subsidy->id }})">Postular</x-primary-button>
-                        </div>
-                    </x-postulation.subvention-card>
-                @endforeach
-            </div>
+
+            @foreach ($subsidies as $subsidy)
+                <x-postulation.subvention-card
+                    img="https://unasam.edu.pe/web/noticiaunasam/noticia-04-04-2023-11-24-23.png"
+                    title="{{ $subsidy->name }}">
+                    <div class="whitespace-pre-wrap mb-2">{{ $subsidy->description }}</div>
+                    <x-primary-button onclick="postulate({{ $subsidy->id }})">
+                        Postular
+                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 5h12m0 0L9 1m4 4L9 9" />
+                        </svg>
+                    </x-primary-button>
+                </x-postulation.subvention-card>
+            @endforeach
+
+
         </div>
     </div>
     @push('scripts')
