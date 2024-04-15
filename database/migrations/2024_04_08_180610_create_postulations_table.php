@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('postulations', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
+            $table->string('name');
             $table->string('adviser')->nullable();
+            $table->string('uuid')->unique();
             $table->enum('status', [
                 'Subiendo archivos',
                 'Pendiente de revisión',
@@ -25,6 +26,7 @@ return new class extends Migration
             ])->default('Subiendo archivos');
             $table->foreignId('student_id')->constrained();
             $table->foreignId('announcement_id')->constrained();
+            $table->foreignId('activity_id')->constrained();
             $table->timestamps();
         });
     }
