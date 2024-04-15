@@ -14,11 +14,12 @@ class SubventionsList extends Component
         $this->subsidies = Subsidy::where('status','activo')->get();
     }
 
-    public function postulate($subsidy_id){
+    public function postulate($subsidy_id, $subsidy_name){
         $subsidy = Subsidy::find($subsidy_id);
         $announcement = $subsidy->announcement()->latest()->first();
         
         $postulation = Postulation::create([
+            'name' => $subsidy_name,
             'student_id' => auth()->user()->student->id,
             'announcement_id' => $announcement->id,
         ]);

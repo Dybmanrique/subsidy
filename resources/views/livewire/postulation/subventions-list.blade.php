@@ -8,10 +8,7 @@
                         title="{{ $subsidy->name }}">
                         <span class="whitespace-pre-wrap">{{ $subsidy->description }}</span>
                         <div class="flex justify-end items-end h-full mt-2">
-                            {{-- <form action="" method="POST" class="formularioPostulacion">
-                                @csrf
-                            </form> --}}
-                            <x-primary-button onclick="postulate({{$subsidy->id}})">Postular</x-primary-button>
+                            <x-primary-button onclick="postulate({{ $subsidy->id }})">Postular</x-primary-button>
                         </div>
                     </x-postulation.subvention-card>
                 @endforeach
@@ -23,19 +20,28 @@
         <script>
             function postulate(id) {
                 Swal.fire({
-                    title: '¿Estas seguro?',
-                    text: "IMPORTANTE: Recuerde que se puede postular sólo a UNA subvención por año. Si tiene dudas puede leer el REGLAMENTO",
-                    icon: 'warning',
+                    title: '¿Esta seguro?',
+                    html: "<p><span class='font-bold'>IMPORTANTE:</span> Recuerde que se puede postular sólo a UNA subvención por año. Si tiene dudas puede leer el REGLAMENTO</p><br><p class='text-left font-bold'>Nombre de la actividad:<p>",
+                    input: 'text',
+                    inputAttributes: {
+                        autocapitalize: 'off',
+                        style: ' border-radius: 5px;'
+                    },
                     showCancelButton: true,
+                    confirmButtonText: 'POSTULAR',
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si, Postular',
-                    cancelButtonText: 'No'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        @this.postulate(id)
-                    }
-                })
+                    cancelButtonText: 'CANCELAR',
+                    showLoaderOnConfirm: true,
+                    preConfirm: (name) => {
+                        if (!name) {
+                            Swal.showValidationMessage('Por favor ingresa el nombre de la actividad');
+                            return name;
+                        }
+                        @this.postulate(id, name)
+                    },
+                    allowOutsideClick: () => !Swal.isLoading()
+                });
             }
         </script>
     @endpush
