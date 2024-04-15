@@ -20,7 +20,7 @@
                             @endif
 
                             <x-primary-button>Generar Solicitud</x-primary-button>
-                            <x-primary-button>Ver documentos</x-primary-button>
+                            <x-primary-link href="{{ route('postulations.view_documents', $postulation->id) }}" target="_blank">Ver documentos</x-primary-link>
                         </div>
                     </div>
                 </div>
