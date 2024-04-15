@@ -69,23 +69,27 @@
                             @foreach ($requirements as $index => $requirement)
                                 <li>
                                     <a href="#"
-                                        class="inline-flex items-center px-4 py-3 mb-1 rounded-lg bg-gray-50 hover:text-gray-100 hover:bg-blue-700 w-full"
+                                        class="text-nowrap inline-flex items-center px-4 py-3 mb-1 rounded-lg bg-gray-50 hover:text-gray-100 hover:bg-blue-700 w-full"
                                         x-on:click="openTab = {{ $index }}"
                                         :class="{ 'bg-blue-700 text-white': openTab === {{ $index }} }">
-                                        {{ $requirement->name }}
+                                        Requisito {{ $index + 1 }}
                                     </a>
                                 </li>
                             @endforeach
-
                         </ul>
+
                         @foreach ($requirements as $index => $requirement)
                             <div x-show="openTab === {{ $index }}"
                                 class="transition-all duration-300 p-6 bg-gray-50 text-medium text-gray-500  rounded-lg w-full">
                                 <h3 class="text-lg font-bold text-gray-900  mb-2">{{ $requirement->name }}</h3>
                                 <p class="mb-2">{{ $requirement->description }}</p>
-                                <x-primary-button class="mb-2" @click="modelOpen =!modelOpen"
-                                    wire:click='setRequirementModal({{ $requirement->id }})'>Subir
-                                    documento</x-primary-button>
+                                <div class="flex justify-between">
+                                    <x-primary-button class="mb-2" @click="modelOpen =!modelOpen"
+                                        wire:click='setRequirementModal({{ $requirement->id }})'>Subir
+                                        documento</x-primary-button>
+                                    <x-primary-button class="mb-2"
+                                        onclick="deleteFile({{ $requirement->id }})">Eliminar</x-primary-button>
+                                </div>
 
                                 @if ($file_requirement = $postulation->requirements()->where('requirement_id', $requirement->id)->first())
                                     <iframe src="{{ Storage::url($file_requirement->pivot->file) }}"
@@ -97,7 +101,17 @@
                                     </div>
                                 @endif
 
-
+                                <div>
+                                    @if ($index > 0)
+                                        <x-primary-button class="mt-2" x-on:click="openTab = {{ $index - 1 }}">Anterior</x-primary-button>
+                                    @endif
+                                    @if ($index < count($requirements)-1)
+                                        <x-primary-button class="mt-2 float-right" x-on:click="openTab = {{ $index + 1 }}">Siguiente</x-primary-button>
+                                    @endif
+                                    @if ($index >= count($requirements)-1)
+                                    <x-primary-button class="mt-2 float-right" onclick="confirmRequirements()">Confirmar documentos</x-primary-button>
+                                    @endif
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -110,7 +124,38 @@
     @push('scripts')
         <script src="{{ asset('js/admin/message_forms.js') }}"></script>
         <script>
-            
+            function deleteFile(id) {
+                Swal.fire({
+                    title: '¿Estas seguro?',
+                    text: "Tendrás que subir otro documento en caso sea obligatorio",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, Eliminar',
+                    cancelButtonText: 'No'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        @this.deleteFile(id)
+                    }
+                })
+            }
+            function confirmRequirements() {
+                Swal.fire({
+                    title: '¿Estas seguro?',
+                    text: "Al confirmar ya no podrás editar tus documentos",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, Confirmar',
+                    cancelButtonText: 'No'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        @this.confirmRequirements()
+                    }
+                })
+            }
         </script>
     @endpush
 </div>
