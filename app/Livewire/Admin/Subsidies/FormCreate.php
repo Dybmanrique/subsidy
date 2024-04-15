@@ -31,13 +31,12 @@ class FormCreate extends Component
         $this->requirements_list[$this->requirement_id] = ['is_required' => true, 'name' => $requirement->name];
     }
 
-    #[On('delete-requirement')]
     public function deleteRequirement($id)
     {
-        $this->requirements_list = array_filter($this->requirements_list, fn ($value, $key) => $key !== $id, ARRAY_FILTER_USE_BOTH);
+        unset($this->requirements_list[$id]);
     }
 
-    #[On('change-requirement')]
+    // #[On('change-requirement')]
     public function changeRequirement($id, $checked)
     {
         foreach ($this->requirements_list as $key => $value) {

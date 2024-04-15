@@ -131,18 +131,17 @@
                 cancelButtonText: 'No'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Livewire.dispatch('delete-requirement', {
-                        id: parseInt(this.dataset.id)
-                    })
+                    @this.deleteRequirement(this.dataset.id)
                 }
             })
         });
 
         $(document).on('change', '.check-is-required', function() {
-            Livewire.dispatch('change-requirement', {
-                id: parseInt(this.dataset.id),
-                checked: this.checked
-            })
+            // Livewire.dispatch('change-requirement', {
+            //     id: parseInt(this.dataset.id),
+            //     checked: this.checked
+            // })
+            @this.changeRequirement(this.dataset.id, this.checked)
         });
 
         Livewire.on('created', function(message) {
