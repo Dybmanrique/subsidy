@@ -68,7 +68,11 @@ class UploadDocuments extends Component
                 }
             }
         }
-        $this->dispatch('message', code: '200', content: 'CONFIRMADO');
+        // 2 = Pendiente de revisión
+        $this->postulation->update([
+            'status' => 2
+        ]);
+        redirect()->route('postulations.my_postulations');
     }
 
     public function render()
