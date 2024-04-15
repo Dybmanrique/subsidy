@@ -21,4 +21,8 @@ class PostulationController extends Controller
     public function postulate(Postulation $postulation) {
         return view('postulations.postulate', compact('postulation'));
     }
+
+    public function view_documents(Postulation $postulation) {
+        return view('postulations.view_documents', compact('postulation'));
+    }
 }
