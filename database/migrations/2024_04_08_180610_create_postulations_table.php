@@ -15,7 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('advicer')->nullable();
-            $table->enum('status',['pendiente'])->default('pendiente');
+            $table->enum('status', [
+                'Subiendo archivos',
+                'Pendiente de revisión',
+                'Aceptado en la Dirección de Investigación e Innovación',
+                'Denegado en la Dirección de Investigación e Innovación',
+                'Aprobado en el Consejo Universitario',
+                'Denegado en el Consejo Universitario'
+            ])->default('Subiendo archivos');
             $table->foreignId('student_id')->constrained();
             $table->foreignId('announcement_id')->constrained();
             $table->timestamps();
