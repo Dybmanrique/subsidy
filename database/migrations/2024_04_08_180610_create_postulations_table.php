@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('postulations', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('advicer')->nullable();
+            $table->string('adviser')->nullable();
             $table->enum('status', [
                 'Subiendo archivos',
                 'Pendiente de revisión',
