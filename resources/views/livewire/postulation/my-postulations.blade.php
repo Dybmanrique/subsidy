@@ -19,7 +19,7 @@
                                     href="{{ route('postulations.postulate', $postulation->id) }}">Editar</x-primary-link>
                             @endif
 
-                            <x-primary-button>Generar Solicitud</x-primary-button>
+                            <x-primary-button wire:click='generateSolicitude({{$postulation}})'>Generar Solicitud</x-primary-button>
                             <x-primary-link href="{{ route('postulations.view_documents', $postulation->id) }}" target="_blank">Ver documentos</x-primary-link>
                         </div>
                     </div>
