@@ -13,6 +13,8 @@ class Postulation extends Model
         'name',
         'advicer',
         'status',
+        'uuid',
+        'activity_id',
         'student_id',
         'announcement_id',
     ];
