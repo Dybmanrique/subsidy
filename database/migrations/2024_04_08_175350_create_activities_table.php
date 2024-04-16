@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->enum('status',['activo','inactivo'])->default('activo');
             $table->foreignId('subsidy_id')->constrained();
             $table->timestamps();
         });
