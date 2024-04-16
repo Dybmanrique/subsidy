@@ -59,6 +59,10 @@
         .url {
             font-size: 12px;
         }
+
+        .signature {
+            width: 100px;
+        }
     </style>
 </head>
 
@@ -123,7 +127,18 @@
     @endphp
     <p>Huaraz, {{ date('d') }} de {{ $mounths_es[(int) date('m') - 1] }} {{ date('Y') }}</p>
     <p>Nombres y apellidos: {{ $user->name }} {{ $user->last_name }}</p>
-    <p>Firma: </p>
+    <table>
+        <tbody>
+            <td>Firma:</td>
+            <td>
+                @if ($signature)
+                    <img src="data:image/png;base64,{{ $signature }}" class="signature">
+                @endif
+            </td>
+        </tbody>
+    </table>
+
+
     <p>DNI N.°: {{ $user->student->dni }}</p>
 
     <p>Puede ver los documentos requeridos escaneando el siguiente código QR: </p>
