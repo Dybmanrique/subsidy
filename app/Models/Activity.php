@@ -14,4 +14,12 @@ class Activity extends Model
         'status',
         'subsidy_id'
     ];
+
+    public function subsidy(){
+        return $this->belongsTo(Subsidy::class);
+    }
+
+    public function postulations(){
+        return $this->hasMany(Postulation::class);
+    }
 }
