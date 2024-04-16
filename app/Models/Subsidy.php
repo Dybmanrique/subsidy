@@ -22,4 +22,8 @@ class Subsidy extends Model
     public function announcement(){
         return $this->hasMany(Announcement::class);
     }
+
+    public function activities(){
+        return $this->hasMany(Activity::class);
+    }
 }
