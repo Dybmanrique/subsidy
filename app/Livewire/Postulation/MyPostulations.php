@@ -11,7 +11,7 @@ class MyPostulations extends Component
     public $postulations;
 
     public function mount(){
-        $this->postulations = Postulation::where('student_id', auth()->user()->student->id)->get();
+        $this->postulations = Postulation::where('student_id', auth()->user()->student->id)->orderByDesc('id')->get();
     }
 
     public function generateSolicitude(Postulation $postulation){
