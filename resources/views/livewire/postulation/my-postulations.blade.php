@@ -20,7 +20,7 @@
                             @endif
 
                             <x-primary-button wire:click='generateSolicitude({{$postulation}})'>Generar Solicitud</x-primary-button>
-                            <x-primary-link href="{{ route('postulations.view_documents', $postulation->id) }}" target="_blank">Ver documentos</x-primary-link>
+                            <x-primary-link href="{{ route('postulations.view_documents', $postulation) }}" target="_blank">Ver documentos</x-primary-link>
                         </div>
                     </div>
                 </div>
