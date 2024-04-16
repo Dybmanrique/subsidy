@@ -65,7 +65,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                     <button type="button" class="btn btn-success float-right"
-                                        wire:click='addRequirement'>Agregar</button>
+                                        wire:click='addRequirement'>AGREGAR</button>
                                 </div>
                                 <br>
                                 <hr>
@@ -107,7 +107,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                         <button type="button" class="btn btn-success float-right"
-                                            wire:click = 'addActivity'>Agregar</button>
+                                            wire:click = 'addActivity'>AGREGAR</button>
                                     </div>
                                     <br>
                                     <hr>
@@ -131,7 +131,7 @@
 
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save"></i> Guardar</button>
+                <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save"></i> GUARDAR</button>
             </div>
         </div>
     </form>

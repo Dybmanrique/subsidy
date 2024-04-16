@@ -4,7 +4,10 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <span class="font-weight-bold">DATOS GENERALES</span>
+                            </div>
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="name">Nombre*:</label>
@@ -44,10 +47,13 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <span class="font-weight-bold">LISTA DE REQUISITOS</span>
+                            </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="">Agregar requisitos</label>
+                                    <label for="">Requisito:</label>
                                     <select name="" id="" class="form-control mb-2"
                                         wire:model='requirement_id'>
                                         <option value="">--Seleccione--</option>
@@ -59,7 +65,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                     <button type="button" class="btn btn-success float-right"
-                                        wire:click='addRequirement'>Agregar</button>
+                                        wire:click='addRequirement'>AGREGAR</button>
                                 </div>
                                 <br>
                                 <hr>
@@ -87,18 +93,20 @@
                                 @endforelse
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <span class="font-weight-bold">LISTA DE ACTIVIDADES</span>
+                            </div>
                             <div class="card-body">
-
                                 <div class="form-group">
-                                    <label for="">Agregar actividades</label>
+                                    <label for="">Actividad:</label>
                                     <input type="text" class="form-control mb-2" id="activity_name"
                                         wire:model='activity_name' wire:keydown.enter = 'addActivity'>
                                     @error('activity_name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                     <button type="button" class="btn btn-success float-right"
-                                        wire:click = 'addActivity'>Agregar</button>
+                                        wire:click = 'addActivity'>AGREGAR</button>
                                 </div>
                                 <br>
                                 <hr>
@@ -122,7 +130,7 @@
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save"></i>
-                    Guardar</button>
+                    GUARDAR</button>
             </div>
         </div>
     </form>
