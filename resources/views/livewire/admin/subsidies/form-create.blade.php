@@ -18,13 +18,13 @@
                                     <p class="text-bold">Estado*:</p>
                                     <div class="form-group border p-2 mb-1 rounded">
                                         <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="active_status" wire:model='status' class="custom-control-input"
-                                                value="activo" name="statusRadio" required>
+                                            <input type="radio" id="active_status" wire:model='status'
+                                                class="custom-control-input" value="activo" name="statusRadio" required>
                                             <label class="custom-control-label" for="active_status">Activo</label>
                                         </div>
                                         <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="inactive_status" wire:model='status' class="custom-control-input"
-                                                value="inactivo" name="statusRadio">
+                                            <input type="radio" id="inactive_status" wire:model='status'
+                                                class="custom-control-input" value="inactivo" name="statusRadio">
                                             <label class="custom-control-label" for="inactive_status">Inactivo</label>
                                         </div>
                                     </div>
@@ -47,7 +47,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="">Requisitos</label>
+                                    <label for="">Agregar requisitos</label>
                                     <select name="" id="" class="form-control mb-2"
                                         wire:model='requirement_id'>
                                         <option value="">--Seleccione--</option>
@@ -61,48 +61,59 @@
                                     <button type="button" class="btn btn-success float-right"
                                         wire:click='addRequirement'>Agregar</button>
                                 </div>
+                                <br>
+                                <hr>
+                                @forelse ($requirements_list as $id => $requirement)
+                                    <div
+                                        class="rounded border d-flex flex-row justify-content-between p-2 align-items-center mb-1 overflow-auto">
+                                        <span class="text-nowrap">{{ $requirement['name'] }}</span>
+                                        <div class="d-flex flex-row flex-sm">
+                                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                <label
+                                                    class="text-nowrap ml-2 btn btn-sm btn-primary font-weight-normal @php echo ($requirement['is_required']) ? 'active' : '' @endphp">
+                                                    <input class="check-is-required " type="checkbox"
+                                                        data-id='{{ $id }}' checked autocomplete="off">
+                                                    {{ $requirement['is_required'] ? 'Obligatorio' : 'No obligatorio' }}
+                                                </label>
+                                            </div>
+                                            <button type="button" data-id='{{ $id }}'
+                                                class="btn btn-sm btn-danger btn-delete-requirement ml-2 text-nowrap"><i
+                                                    class="fas fa-trash-alt"></i> Eliminar</button>
+                                        </div>
+                                    </div>
+                                @empty
+                                    <p class="mb-0 text-center">Aquí aparecerán los requisitos que desee agregar.
+                                    </p>
+                                @endforelse
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    @if (count($requirements_list)>0)
-                                        
-                                    <table class="table table-sm">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Requisito</th>
-                                                <th scope="col">Obligatorio</th>
-                                                <th scope="col">Eliminar</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($requirements_list as $id => $requirement)
-                                                <tr>
-                                                    <td>{{ $requirement['name'] }}</td>
-                                                    <td>
-                                                        <div class="custom-control custom-switch">
-                                                            <input type="checkbox"
-                                                                class="custom-control-input check-is-required"
-                                                                id="customSwitch{{ $id }}"
-                                                                data-id='{{ $id }}'
-                                                                @php echo ($requirement['is_required']) ? 'checked' : '' @endphp>
-                                                            <label class="custom-control-label"
-                                                                for="customSwitch{{ $id }}"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" data-id='{{ $id }}'
-                                                            class="btn btn-sm btn-danger btn-delete-requirement">x</button>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                    @else
-                                    <p class="mb-0">Aquí aparecerán los requisitos que desee agregar.</p>
-                                    @endif
+
+                                <div class="form-group">
+                                    <label for="">Agregar actividades</label>
+                                    <input type="text" class="form-control mb-2" id="activity_name"
+                                        wire:model='activity_name' wire:keydown.enter = 'addActivity'>
+                                    @error('activity_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                    <button type="button" class="btn btn-success float-right"
+                                        wire:click = 'addActivity'>Agregar</button>
                                 </div>
+                                <br>
+                                <hr>
+                                @forelse ($activities_list as $id => $activity)
+                                    <div
+                                        class="rounded border d-flex flex-row justify-content-between p-2 align-items-center mb-1">
+                                        <span>{{ $activity }}</span>
+                                        <button type="button" onclick="deleteActivity({{ $id }})"
+                                            class="btn btn-sm btn-danger btn-delete-activity"><i
+                                                class="fas fa-trash-alt"></i> Eliminar</button>
+                                    </div>
+                                @empty
+                                    <p class="mb-0 text-center">Aquí aparecerán las actividades que desee agregar.
+                                    </p>
+                                @endforelse
                             </div>
                         </div>
                     </div>
@@ -110,7 +121,8 @@
 
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save"></i> Guardar</button>
+                <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save"></i>
+                    Guardar</button>
             </div>
         </div>
     </form>
@@ -119,10 +131,17 @@
 @section('js')
     <script src="{{ asset('js/admin/message_forms.js') }}"></script>
     <script>
+        activityInput = document.getElementById('activity_name');
+        activityInput.addEventListener('keypress', e => {
+            if (e.keyCode == 13) {
+                e.preventDefault();
+            }
+        });
+
         $(document).on('click', '.btn-delete-requirement', function() {
             Swal.fire({
                 title: '¿Estas seguro?',
-                text: "Tendrás que volver a insertar al visitante si lo quitas",
+                text: "Tendrás que volver a insertar el requerimeinto si lo deseas de nuevo",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -137,10 +156,6 @@
         });
 
         $(document).on('change', '.check-is-required', function() {
-            // Livewire.dispatch('change-requirement', {
-            //     id: parseInt(this.dataset.id),
-            //     checked: this.checked
-            // })
             @this.changeRequirement(this.dataset.id, this.checked)
         });
 
@@ -149,5 +164,22 @@
                 location.reload();
             }, 1000);
         })
+
+        function deleteActivity(id) {
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "Tendrás que volver a insertar la actividad si la deseas de nuevo",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Quitar!',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    @this.deleteActivity(id)
+                }
+            })
+        }
     </script>
 @stop

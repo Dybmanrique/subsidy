@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Subsidies;
 
+use App\Models\Activity;
 use App\Models\Requirement;
 use App\Models\Subsidy;
 use Livewire\Attributes\On;
@@ -16,6 +17,9 @@ class FormCreate extends Component
     public $requirement_id;
     public $requirements_list = [];
 
+    public $activity_name;
+    public $activities_list = [];
+
     public function mount()
     {
         $this->requirements = Requirement::all();
@@ -27,7 +31,6 @@ class FormCreate extends Component
             'requirement_id' => 'required|numeric'
         ]);
         $requirement = Requirement::find($this->requirement_id);
-        // array_push($this->requirements_list, ['id' => $requirement->id, 'name'=> $requirement->name, 'is_required' => true]);
         $this->requirements_list[$this->requirement_id] = ['is_required' => true, 'name' => $requirement->name];
     }
 
@@ -36,7 +39,6 @@ class FormCreate extends Component
         unset($this->requirements_list[$id]);
     }
 
-    // #[On('change-requirement')]
     public function changeRequirement($id, $checked)
     {
         foreach ($this->requirements_list as $key => $value) {
@@ -45,6 +47,21 @@ class FormCreate extends Component
                 break;
             }
         }
+    }
+
+    public function addActivity()
+    {
+        $this->validate([
+            'activity_name' => 'required|string|max:255'
+        ]);
+
+        array_push($this->activities_list, $this->activity_name);
+        $this->reset(['activity_name']);
+    }
+
+    public function deleteActivity($id)
+    {
+        unset($this->activities_list[$id]);
     }
 
     public function save()
@@ -70,11 +87,17 @@ class FormCreate extends Component
             }
 
             $subsidy->requirements()->attach($requirements_list_map);
+            foreach ($this->activities_list as $activity) {
+                Activity::create([
+                    'name' => $activity,
+                    'subsidy_id' => $subsidy->id
+                ]);
+            }
             $this->reset(['name', 'description', 'requirements_list', 'status']);
             $this->dispatch('message', code: '200', content: 'Creado, se actualizará la página');
             $this->dispatch('created');
         } catch (\Exception $ex) {
-            $this->dispatch('message', code: '500', content: 'No se pudo crear la sede');
+            $this->dispatch('message', code: '500', content: 'No se pudo crear');
         }
     }
 
