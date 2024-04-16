@@ -15,6 +15,9 @@ class UploadDocuments extends Component
     public $postulation;
     public $requirements;
 
+    public $activity_items;
+    public $name, $activity_id, $adviser;
+
     public $model_open = false;
     public $requirement_modal_id;
     public $file_modal;
@@ -22,6 +25,28 @@ class UploadDocuments extends Component
     public function mount()
     {
         $this->requirements = $this->postulation->announcement->subsidy->requirements;
+        $this->activity_items = $this->postulation->announcement->subsidy->activities()->where('status','activo')->get();
+        $this->name = $this->postulation->name;
+        $this->activity_id = $this->postulation->activity_id;
+        $this->adviser = $this->postulation->adviser;
+    }
+
+    public function updateGeneralData(){
+        $this->validate([
+            'name' => 'required|string|max:255',
+            'adviser' => 'nullable|string|max:255',
+            'activity_id' => 'required|numeric',
+        ]);
+
+        $adviser = (trim($this->adviser) == "") ? null : $this->adviser;
+
+        $this->postulation->update([
+            'name' => $this->name,
+            'activity_id' => $this->activity_id,
+            'adviser' => $adviser,
+        ]);
+
+        $this->dispatch('message', code: '200', content: 'Se han actualizado los datos generales');
     }
 
     public function setRequirementModal($requirement_id)

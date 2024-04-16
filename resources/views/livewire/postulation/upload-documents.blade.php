@@ -63,9 +63,17 @@
                         </div>
                     </div>
 
-                    <div class="md:flex" x-data="{ openTab: 0 }">
+                    <div class="md:flex" x-data="{ openTab: -1 }">
                         <ul
                             class="flex-column space-y space-y-0 text-sm font-medium text-gray-500 md:me-4 mb-4 md:mb-0">
+                            <li>
+                                <button
+                                    class="border shadow text-nowrap inline-flex items-center px-4 py-3 mb-1 rounded-lg bg-gray-50 hover:text-gray-100 hover:bg-blue-700 w-full"
+                                    x-on:click="openTab = {{ -1 }}"
+                                    :class="{ 'bg-blue-600 text-white': openTab === {{ -1 }} }">
+                                    General
+                                </button>
+                            </li>
                             @foreach ($requirements as $index => $requirement)
                                 <li>
                                     <button
@@ -78,6 +86,46 @@
                             @endforeach
                         </ul>
 
+                        <div x-show="openTab === -1"
+                            class="border shadow transition-all duration-300 p-6 bg-gray-50 text-medium text-gray-500  rounded-lg w-full">
+                            <h3 class="text-lg font-bold text-gray-900  mb-2">DATOS GENERALES</h3>
+
+                            <form class="mt-5" wire:submit='updateGeneralData'>
+                                <div>
+                                    <label for="user name"
+                                        class="mt-3 block text-gray-700 capitalize">Actividad*:</label>
+                                    <input placeholder="Nombre de la actividad" type="text" wire:model='name'
+                                        class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
+
+
+                                    <label for="user name" class="mt-3 block text-gray-700 capitalize">Tipo*:</label>
+                                    <select name="" id="" wire:model='activity_id'
+                                        class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                        <option value="">-- Seleccione --</option>
+                                        @foreach ($activity_items as $activity)
+                                            <option value="{{ $activity->id }}">{{ $activity->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <x-input-error :messages="$errors->get('activity_id')" class="mt-2" />
+
+                                    <label for="user name" class="mt-3 block text-gray-700 capitalize">Asesor:</label>
+                                    <input placeholder="Nombres y apellidos del asesor" type="text"
+                                        wire:model='adviser'
+                                        class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                    <x-input-error :messages="$errors->get('adviser')" class="mt-2" />
+                                </div>
+
+                                <div class="flex justify-center mt-6">
+                                    <x-primary-button>Actualizar datos</x-primary-button>
+                                </div>
+                            </form>
+
+                            <div>
+                                <x-primary-button class="mt-2 float-right"
+                                    x-on:click="openTab = 0">Siguiente</x-primary-button>
+                            </div>
+                        </div>
                         @foreach ($requirements as $index => $requirement)
                             <div x-show="openTab === {{ $index }}"
                                 class="border shadow transition-all duration-300 p-6 bg-gray-50 text-medium text-gray-500  rounded-lg w-full">
@@ -103,13 +151,16 @@
 
                                 <div>
                                     @if ($index > 0)
-                                        <x-primary-button class="mt-2" x-on:click="openTab = {{ $index - 1 }}">Anterior</x-primary-button>
+                                        <x-primary-button class="mt-2"
+                                            x-on:click="openTab = {{ $index - 1 }}">Anterior</x-primary-button>
                                     @endif
-                                    @if ($index < count($requirements)-1)
-                                        <x-primary-button class="mt-2 float-right" x-on:click="openTab = {{ $index + 1 }}">Siguiente</x-primary-button>
+                                    @if ($index < count($requirements) - 1)
+                                        <x-primary-button class="mt-2 float-right"
+                                            x-on:click="openTab = {{ $index + 1 }}">Siguiente</x-primary-button>
                                     @endif
-                                    @if ($index >= count($requirements)-1)
-                                    <x-primary-button class="mt-2 float-right" onclick="confirmRequirements()">Confirmar documentos</x-primary-button>
+                                    @if ($index >= count($requirements) - 1)
+                                        <x-primary-button class="mt-2 float-right"
+                                            onclick="confirmRequirements()">Confirmar documentos</x-primary-button>
                                     @endif
                                 </div>
                             </div>
@@ -140,6 +191,7 @@
                     }
                 })
             }
+
             function confirmRequirements() {
                 Swal.fire({
                     title: '¿Estas seguro?',
