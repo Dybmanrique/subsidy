@@ -33,10 +33,11 @@ class SubventionsList extends Component
 
         $subsidy = Subsidy::find($this->subsidy_id);
         $announcement = $subsidy->announcement()->latest()->first();
+        $adviser = (trim($this->adviser) == "") ? null : $this->adviser;
         
         $postulation = Postulation::create([
             'name' => $this->name,
-            'adviser' => $this->adviser,
+            'adviser' => $adviser,
             'uuid' => Str::uuid()->toString(),
             'activity_id' => $this->activity_id,
             'student_id' => auth()->user()->student->id,
