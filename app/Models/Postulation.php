@@ -31,4 +31,8 @@ class Postulation extends Model
     public function requirements(){
         return $this->belongsToMany(Requirement::class)->withPivot('file');
     }
+
+    public function activity(){
+        return $this->belongsTo(Activity::class);
+    }
 }
