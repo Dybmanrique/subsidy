@@ -11,13 +11,18 @@ class Postulation extends Model
 
     protected $fillable = [
         'name',
-        'advicer',
+        'adviser',
         'status',
         'uuid',
         'activity_id',
         'student_id',
         'announcement_id',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
 
     public function announcement(){
         return $this->belongsTo(Announcement::class);
