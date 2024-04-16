@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('adviser')->nullable();
-            $table->string('uuid')->unique();
+            $table->uuid('uuid')->unique();
             $table->enum('status', [
                 'Subiendo archivos',
                 'Pendiente de revisión',
