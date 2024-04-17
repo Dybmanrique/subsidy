@@ -10,13 +10,21 @@ use Illuminate\Support\Facades\DB;
 
 class PostulationController extends Controller
 {
-    public function all_index(Subsidy $subsidy) {
+    public function all_index(Subsidy $subsidy)
+    {
         return view('admin.postulations.all_index', compact('subsidy'));
     }
-    public function all_data(Request $request) {
-        return DB::select('SELECT postulations.id, postulations.name from postulations
-        join announcements on announcement_id = announcements.id
-        join subsidies on subsidy_id = subsidies.id
-        where subsidies.id = '. $request->id);
+    public function all_data(Subsidy $subsidy)
+    {
+        return DB::select("SELECT postulations.id, postulations.name as postulation, postulations.status,
+            announcements.name as announcement, 
+            users.name, users.last_name, users.email, schools.name as school, faculties.name as faculty
+            from postulations
+            join students on student_id = students.id
+            join announcements on announcement_id = announcements.id
+            join users on user_id = users.id
+            join schools on school_id = schools.id
+            join faculties on faculty_id = faculties.id
+            where announcements.subsidy_id = $subsidy->id");
     }
 }

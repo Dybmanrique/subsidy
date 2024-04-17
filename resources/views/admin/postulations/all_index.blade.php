@@ -9,7 +9,8 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <p class="mb-0 font-weight-bold">TIPO DE SUBVENCIÓN: <span class="font-weight-normal">{{$subsidy->name}}</span></p>
+            <p class="mb-0 font-weight-bold">TIPO DE SUBVENCIÓN: <span class="font-weight-normal">{{ $subsidy->name }}</span>
+            </p>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -17,8 +18,14 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">NOMBRE</th>
                             <th scope="col">ACCIONES</th>
+                            <th scope="col">NOMBRE</th>
+                            <th scope="col">ESTADO</th>
+                            <th scope="col">POSTULANTE</th>
+                            <th scope="col">CORREO I.</th>
+                            <th scope="col">ESCUELA</th>
+                            <th scope="col">FACULTAD</th>
+                            <th scope="col">CONVOCATORIA</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,19 +62,39 @@
                     }
                 },
                 {
-                    "data": "name",
-                },
-                {
                     "data": null,
                     "render": function(data, type, row, meta) {
                         return (
                             `<div class="d-flex flex-row justify-content-start">
-                                <a class="btn btn-primary btn-sm mr-2 btn-edit" href="{{ route('admin.faculties.edit', ':id') }}"><i class="far fa-edit"></i> Editar</a>
-                                <button class="btn btn-sm btn-danger btn-delete" type="button"><i class=" fas fa-trash"></i> Eliminar</button>
+                                <a class="btn btn-primary btn-sm mr-2 btn-edit" href="{{ route('admin.faculties.edit', ':id') }}"><i class="far fa-eye"></i> Ver documentos</a>
                             </div>`.replace(':id', data.id)
                         );
                     }
-                }
+                },
+                {
+                    "data": "postulation",
+                },
+                {
+                    "data": "status",
+                },
+                {
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return `${data.last_name} ${data.name}`
+                    }
+                },
+                {
+                    "data": "email",
+                },
+                {
+                    "data": "school",
+                },
+                {
+                    "data": "faculty",
+                },
+                {
+                    "data": "announcement",
+                },
             ];
 
             columnDefs = [{
@@ -77,12 +104,10 @@
 
             let table = $(`#table`).DataTable({
                 "ajax": {
-                    "url": "{{ route('admin.postulations.all_data') }}",
+                    "url": "{{ route('admin.postulations.all_data', ':id') }}".replace(':id',
+                        {{ $subsidy->id }}),
                     "type": "GET",
                     "dataSrc": "",
-                    "data": {
-                        id: {{$subsidy->id}},
-                    }
                 },
                 "columns": columnAttributes,
                 language: {
