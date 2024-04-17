@@ -64,7 +64,7 @@
                                 $postulation->status !== 'Pendiente de revisión' &&
                                     $postulation->status !== 'Denegado en la Dirección de Investigación e Innovación')
                                 <x-primary-link
-                                    href="{{ route('postulations.postulate', $postulation->id) }}">Editar</x-primary-link>
+                                    href="{{ route('postulations.postulate', $postulation) }}">Editar</x-primary-link>
                             @endif
 
                             <button
