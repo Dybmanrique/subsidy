@@ -34,12 +34,12 @@
 
                                 <div>
                                     @if ($index > 0)
-                                        <x-primary-button class="mt-2"
-                                            x-on:click="openTab = {{ $index - 1 }}">Anterior</x-primary-button>
+                                        <x-dark-button class="mt-2"
+                                            x-on:click="openTab = {{ $index - 1 }}">Anterior</x-dark-button>
                                     @endif
                                     @if ($index < count($postulation->requirements) - 1)
-                                        <x-primary-button class="mt-2 float-right"
-                                            x-on:click="openTab = {{ $index + 1 }}">Siguiente</x-primary-button>
+                                        <x-dark-button class="mt-2 float-right"
+                                            x-on:click="openTab = {{ $index + 1 }}">Siguiente</x-dark-button>
                                     @endif
                                 </div>
                             </div>
