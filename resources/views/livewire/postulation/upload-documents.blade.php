@@ -70,7 +70,7 @@
                                 <button
                                     class="border shadow text-nowrap inline-flex items-center px-4 py-3 mb-1 rounded-lg bg-gray-50 hover:text-gray-100 hover:bg-blue-700 w-full"
                                     x-on:click="openTab = {{ -1 }}"
-                                    :class="{ 'bg-blue-600 text-white': openTab === {{ -1 }} }">
+                                    :class="{ 'bg-blue-700 text-white': openTab === {{ -1 }} }">
                                     General
                                 </button>
                             </li>
@@ -79,7 +79,7 @@
                                     <button
                                         class="border shadow text-nowrap inline-flex items-center px-4 py-3 mb-1 rounded-lg bg-gray-50 hover:text-gray-100 hover:bg-blue-700 w-full"
                                         x-on:click="openTab = {{ $index }}"
-                                        :class="{ 'bg-blue-600 text-white': openTab === {{ $index }} }">
+                                        :class="{ 'bg-blue-700 text-white': openTab === {{ $index }} }">
                                         Requisito {{ $index + 1 }}
                                     </button>
                                 </li>
@@ -122,8 +122,8 @@
                             </form>
 
                             <div>
-                                <x-primary-button class="mt-2 float-right"
-                                    x-on:click="openTab = 0">Siguiente</x-primary-button>
+                                <x-dark-button class="mt-2 float-right"
+                                    x-on:click="openTab = 0">Siguiente</x-dark-button>
                             </div>
                         </div>
                         @foreach ($requirements as $index => $requirement)
@@ -135,8 +135,8 @@
                                     <x-primary-button class="mb-2" @click="modelOpen =!modelOpen"
                                         wire:click='setRequirementModal({{ $requirement->id }})'>Subir
                                         documento</x-primary-button>
-                                    <x-primary-button class="mb-2"
-                                        onclick="deleteFile({{ $requirement->id }})">Eliminar</x-primary-button>
+                                    <x-danger-button class="mb-2"
+                                        onclick="deleteFile({{ $requirement->id }})">Eliminar</x-danger-button>
                                 </div>
 
                                 @if ($file_requirement = $postulation->requirements()->where('requirement_id', $requirement->id)->first())
@@ -151,16 +151,16 @@
 
                                 <div>
                                     @if ($index > 0)
-                                        <x-primary-button class="mt-2"
-                                            x-on:click="openTab = {{ $index - 1 }}">Anterior</x-primary-button>
                                     @endif
+                                    <x-dark-button class="mt-2"
+                                        x-on:click="openTab = {{ $index - 1 }}">Anterior</x-dark-button>
                                     @if ($index < count($requirements) - 1)
-                                        <x-primary-button class="mt-2 float-right"
-                                            x-on:click="openTab = {{ $index + 1 }}">Siguiente</x-primary-button>
+                                        <x-dark-button class="mt-2 float-right"
+                                            x-on:click="openTab = {{ $index + 1 }}">Siguiente</x-dark-button>
                                     @endif
                                     @if ($index >= count($requirements) - 1)
-                                        <x-primary-button class="mt-2 float-right"
-                                            onclick="confirmRequirements()">Confirmar documentos</x-primary-button>
+                                        <x-success-button class="mt-2 float-right"
+                                            onclick="confirmRequirements()">Confirmar documentos</x-success-button>
                                     @endif
                                 </div>
                             </div>
