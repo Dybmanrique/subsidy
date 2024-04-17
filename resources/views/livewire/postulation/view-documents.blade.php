@@ -4,7 +4,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="m-4">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <x-application-logo class="block h-15 w-auto fill-current text-gray-700" />
                     </div>
 
                     <div class="md:flex" x-data="{ openTab: 0 }">
