@@ -58,3 +58,5 @@ Route::post('/estudiantes/eliminar', [StudentController::class, 'destroy'])->nam
 
 Route::get('/postulaciones-subvencion/{subsidy}/postulaciones', [PostulationController::class, 'all_index'])->name('admin.postulations.all_index');
 Route::get('/postulaciones-subvencion/{subsidy}/data', [PostulationController::class, 'all_data'])->name('admin.postulations.all_data');
+Route::get('/postulacion/{id}/ver', [PostulationController::class, 'view_postulation'])->name('admin.postulations.view_postulation');
+// Route::get('/postulacion', [PostulationController::class, 'view_postulation'])->name('admin.postulations.view_postulation');
