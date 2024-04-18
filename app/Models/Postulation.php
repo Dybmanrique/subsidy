@@ -35,4 +35,8 @@ class Postulation extends Model
     public function activity(){
         return $this->belongsTo(Activity::class);
     }
+
+    public function student(){
+        return $this->belongsTo(Student::class);
+    }
 }
