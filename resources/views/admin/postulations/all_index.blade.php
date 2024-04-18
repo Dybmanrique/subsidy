@@ -66,7 +66,7 @@
                     "render": function(data, type, row, meta) {
                         return (
                             `<div class="d-flex flex-row justify-content-start">
-                                <a class="btn btn-primary btn-sm mr-2 btn-edit" href="{{ route('admin.faculties.edit', ':id') }}"><i class="far fa-eye"></i> Ver documentos</a>
+                                <a class="btn btn-primary btn-sm mr-2 btn-edit" href="{{ route('admin.postulations.view_postulation', ':id') }}"><i class="far fa-eye"></i> Ver documentos</a>
                             </div>`.replace(':id', data.id)
                         );
                     }
