@@ -14,6 +14,7 @@ class PostulationController extends Controller
     {
         return view('admin.postulations.all_index', compact('subsidy'));
     }
+
     public function all_data(Subsidy $subsidy)
     {
         return DB::select("SELECT postulations.id, postulations.name as postulation, postulations.status,
@@ -26,5 +27,10 @@ class PostulationController extends Controller
             join schools on school_id = schools.id
             join faculties on faculty_id = faculties.id
             where announcements.subsidy_id = $subsidy->id");
+    }
+
+    public function view_postulation($postulation_id){
+        $postulation = Postulation::find($postulation_id);
+        return view('admin.postulations.view_postulation', compact('postulation'));
     }
 }
