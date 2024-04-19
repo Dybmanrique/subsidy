@@ -50,13 +50,7 @@
         <div class="card-body">
             @switch($postulation->status)
                 @case('Subiendo archivos')
-                    <button type="button" class="btn btn-success my-1 w-100" onclick="revisarDocumentos()"">Pasar a revisión</button>
-                    {{-- <button type="button" class="btn btn-success my-1 w-100" onclick="aprobarDII()">Aceptar en la Dirección del
-                        Instituto de
-                        Investigación</button>
-                    <button type="button" class="btn btn-danger my-1 w-100" onclick="denegarDII()">Denegar en la Dirección del
-                        Instituto de
-                        Investigación</button> --}}
+                    <button type="button" class="btn btn-danger my-1 w-100" onclick="eliminar()"">Eliminar</button>
                 @break
 
                 @case('Pendiente de revisión')
@@ -184,7 +178,7 @@
                     }
                 })
             }
-            function revisarDocumentos() {
+            function eliminar() {
                 Swal.fire({
                     title: 'Estas seguro?',
                     text: "Esta acción no se puede revertir!",
@@ -196,7 +190,7 @@
                     cancelButtonText: 'No'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        @this.revisarDocumentos();
+                        @this.eliminar();
                     }
                 })
             }
