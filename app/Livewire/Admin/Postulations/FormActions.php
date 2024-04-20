@@ -2,12 +2,15 @@
 
 namespace App\Livewire\Admin\Postulations;
 
+use App\Mail\PostulationDeniedMailable;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class FormActions extends Component
 {
     public $postulation;
+    public $reason_for_denial;
 
     public function eliminar(){
         // $this->postulation->status = 'Pendiente de revisión';
@@ -24,9 +27,11 @@ class FormActions extends Component
         $this->dispatch('message', code: '200', content: 'Hecho');
     }
     public function denegarDII(){
+        Mail::to($this->postulation->student->user->email)->send(new PostulationDeniedMailable($this->reason_for_denial));
         $this->postulation->status = 'Denegado en la Dirección del Instituto de Investigación';
         $this->postulation->save();
-        $this->dispatch('message', code: '200', content: 'Hecho');
+        $this->dispatch('message', code: '200', content: 'Hecho, se le envió el mensaje');
+        $this->dispatch('close_modal');
     }
     public function aprobarConsejo(){
         $this->postulation->status = 'Aprobado en el Consejo Universitario';
