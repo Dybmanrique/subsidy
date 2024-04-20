@@ -29,8 +29,20 @@ class PostulationController extends Controller
             where announcements.subsidy_id = $subsidy->id");
     }
 
-    public function view_postulation($postulation_id){
+    public function view_postulation($postulation_id)
+    {
         $postulation = Postulation::findOrFail($postulation_id);
-        return view('admin.postulations.view_postulation', compact('postulation'));
+        
+        $previous_id = DB::scalar("SELECT postulations.id from postulations
+        join announcements on announcement_id = announcements.id
+        where announcements.subsidy_id = :subsidy_id and postulations.id < :postulation_id order by id desc limit 1", 
+        ['subsidy_id' => $postulation->announcement->subsidy->id, 'postulation_id' => $postulation->id]);
+        
+        $next_id = DB::scalar("SELECT postulations.id from postulations
+        join announcements on announcement_id = announcements.id
+        where announcements.subsidy_id = :subsidy_id and postulations.id > :postulation_id order by id asc limit 1", 
+        ['subsidy_id' => $postulation->announcement->subsidy->id, 'postulation_id' => $postulation->id]);
+
+        return view('admin.postulations.view_postulation', compact('postulation','previous_id','next_id'));
     }
 }
