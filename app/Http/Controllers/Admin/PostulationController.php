@@ -30,7 +30,7 @@ class PostulationController extends Controller
     }
 
     public function view_postulation($postulation_id){
-        $postulation = Postulation::find($postulation_id);
+        $postulation = Postulation::findOrFail($postulation_id);
         return view('admin.postulations.view_postulation', compact('postulation'));
     }
 }
