@@ -17,16 +17,25 @@ class BlackList extends Component
             'email' => 'required|email|max:255|unique:black_list,email|regex:/^.*@unasam\.edu\.pe$/',
             'reason' => 'required|string',
         ]);
-        $item = ModelsBlackList::create($this->only(['email','reason']));
-        $this->reset(['email','reason']);
-        $this->dispatch('message', code: '200', content: 'Hecho');
-        $this->dispatch('email_saved', email: $item->email, id: $item->id);
+        
+        try {
+            $item = ModelsBlackList::create($this->only(['email','reason']));
+            $this->reset(['email','reason']);
+            $this->dispatch('message', code: '200', content: 'Hecho');
+            $this->dispatch('email_saved', email: $item->email, id: $item->id);
+        } catch (\Exception $ex) {
+            $this->dispatch('message', code: '500', content: 'Algo salió mal');
+        }
     }
 
     public function show_reason(){
-        $item = ModelsBlackList::find($this->id_item_selected);
-        if($item){
-            $this->reason_item_selected = $item->reason;
+        try {
+            $item = ModelsBlackList::find($this->id_item_selected);
+            if($item){
+                $this->reason_item_selected = $item->reason;
+            }
+        } catch (\Exception $ex) {
+            $this->dispatch('message', code: '500', content: 'Algo salió mal');
         }
     }
     
