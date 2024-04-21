@@ -36,11 +36,13 @@
         <div class="col-md-8">
             <div class="card card-primary">
                 <div class="card-header font-weight-bold">
-                    VISUALIZADOR
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <span>VISUALIZADOR</span>
+                        @livewire('admin.postulations.black-list', ['postulation' => $postulation])
+                    </div>
                 </div>
                 <div class="card-body">
-                    <iframe id="previsualizador" src=""
-                        style="width:100%; height:700px;"frameborder="0"></iframe>
+                    <iframe id="previsualizador" src="" style="width:100%; height:700px;"frameborder="0"></iframe>
                 </div>
             </div>
             <div class="">
