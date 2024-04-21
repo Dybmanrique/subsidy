@@ -10,7 +10,7 @@ class FormEdit extends Component
 {
     public $announcement;
     public $vicerrectors, $subsidies;
-    public $name, $start, $end, $subsidy_id, $vicerrector_id;
+    public $name, $start, $end, $description, $subsidy_id, $vicerrector_id;
 
     public function mount()
     {
@@ -19,6 +19,7 @@ class FormEdit extends Component
         $this->name = $this->announcement->name;
         $this->start = $this->announcement->start;
         $this->end = $this->announcement->end;
+        $this->description = $this->announcement->description;
         $this->subsidy_id = $this->announcement->subsidy_id;
         $this->vicerrector_id = $this->announcement->vicerrector_id;
     }
@@ -29,6 +30,7 @@ class FormEdit extends Component
             'name' => 'required|string|max:255',
             'start' => 'required|date',
             'end' => 'required|date',
+            'description' => 'nullable|string',
             'subsidy_id' => 'required|numeric',
             'vicerrector_id' => 'required|numeric',
         ]);
@@ -38,12 +40,13 @@ class FormEdit extends Component
                 "name" => $this->name,
                 "start" => $this->start,
                 "end" => $this->end,
+                "description" => $this->description,
                 "subsidy_id" => $this->subsidy_id,
                 "vicerrector_id" => $this->vicerrector_id,
             ]);
-            $this->dispatch('message', code: '200', content: 'Se ha creado');
+            $this->dispatch('message', code: '200', content: 'Se ha editado');
         } catch (\Exception $ex) {
-            $this->dispatch('message', code: '500', content: 'No se pudo crear');
+            $this->dispatch('message', code: '500', content: 'No se pudo editar');
         }
     }
 

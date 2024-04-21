@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->date('start');
             $table->date('end');
+            $table->text('description')->nullable();
             $table->foreignId('vicerrector_id')->constrained();
             $table->foreignId('subsidy_id')->constrained();
             $table->timestamps();

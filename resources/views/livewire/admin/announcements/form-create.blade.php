@@ -43,10 +43,19 @@
                     <select wire:model='vicerrector_id' id="vicerrector_id" class="form-control">
                         <option value="">--Seleccione--</option>
                         @foreach ($vicerrectors as $vicerrector)
-                            <option value="{{ $vicerrector->id }}">{{ $vicerrector->last_name }} {{ $vicerrector->name }}</option>
+                            <option value="{{ $vicerrector->id }}">{{ $vicerrector->last_name }}
+                                {{ $vicerrector->name }}</option>
                         @endforeach
                     </select>
                     @error('vicerrector_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="description">Descripción:</label>
+                    <textarea wire:model='description' id="description" class="form-control" placeholder="Ingrese una descripción"
+                        rows="4"></textarea>
+                    @error('description')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>

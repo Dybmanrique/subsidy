@@ -13,6 +13,7 @@ class Announcement extends Model
         'name',
         'start',
         'end',
+        'description',
         'vicerrector_id',
         'subsidy_id'
     ];

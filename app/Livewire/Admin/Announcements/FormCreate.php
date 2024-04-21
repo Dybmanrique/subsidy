@@ -11,7 +11,7 @@ class FormCreate extends Component
 {
     public $vicerrectors, $subsidies;
 
-    public $name, $start, $end, $subsidy_id, $vicerrector_id;
+    public $name, $start, $end, $description, $subsidy_id, $vicerrector_id;
 
     public function mount()
     {
@@ -25,6 +25,7 @@ class FormCreate extends Component
             'name' => 'required|string|max:255',
             'start' => 'required|date',
             'end' => 'required|date',
+            'description' => 'nullable|string',
             'subsidy_id' => 'required|numeric',
             'vicerrector_id' => 'required|numeric',
         ]);
@@ -34,10 +35,11 @@ class FormCreate extends Component
                 "name" => $this->name,
                 "start" => $this->start,
                 "end" => $this->end,
+                "description" => $this->description,
                 "subsidy_id" => $this->subsidy_id,
                 "vicerrector_id" => $this->vicerrector_id,
             ]);
-            $this->reset('name', 'start', 'end', 'subsidy_id', 'vicerrector_id');
+            $this->reset('name', 'start', 'end', 'description', 'subsidy_id', 'vicerrector_id');
             $this->dispatch('message', code: '200', content: 'Se ha creado');
         } catch (\Exception $ex) {
             $this->dispatch('message', code: '500', content: 'No se pudo crear');

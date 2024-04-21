@@ -50,6 +50,14 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+                <div class="form-group">
+                    <label for="description">Descripción:</label>
+                    <textarea wire:model='description' id="description" class="form-control" placeholder="Ingrese una descripción"
+                        rows="4"></textarea>
+                    @error('description')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary float-right">Editar</button>
