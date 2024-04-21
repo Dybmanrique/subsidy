@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('black_list', function (Blueprint $table) {
             $table->id();
             $table->string('email')->unique();
-            $table->string('reason');
+            $table->text('reason');
             $table->timestamps();
         });
     }
