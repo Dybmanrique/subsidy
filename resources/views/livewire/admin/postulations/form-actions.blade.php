@@ -37,11 +37,15 @@
             DATOS GENERALES
         </div>
         <div class="card-body">
-            <table class="table">
+            <table class="table table-sm">
                 <tbody>
                     <tr>
                         <td class="text-bold">Nombre actividad:</td>
                         <td>{{ $postulation->name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-bold">Convocatoria:</td>
+                        <td>{{ $postulation->announcement->name }}</td>
                     </tr>
                     <tr>
                         <td class="text-bold">Asesor:</td>
