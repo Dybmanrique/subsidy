@@ -12,7 +12,7 @@ class FormCreate extends Component
 {
     public $requirements;
 
-    public $name, $description, $status;
+    public $name, $status;
 
     public $requirement_id;
     public $requirements_list = [];
@@ -69,16 +69,13 @@ class FormCreate extends Component
 
         $this->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
             'status' => 'required',
         ]);
 
         try {
-            $description = (trim($this->description) == "") ? null : $this->description;
             $subsidy = Subsidy::create([
                 'name' => $this->name,
                 'status' => $this->status,
-                'description' => $description,
             ]);
 
             $requirements_list_map = [];
@@ -93,7 +90,7 @@ class FormCreate extends Component
                     'subsidy_id' => $subsidy->id
                 ]);
             }
-            $this->reset(['name', 'description', 'requirements_list', 'status']);
+            $this->reset(['name', 'requirements_list', 'status']);
             $this->dispatch('message', code: '200', content: 'Creado, se actualizará la página');
             $this->dispatch('created');
         } catch (\Exception $ex) {

@@ -21,7 +21,6 @@
                             <th scope="col">#</th>
                             <th scope="col">NOMBRE</th>
                             <th scope="col">ESTADO</th>
-                            <th scope="col">DESCRIPCIÓN</th>
                             <th scope="col">ACCIONES</th>
                         </tr>
                     </thead>
@@ -65,12 +64,6 @@
                     "data": "status",
                     "render": function(data, type, row, meta) {
                         return data.charAt(0).toUpperCase() + data.slice(1);;
-                    }
-                },
-                {
-                    "data": "description",
-                    "render": function(data, type, row, meta) {
-                        return data ?? 'Ninguna descripción';
                     }
                 },
                 {

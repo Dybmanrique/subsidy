@@ -35,14 +35,6 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label for="description">Descripción:</label>
-                                    <textarea wire:model='description' id="description" rows="6" class="form-control"
-                                        placeholder="Ingrese una descripción"></textarea>
-                                    @error('description')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
                             </div>
                         </div>
                     </div>

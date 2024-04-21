@@ -11,7 +11,7 @@ class FormEdit extends Component
     public $subsidy;
     public $requirements;
 
-    public $name, $description, $status;
+    public $name, $status;
 
     public $requirement_id;
     public $requirements_list = [];
@@ -23,7 +23,6 @@ class FormEdit extends Component
     {
         $this->requirements = Requirement::all();
         $this->name = $this->subsidy->name;
-        $this->description = $this->subsidy->description;
         $this->status = $this->subsidy->status;
         foreach ($this->subsidy->requirements as $key => $value) {
             $this->requirements_list[$value->id] = ['is_required' => $value->pivot->is_required, 'name' => $value->name];
@@ -76,17 +75,14 @@ class FormEdit extends Component
     {
         $this->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
             'status' => 'required',
         ]);
         $password_changed = ($this->subsidy->status !== $this->status);
             
         try {
-            $description = (trim($this->description) == "") ? null : $this->description;
             $this->subsidy->update([
                 'name' => $this->name,
                 'status' => $this->status,
-                'description' => $description,
             ]);
 
             $requirements_list_map = [];
