@@ -116,46 +116,6 @@
                 columnDefs: columnDefs,
                 responsive: true
             });
-
-            // $(`#table tbody`).on('click', '.btn-delete', function() {
-            //     let data = table.row($(this).parents('tr')).data();
-            //     Swal.fire({
-            //         title: 'Estas seguro?',
-            //         text: "Esta acción no se puede revertir!",
-            //         icon: 'warning',
-            //         showCancelButton: true,
-            //         confirmButtonColor: '#3085d6',
-            //         cancelButtonColor: '#d33',
-            //         confirmButtonText: 'Si, Eliminar!',
-            //         cancelButtonText: 'No'
-            //     }).then((result) => {
-            //         if (result.isConfirmed) {
-            //             $.ajax({
-            //                 url: "{{ route('admin.faculties.destroy') }}",
-            //                 type: "POST",
-            //                 dataType: 'json',
-            //                 data: {
-            //                     "_token": "{{ csrf_token() }}",
-            //                     id: data["id"],
-            //                 }
-            //             }).done(function(response) {
-            //                 if (response.code == '200') {
-            //                     table.ajax.reload();
-            //                     Toast.fire({
-            //                         icon: 'success',
-            //                         title: response.message
-            //                     });
-            //                 } else if (response.code == '500') {
-            //                     Toast.fire({
-            //                         icon: 'info',
-            //                         title: response.message
-            //                     });
-            //                 }
-            //             });
-            //         }
-            //     })
-            // });
-
         });
     </script>
 @stop
