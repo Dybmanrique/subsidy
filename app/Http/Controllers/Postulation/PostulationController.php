@@ -12,8 +12,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class PostulationController extends Controller
 {
     public function index(){
-        $subsidies = Subsidy::where('status','activo')->get();
-        return view('postulations.index', compact('subsidies'));
+        return view('postulations.index');
     }
 
     public function my_postulations(){
