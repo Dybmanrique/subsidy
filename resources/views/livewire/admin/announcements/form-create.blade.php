@@ -43,7 +43,7 @@
                     <select wire:model='vicerrector_id' id="vicerrector_id" class="form-control">
                         <option value="">--Seleccione--</option>
                         @foreach ($vicerrectors as $vicerrector)
-                            <option value="{{ $vicerrector->id }}">{{ $vicerrector->name }}</option>
+                            <option value="{{ $vicerrector->id }}">{{ $vicerrector->last_name }} {{ $vicerrector->name }}</option>
                         @endforeach
                     </select>
                     @error('vicerrector_id')

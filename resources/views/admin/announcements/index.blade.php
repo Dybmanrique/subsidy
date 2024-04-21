@@ -73,7 +73,10 @@
                     "data": "subsidy.name"
                 },
                 {
-                    "data": "vicerrector.name"
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return `${data.vicerrector.last_name} ${data.vicerrector.name}`;
+                    }
                 },
                 {
                     "data": null,
