@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('phone');
             $table->enum('condition',['estudiante','egresado']);
             $table->foreignId('school_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
