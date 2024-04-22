@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Postulation;
 
+use App\Models\Announcement;
 use App\Models\Postulation;
 use App\Models\Subsidy;
 use Livewire\Component;
@@ -10,18 +11,24 @@ use Illuminate\Support\Str;
 class SubventionsList extends Component
 {
     public $subsidies;
+    public $announcements;
     public $model_open = false;
     public $activity_items = [];
 
+    public $announcement_selected;
     public $name, $activity_id, $adviser, $subsidy_id;
 
     public function mount(){
         $this->subsidies = Subsidy::where('status','activo')->get();
+        $currentDate = now()->toDateString(); // Obtiene la fecha actual en formato "YYYY-MM-DD"
+        $this->announcements = Announcement::whereDate('start', '<=', $currentDate)
+                                      ->whereDate('end', '>=', $currentDate)
+                                      ->get();
     }
 
-    public function selectSubsidy($subsidy_id){
-        $this->subsidy_id = $subsidy_id;
-        $this->activity_items = Subsidy::find($subsidy_id)->activities()->where('status','activo')->get();
+    public function selectAnnouncement($announcement_id){
+        $this->announcement_selected = Announcement::find($announcement_id);
+        $this->activity_items = Subsidy::find($this->announcement_selected->subsidy->id)->activities()->where('status','activo')->get();
     }
 
     public function postulate(){
@@ -31,8 +38,6 @@ class SubventionsList extends Component
             'activity_id' => 'required|numeric',
         ]);
 
-        $subsidy = Subsidy::find($this->subsidy_id);
-        $announcement = $subsidy->announcement()->latest()->first();
         $adviser = (trim($this->adviser) == "") ? null : $this->adviser;
         
         $postulation = Postulation::create([
@@ -41,7 +46,7 @@ class SubventionsList extends Component
             'uuid' => Str::uuid()->toString(),
             'activity_id' => $this->activity_id,
             'student_id' => auth()->user()->student->id,
-            'announcement_id' => $announcement->id,
+            'announcement_id' => $this->announcement_selected->id,
         ]);
 
         redirect()->route('postulations.postulate', $postulation);

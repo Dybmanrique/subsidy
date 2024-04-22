@@ -31,39 +31,43 @@
 
                     <form class="mt-5" wire:submit='postulate'>
                         <div>
-                            
-
-                            <label for="user name" class="mt-3 block text-gray-700 capitalize">Actividad*:</label>
+                            <label for="name" class="mt-3 block text-gray-700 capitalize">Actividad*:</label>
                             <input placeholder="Nombre de la actividad" type="text" wire:model='name'
                                 class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
 
 
-                            <label for="user name" class="mt-3 block text-gray-700 capitalize">Tipo*:</label>
-                            <select name="" id="" wire:model='activity_id'
+                            <label for="activity_id" class="mt-3 block text-gray-700 capitalize">Tipo*:</label>
+                            <select id="activity_id" wire:model='activity_id'
                                 class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                 <option value="">-- Seleccione --</option>
                                 @foreach ($activity_items as $activity)
-                                <option value="{{$activity->id}}">{{$activity->name}}</option>
+                                    <option value="{{ $activity->id }}">{{ $activity->name }}</option>
                                 @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('activity_id')" class="mt-2" />
 
-                            <label for="user name" class="mt-3 block text-gray-700 capitalize">Asesor:</label>
-                            <input placeholder="Nombres y apellidos del asesor" type="text" wire:model='adviser'
+                            <label for="adviser" class="mt-3 block text-gray-700 capitalize">Asesor:</label>
+                            <input placeholder="Nombres y apellidos del asesor" type="text" wire:model='adviser' id="adviser"
                                 class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                             <x-input-error :messages="$errors->get('adviser')" class="mt-2" />
                         </div>
 
-                        <div class="mt-6 bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                        <div class="mt-6 bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
+                            role="alert">
                             <div class="flex">
-                              <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
-                              <div>
-                                <p class="font-bold">IMPORTANTE</p>
-                                <p class="text-sm">Recuerde que actualmente sólo se puede postular a <span class="font-bold">UNA</span> subvención por año.</p>
-                              </div>
+                                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path
+                                            d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+                                    </svg></div>
+                                <div>
+                                    <p class="font-bold">IMPORTANTE</p>
+                                    <p class="text-sm">Recuerde que actualmente sólo se puede postular a <span
+                                            class="font-bold">UNA</span> subvención por año.</p>
+                                </div>
                             </div>
-                          </div>
+                        </div>
 
                         <div class="flex justify-end mt-6">
                             <x-primary-button>POSTULAR</x-primary-button>
@@ -77,15 +81,18 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            @foreach ($subsidies as $subsidy)
-                <x-postulation.subvention-card
-                    title="{{ $subsidy->name }}">
-                    <div class="whitespace-pre-wrap mb-2">{{ $subsidy->description }}</div>
+            @foreach ($announcements as $announcement)
+                <x-postulation.subvention-card title="{{ $announcement->name }}">
+                    @php
+                        $start_formatted = date('d-m-Y', strtotime($announcement->start));
+                        $end_formatted = date('d-m-Y', strtotime($announcement->end));
+                    @endphp
+                    <p class="mb-3">Desde el <span class="font-bold">{{ $start_formatted }}</span> hasta el <span
+                            class="font-bold">{{ $end_formatted }}</span></p>
+                    <div class="whitespace-pre-wrap mb-2">{{ $announcement->description ?? '' }}</div>
                     <button
                         class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
-                        @click="modelOpen =!modelOpen" 
-                        wire:click = 'selectSubsidy({{ $subsidy->id }})'
-                        >
+                        @click="modelOpen =!modelOpen" wire:click = 'selectAnnouncement({{ $announcement->id }})'>
                         Postular
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
