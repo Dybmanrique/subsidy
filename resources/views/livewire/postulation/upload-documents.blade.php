@@ -68,7 +68,7 @@
                             class="flex-column space-y space-y-0 text-sm font-medium text-gray-500 md:me-4 mb-4 md:mb-0">
                             <li>
                                 <button
-                                    class="border shadow text-nowrap inline-flex items-center px-4 py-3 mb-1 rounded-lg bg-gray-50 hover:text-gray-100 hover:bg-blue-700 w-full"
+                                    class="border shadow text-nowrap inline-flex items-center px-4 py-3 mb-1 rounded-lg hover:text-gray-100 hover:bg-blue-700 w-full"
                                     x-on:click="openTab = {{ -1 }}"
                                     :class="{ 'bg-blue-700 text-white': openTab === {{ -1 }} }">
                                     General
@@ -77,7 +77,7 @@
                             @foreach ($requirements as $index => $requirement)
                                 <li>
                                     <button
-                                        class="border shadow text-nowrap inline-flex items-center px-4 py-3 mb-1 rounded-lg bg-gray-50 hover:text-gray-100 hover:bg-blue-700 w-full"
+                                        class="border shadow text-nowrap inline-flex items-center px-4 py-3 mb-1 rounded-lg hover:text-gray-100 hover:bg-blue-700 w-full"
                                         x-on:click="openTab = {{ $index }}"
                                         :class="{ 'bg-blue-700 text-white': openTab === {{ $index }} }">
                                         Requisito {{ $index + 1 }}

@@ -13,7 +13,7 @@
                             @foreach ($postulation->requirements as $index => $requirement)
                                 <li>
                                     <button type="button"
-                                        class="shadow border text-nowrap inline-flex items-center px-4 py-3 mb-1 rounded-lg bg-gray-50 hover:text-gray-100 hover:bg-blue-700 w-full"
+                                        class="shadow border text-nowrap inline-flex items-center px-4 py-3 mb-1 rounded-lg hover:text-gray-100 hover:bg-blue-700 w-full"
                                         x-on:click="openTab = {{ $index }}"
                                         :class="{ 'bg-blue-700 text-white': openTab === {{ $index }} }">
                                         Requisito {{ $index + 1 }}
