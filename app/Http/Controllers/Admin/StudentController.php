@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -19,7 +20,7 @@ class StudentController extends Controller
             ->with([
                 'user:id,name,last_name,email',
                 'school' => function ($query) {
-                    $query->select(['id','name','faculty_id'])->with(['faculty:id,name']);
+                    $query->select(['id', 'name', 'faculty_id'])->with(['faculty:id,name']);
                 }
             ])->get();
     }
@@ -37,7 +38,22 @@ class StudentController extends Controller
     public function destroy(Request $request)
     {
         try {
-            Student::find($request->id)->delete();
+            $student = Student::find($request->id);
+            if ($student) {
+                return response()->json([
+                    'message' => 'Algo no salió bien',
+                    'code' => '500'
+                ]);
+            }
+
+            if ($student->postulations()->exists()) {
+                return response()->json([
+                    'message' => 'No se puede eliminar porque tiene relaciones existentes',
+                    'code' => '500'
+                ]);
+            }
+
+            User::find($student->user_id)->delete();
             return response()->json([
                 'message' => 'Eliminado correctamente',
                 'code' => '200'
