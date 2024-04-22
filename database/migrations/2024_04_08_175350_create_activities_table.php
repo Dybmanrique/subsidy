@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->enum('status',['activo','inactivo'])->default('activo');
-            $table->foreignId('subsidy_id')->constrained();
+            $table->foreignId('subsidy_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
