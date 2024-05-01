@@ -3,20 +3,21 @@
 @section('title', 'UNASAM')
 
 @section('content_header')
-    <h1>FACULTADES</h1>
+    <h1 class="font-weight-bold">FACULTADES</h1>
 @stop
 
 @section('content')
     <div class="card">
 
         <div class="card-header">
-            <a href="{{ route('admin.faculties.create') }}" class="btn btn-primary">Registrar nueva facultad</a>
+            <a href="{{ route('admin.faculties.create') }}" class="btn btn-primary text-uppercase font-weight-bold">Registrar
+                nueva facultad</a>
         </div>
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-sm w-100 my-2" id="table">
-                    <thead>
+                <table class="table table-sm w-100 my-2 " id="table">
+                    <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">NOMBRE</th>
@@ -27,6 +28,9 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="card-footer">
+
         </div>
     </div>
 @stop
@@ -63,9 +67,9 @@
                     "data": null,
                     "render": function(data, type, row, meta) {
                         return (
-                            `<div class="d-flex flex-row justify-content-start">
-                                <a class="btn btn-primary btn-sm mr-2 btn-edit" href="{{ route('admin.faculties.edit', ':id') }}"><i class="far fa-edit"></i> Editar</a>
-                                <button class="btn btn-sm btn-danger btn-delete" type="button"><i class=" fas fa-trash"></i> Eliminar</button>
+                            `<div class="d-flex flex-row justify-content-end">
+                                <a class="btn btn-primary btn-sm mr-2 font-weight-bold btn-edit" href="{{ route('admin.faculties.edit', ':id') }}"><i class="far fa-edit"></i> EDITAR</a>
+                                <button class="btn btn-sm btn-danger font-weight-bold btn-delete" type="button"><i class=" fas fa-trash"></i> ELIMINAR</button>
                             </div>`.replace(':id', data.id)
                         );
                     }
@@ -73,9 +77,14 @@
             ];
 
             columnDefs = [{
-                className: 'text-left text-nowrap',
-                targets: '_all'
-            }];
+                    className: 'text-left text-nowrap',
+                    targets: [0, 1]
+                },
+                {
+                    className: 'text-right',
+                    targets: [2]
+                },
+            ];
 
             let table = $(`#table`).DataTable({
                 "ajax": {
@@ -98,14 +107,14 @@
                     text: "Esta acción no se puede revertir!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#1e40af',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si, Eliminar!',
-                    cancelButtonText: 'No'
+                    confirmButtonText: 'SÍ, ELIMINAR!',
+                    cancelButtonText: 'CANCELAR'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{route('admin.faculties.destroy')}}",
+                            url: "{{ route('admin.faculties.destroy') }}",
                             type: "POST",
                             dataType: 'json',
                             data: {
