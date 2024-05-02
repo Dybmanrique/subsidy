@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="form-group">
-                    <label for="name">Nombre*:</label>
+                    <label for="name">Nombre de la escuela*:</label>
                     <input type="text" wire:model='name' id="name" class="form-control"
                         placeholder="Ingrese el nombre" required>
                     @error('name')
@@ -11,7 +11,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="faculty_id">Facultad*:</label>
+                    <label for="faculty_id">Facultad respectiva*:</label>
                     <select wire:model='faculty_id' id="faculty_id" class="form-control">
                         <option value="">--Seleccione--</option>
                         @foreach ($faculties as $faculty)
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary float-right">Crear</button>
+                <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save"></i> Guardar</button>
             </div>
         </div>
     </form>
