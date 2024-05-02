@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save"></i> Guardar</button>
+                <button type="submit" class="btn btn-primary float-right text-uppercase font-weight-bold"><i class="fas fa-save"></i> Guardar</button>
             </div>
         </div>
     </form>
