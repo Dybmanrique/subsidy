@@ -3,7 +3,7 @@
 @section('title', 'UNASAM')
 
 @section('content_header')
-    <h1>ESTUDIANTES</h1>
+    <h1 class="font-weight-bold">ESTUDIANTES</h1>
 @stop
 
 @section('content')
