@@ -3,12 +3,14 @@
 @section('title', 'UNASAM')
 
 @section('content_header')
-    <h1>EDITAR REQUISITO</h1>
+    <div class="d-flex flex-row justify-content-between">
+        <h1 class="font-weight-bold">EDITAR REQUISITO</h1>
+        <a href="{{ route('admin.requirements.index') }}" class="btn btn-secondary mb-4"><i class="fas fa-arrow-left"></i>
+            VOLVER</a>
+    </div>
 @stop
 
 @section('content')
-    <a href="{{ route('admin.requirements.index') }}" class="btn btn-secondary mb-4"><i class="fas fa-arrow-left"></i>
-        Volver</a>
 
     @livewire('admin.requirements.form-edit', ['requirement' => $requirement])
 

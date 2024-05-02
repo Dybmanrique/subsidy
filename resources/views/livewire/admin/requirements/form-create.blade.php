@@ -27,7 +27,7 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="btn btn-primary float-right">Crear</button>
+                <button type="submit" class="btn btn-primary float-right text-uppercase font-weight-bold"><i class="fas fa-save"></i> Guardar</button>
             </form>
         </div>
     </div>
