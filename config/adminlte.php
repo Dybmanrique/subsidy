@@ -314,56 +314,66 @@ return [
             'text' => 'Dashboard',
             'route' => 'admin.dashboard',
             'icon' => 'fas fa-fw fa-tachometer-alt',
+            'classes' => 'text-uppercase'
         ],
-        ['header' => 'POSTULACIONES', 'key' => 'postulations'],
+        ['header' => 'POSTULACIONES', 'key' => 'postulations', 'classes' => 'font-weight-bold'],
         //The options in this section are added dynamically in AppServiceProvider
-        ['header' => 'SUBVENCIONES'],
+        ['header' => 'SUBVENCIONES', 'classes' => 'font-weight-bold'],
         [
             'text' => 'Subvenciones',
             'route' => 'admin.subsidies.index',
             'icon' => 'fas fa-fw fa-wallet',
+            'classes' => 'text-uppercase'
         ],
         [
             'text' => 'Requisitos',
             'route' => 'admin.requirements.index',
             'icon' => 'fas fa-fw fa-folder-open',
+            'classes' => 'text-uppercase'
         ],
         [
             'text' => 'Convocatorias',
             'route' => 'admin.announcements.index',
             'icon' => 'fas fa-fw fa-calendar-alt',
+            'classes' => 'text-uppercase'
         ],
         [
             'text' => 'Vicerrectores',
             'route' => 'admin.vicerrectors.index',
             'icon' => 'fas fa-fw fa-street-view',
+            'classes' => 'text-uppercase'
         ],
-        ['header' => 'UNIVERSIDAD'],
+        ['header' => 'UNIVERSIDAD', 'classes' => 'font-weight-bold'],
         [
             'text' => 'Estudiantes',
             'route' => 'admin.students.index',
             'icon' => 'fas fa-fw fa-user-graduate',
+            'classes' => 'text-uppercase'
         ],
         [
             'text' => 'Escuelas',
             'route' => 'admin.schools.index',
             'icon' => 'fas fa-fw fa-school',
+            'classes' => 'text-uppercase'
         ],
         [
             'text' => 'Facultades',
             'route' => 'admin.faculties.index',
             'icon' => 'fas fa-fw fa-building',
+            'classes' => 'text-uppercase'
         ],
-        ['header' => 'SISTEMA'],
+        ['header' => 'SISTEMA', 'classes' => 'font-weight-bold'],
         [
-            'text' => 'Usuarios administrativos',
+            'text' => 'Usuarios admin',
             'url' => 'admin/dashboard',
             'icon' => 'fas fa-fw fa-users-cog',
+            'classes' => 'text-uppercase'
         ],
         [
             'text' => 'Roles',
             'url' => 'admin/dashboard',
             'icon' => 'fas fa-fw fa-cogs',
+            'classes' => 'text-uppercase'
         ],
     ],
 

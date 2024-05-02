@@ -27,16 +27,19 @@ class AppServiceProvider extends ServiceProvider
 
             $subsidies = Subsidy::where('status', 'activo')->get()->map(function (Subsidy $subsidy) {
                 return [
-                    'text' => substr($subsidy['name'], 0, 20) . "...",
-                    'icon' => 'fas fa-fw fa-file-import',
+                    'text' => substr($subsidy['name'], 0, 18) . "...",
+                    'classes' => 'text-uppercase',
+                    'icon' => 'fas fa-fw fa-ticket-alt',
                     'submenu' => [
                         [
                             'text' => 'Última convocatoria',
                             'url' => route('admin.postulations.last_index', $subsidy['id']),
+                            'classes' => 'text-uppercase'
                         ],
                         [
                             'text' => 'Todos',
                             'url' => route('admin.postulations.all_index', $subsidy['id']),
+                            'classes' => 'text-uppercase'
                         ],
                     ],
                 ];
