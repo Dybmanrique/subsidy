@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary float-right">Editar</button>
+                <button type="submit" class="btn btn-primary float-right text-uppercase font-weight-bold"><i class="fas fa-save"></i> Guardar</button>
             </div>
         </div>
     </form>
