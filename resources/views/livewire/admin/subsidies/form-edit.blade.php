@@ -71,12 +71,12 @@
                                                     class="text-nowrap ml-2 btn btn-sm btn-primary font-weight-normal @php echo ($requirement['is_required']) ? 'active' : '' @endphp">
                                                     <input class="check-is-required " type="checkbox"
                                                         data-id='{{ $id }}' checked autocomplete="off">
-                                                    {{ $requirement['is_required'] ? 'Obligatorio' : 'No obligatorio' }}
+                                                    {{ $requirement['is_required'] ? 'OBLIGATORIO' : 'NO OBLIGATORIO' }}
                                                 </label>
                                             </div>
                                             <button type="button" data-id='{{ $id }}'
                                                 class="btn btn-sm btn-danger btn-delete-requirement ml-2 text-nowrap"><i
-                                                    class="fas fa-trash-alt"></i> Eliminar</button>
+                                                    class="fas fa-trash-alt"></i> ELIMINAR</button>
                                         </div>
                                     </div>
                                 @empty
@@ -109,7 +109,7 @@
                                             <span>{{ $activity }}</span>
                                             <button type="button" onclick="deleteActivity({{ $id }})"
                                                 class="btn btn-sm btn-danger btn-delete-activity"><i
-                                                    class="fas fa-trash-alt"></i> Eliminar</button>
+                                                    class="fas fa-trash-alt"></i> ELIMINAR</button>
                                         </div>
                                     @empty
                                         <p class="mb-0 text-center">Aquí aparecerán las actividades que desee agregar.
@@ -123,7 +123,7 @@
 
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save"></i> GUARDAR</button>
+                <button type="submit" class="btn btn-primary float-right font-weight-bold"><i class="fas fa-save"></i> GUARDAR</button>
             </div>
         </div>
     </form>

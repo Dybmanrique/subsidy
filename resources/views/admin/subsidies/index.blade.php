@@ -3,20 +3,20 @@
 @section('title', 'UNASAM')
 
 @section('content_header')
-    <h1>SUBVENCIONES</h1>
+    <h1 class="font-weight-bold">SUBVENCIONES</h1>
 @stop
 
 @section('content')
     <div class="card">
 
         <div class="card-header">
-            <a href="{{ route('admin.subsidies.create') }}" class="btn btn-primary">Registrar nuevo</a>
+            <a href="{{ route('admin.subsidies.create') }}" class="btn btn-primary font-weight-bold text-uppercase">Registrar nuevo</a>
         </div>
 
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-sm w-100 my-2" id="table">
-                    <thead>
+                    <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">NOMBRE</th>
@@ -70,9 +70,9 @@
                     "data": null,
                     "render": function(data, type, row, meta) {
                         return (
-                            `<div class="d-flex flex-row justify-content-start">
-                                <a class="btn btn-primary btn-sm mr-2 btn-edit" href="{{ route('admin.subsidies.edit', ':id') }}"><i class="far fa-edit"></i> Editar</a>
-                                <button class="btn btn-sm btn-danger btn-delete" type="button"><i class=" fas fa-trash"></i> Eliminar</button>
+                            `<div class="d-flex flex-row justify-content-end">
+                                <a class="btn btn-primary btn-sm mr-2 font-weight-bold text-uppercase btn-edit" href="{{ route('admin.subsidies.edit', ':id') }}"><i class="far fa-edit"></i> Editar</a>
+                                <button class="btn btn-sm btn-danger font-weight-bold text-uppercase btn-delete" type="button"><i class=" fas fa-trash"></i> Eliminar</button>
                             </div>`.replace(':id', data.id)
                         );
                     }
@@ -81,7 +81,10 @@
 
             columnDefs = [{
                 className: 'text-left text-nowrap',
-                targets: '_all'
+                targets: [0,1,2]
+            },{
+                className: 'text-right',
+                targets: [3]
             }];
 
             let table = $(`#table`).DataTable({
