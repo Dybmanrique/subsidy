@@ -4,8 +4,8 @@
 
 @section('content_header')
     <div class="d-flex flex-row justify-content-between">
-        <h1>VISUALIZAR DOCUMENTOS</h1>
-        <a class="btn btn-secondary font-weight-bold text-uppercase"
+        <h1 class="font-weight-bold">VISUALIZAR DOCUMENTOS</h1>
+        <a class="btn btn-secondary text-uppercase"
             href="{{ route('admin.postulations.all_index', $postulation->announcement->subsidy) }}"><i
                 class="fas fa-arrow-left"></i> Volver</a>
     </div>

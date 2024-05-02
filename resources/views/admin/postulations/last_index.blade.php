@@ -3,7 +3,7 @@
 @section('title', 'UNASAM')
 
 @section('content_header')
-    <h1>POSTULACIONES DE LA ÚLTIMA CONVOCATORIA</h1>
+    <h1 class="font-weight-bold">POSTULACIONES DE LA ÚLTIMA CONVOCATORIA</h1>
 @stop
 
 @section('content')
@@ -15,7 +15,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-sm w-100 my-2" id="table">
-                    <thead>
+                    <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">ACCIONES</th>
