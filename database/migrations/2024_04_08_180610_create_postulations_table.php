@@ -16,14 +16,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('adviser')->nullable();
             $table->uuid('uuid')->unique();
-            $table->enum('status', [
-                'Subiendo archivos',
-                'Pendiente de revisión',
-                'Aceptado en la Dirección del Instituto de Investigación',
-                'Denegado en la Dirección del Instituto de Investigación',
-                'Aprobado en el Consejo Universitario',
-                'Denegado en el Consejo Universitario'
-            ])->default('Subiendo archivos');
+            // $table->enum('status', [
+            //     'Subiendo archivos',
+            //     'Pendiente de revisión',
+            //     'Aceptado en la Dirección del Instituto de Investigación',
+            //     'Denegado en la Dirección del Instituto de Investigación',
+            //     'Aprobado en el Consejo Universitario',
+            //     'Denegado en el Consejo Universitario'
+            // ])->default('Subiendo archivos');
             $table->foreignId('student_id')->constrained();
             $table->foreignId('announcement_id')->constrained();
             $table->foreignId('activity_id')->constrained();
