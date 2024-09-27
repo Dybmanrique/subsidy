@@ -30,7 +30,8 @@
 
                     <form class="mt-5" wire:submit='generateSolicitude()'>
                         <div>
-                            <label for="user name" class="mt-3 block text-gray-700">Si desea puede agregar una imagen de su firma:</label>
+                            <label for="user name" class="mt-3 block text-gray-700">Si desea puede agregar una imagen de
+                                su firma:</label>
                             <input wire:model = 'file_modal' accept="image/*"
                                 class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none"
                                 type="file" />
@@ -51,34 +52,53 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             @foreach ($postulations as $postulation)
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-2">
-                    <div class="p-6 text-gray-900">
-                        <p><span class="font-bold">Nombre: </span>{{ $postulation->name ?? 'Sin nombre' }}</p>
-                        <p><span class="font-bold">Asesor: </span>{{ $postulation->adviser ?? 'Sin asesor' }}</p>
-                        <p><span class="font-bold">Estado: </span>{{ $postulation->status }}</p>
-                        <p><span class="font-bold">Convocatoria: </span>{{ $postulation->announcement->name }}</p>
-                        <p><span class="font-bold">Tipo de subvención:
-                            </span>{{ $postulation->announcement->subsidy->name }}</p>
-                        <div class="mt-2">
-                            @if (
-                                $postulation->status !== 'Pendiente de revisión' &&
-                                    $postulation->status !== 'Denegado en la Dirección de Investigación e Innovación')
-                                <x-primary-link
-                                    href="{{ route('postulations.postulate', $postulation) }}">Editar</x-primary-link>
-                            @endif
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg m-2 rounded">
+                    <div class="p-6 text-gray-900 md:flex md:flex-row">
+                        <div class="flex-1">
+                            <p><span class="font-bold">Nombre: </span>{{ $postulation->name ?? 'Sin nombre' }}</p>
+                            <p><span class="font-bold">Asesor: </span>{{ $postulation->adviser ?? 'Sin asesor' }}</p>
+                            <p><span class="font-bold">Convocatoria: </span>{{ $postulation->announcement->name }}</p>
+                            <p><span class="font-bold">Tipo de subvención:
+                                </span>{{ $postulation->announcement->subsidy->name }}</p>
+                            <div class="mt-2">
+                                @if (
+                                    $postulation->status !== 'Pendiente de revisión' &&
+                                        $postulation->status !== 'Denegado en la Dirección de Investigación e Innovación')
+                                    <x-primary-link
+                                        href="{{ route('postulations.postulate', $postulation) }}">Editar</x-primary-link>
+                                @endif
 
-                            <button
-                                class="mb-1 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
-                                wire:click = 'setPostulationId({{ $postulation->id }})'
-                                @click="modelOpen =!modelOpen">Generar solicitud</button>
-                            <x-success-link class="mb-1"
-                                href="{{ route('postulations.view_documents', $postulation) }}" target="_blank">Ver
-                                documentos</x-success-link>
+                                <button
+                                    class="mb-1 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                    wire:click = 'setPostulationId({{ $postulation->id }})'
+                                    @click="modelOpen =!modelOpen">Generar solicitud</button>
+                                <x-success-link class="mb-1"
+                                    href="{{ route('postulations.view_documents', $postulation) }}" target="_blank">Ver
+                                    documentos</x-success-link>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-lg border-t-2 md:border-none mt-2">Historial:</h3>
+                            @foreach ($postulation->states as $state)
+                                <ol class="relative border-s border-gray-700">
+                                    <li class="mb-4 ms-4">
+                                        <div
+                                            class="absolute w-3 h-3 bg-gray-700 rounded-full mt-1.5 -start-1.5 border border-white">
+                                        </div>
+                                        <time class="mb-1 text-sm font-normal leading-none text-gray-500">{{$state->pivot->created_at->toDayDateTimeString()}}</time>
+                                        <h3 class=" font-semibold text-gray-900">{{$state->name}}
+                                        </h3>
+                                        {{-- <p class="mb-4 text-base font-normal text-gray-500">Get access to over 20+ pages
+                                            including a dashboard layout, charts, kanban board, calendar, and pre-order
+                                            E-commerce &
+                                            Marketing pages.</p> --}}
+                                    </li>
+                                </ol>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             @endforeach
-
         </div>
     </div>
 </div>
