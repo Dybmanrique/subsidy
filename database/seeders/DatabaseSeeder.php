@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'dmanriquea@unasam.edu.pe',
         ]);
 
-        State::create(['name' => 'Subiendo archivos']);
-        State::create(['name' => 'Pendiente de revisión']);
+        State::create(['name' => 'Inicio de la postulación']);
+        State::create(['name' => 'Subida de requerimientos']);
         State::create(['name' => 'Aceptado en la Dirección del Instituto de Investigación']);
         State::create(['name' => 'Denegado en la Dirección del Instituto de Investigación']);
         State::create(['name' => 'Aprobado en el Consejo Universitario']);
