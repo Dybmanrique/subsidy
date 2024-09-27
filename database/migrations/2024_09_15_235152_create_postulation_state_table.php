@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('postulation_state', function (Blueprint $table) {
             $table->foreignId('postulation_id')->constrained()->onDelete('cascade');
             $table->foreignId('state_id')->constrained()->onDelete('cascade');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
