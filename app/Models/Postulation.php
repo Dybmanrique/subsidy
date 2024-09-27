@@ -41,6 +41,6 @@ class Postulation extends Model
     }
 
     public function states(){
-        return $this->belongsToMany(State::class);
+        return $this->belongsToMany(State::class)->withPivot('created_at')->withTimestamps();
     }
 }

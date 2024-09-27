@@ -12,4 +12,8 @@ class State extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function postulations() {
+        return $this->belongsToMany(Postulation::class)->withTimestamps();
+    }
 }
