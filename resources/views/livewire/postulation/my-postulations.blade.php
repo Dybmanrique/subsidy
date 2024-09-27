@@ -61,16 +61,16 @@
                             <p><span class="font-bold">Tipo de subvención:
                                 </span>{{ $postulation->announcement->subsidy->name }}</p>
                             <div class="mt-2">
-                                @if (
-                                    $postulation->editable_up_to !== null && $postulation->editable_up_to > now())
+                                @if ($postulation->editable_up_to !== null && $postulation->editable_up_to > now())
                                     <x-primary-link
                                         href="{{ route('postulations.postulate', $postulation) }}">Editar</x-primary-link>
+                                @else
+                                    <button
+                                        class="mb-1 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                        wire:click = 'setPostulationId({{ $postulation->id }})'
+                                        @click="modelOpen =!modelOpen">Generar solicitud</button>
                                 @endif
 
-                                <button
-                                    class="mb-1 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
-                                    wire:click = 'setPostulationId({{ $postulation->id }})'
-                                    @click="modelOpen =!modelOpen">Generar solicitud</button>
                                 <x-success-link class="mb-1"
                                     href="{{ route('postulations.view_documents', $postulation) }}" target="_blank">Ver
                                     documentos</x-success-link>
@@ -87,7 +87,8 @@
                                         <h3 class=" font-semibold text-gray-900">{{ $state->name }}</h3>
                                         <time
                                             class="mb-1 text-sm font-normal leading-none text-gray-500">{{ $state->pivot->created_at->diffForHumans() }}</time>
-                                        <p class="mb-4 text-base font-normal text-gray-500">{{$state->pivot->description}}</p>
+                                        <p class="mb-4 text-base font-normal text-gray-500">
+                                            {{ $state->pivot->description }}</p>
                                     </li>
                                 @endforeach
                             </ol>
