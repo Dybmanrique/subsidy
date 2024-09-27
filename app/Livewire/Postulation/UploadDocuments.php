@@ -94,9 +94,7 @@ class UploadDocuments extends Component
             }
         }
         // 2 = Pendiente de revisión
-        $this->postulation->update([
-            'status' => 2
-        ]);
+        $this->postulation->states()->attach('2');
         redirect()->route('postulations.my_postulations');
     }
 
