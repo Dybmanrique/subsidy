@@ -49,6 +49,8 @@ class SubventionsList extends Component
             'announcement_id' => $this->announcement_selected->id,
         ]);
 
+        $postulation->states()->attach(1); //Asigne el primer estado por defecto
+
         redirect()->route('postulations.postulate', $postulation);
     }
 
