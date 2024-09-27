@@ -78,23 +78,23 @@
                             </div>
                         </div>
                         <div class="flex-1">
-                            <h3 class="font-bold text-lg border-t-2 md:border-none mt-2">Historial:</h3>
-                            @foreach ($postulation->states as $state)
-                                <ol class="relative border-s border-gray-700">
+                            <h3 class="font-bold text-lg border-t-2 md:border-none mt-2 md:mt-0">Historial:</h3>
+                            <ol class="relative border-s border-gray-700">
+                                @foreach ($postulation->states as $state)
                                     <li class="mb-4 ms-4">
                                         <div
                                             class="absolute w-3 h-3 bg-gray-700 rounded-full mt-1.5 -start-1.5 border border-white">
                                         </div>
-                                        <time class="mb-1 text-sm font-normal leading-none text-gray-500">{{$state->pivot->created_at->toDayDateTimeString()}}</time>
-                                        <h3 class=" font-semibold text-gray-900">{{$state->name}}
-                                        </h3>
-                                        {{-- <p class="mb-4 text-base font-normal text-gray-500">Get access to over 20+ pages
+                                        <h3 class=" font-semibold text-gray-900">{{ $state->name }}</h3>
+                                        <time
+                                            class="mb-1 text-sm font-normal leading-none text-gray-500">{{ $state->pivot->created_at->diffForHumans() }}</time>
+                                        <p class="mb-4 text-base font-normal text-gray-500">Get access to over 20+ pages
                                             including a dashboard layout, charts, kanban board, calendar, and pre-order
                                             E-commerce &
-                                            Marketing pages.</p> --}}
+                                            Marketing pages.</p>
                                     </li>
-                                </ol>
-                            @endforeach
+                                @endforeach
+                            </ol>
                         </div>
                     </div>
                 </div>
