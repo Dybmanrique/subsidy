@@ -62,8 +62,7 @@
                                 </span>{{ $postulation->announcement->subsidy->name }}</p>
                             <div class="mt-2">
                                 @if (
-                                    $postulation->status !== 'Pendiente de revisión' &&
-                                        $postulation->status !== 'Denegado en la Dirección de Investigación e Innovación')
+                                    $postulation->editable_up_to !== null && $postulation->editable_up_to > now())
                                     <x-primary-link
                                         href="{{ route('postulations.postulate', $postulation) }}">Editar</x-primary-link>
                                 @endif
