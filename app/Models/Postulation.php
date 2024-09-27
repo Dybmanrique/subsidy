@@ -29,7 +29,7 @@ class Postulation extends Model
     }
 
     public function requirements(){
-        return $this->belongsToMany(Requirement::class)->withPivot(['file','description']);
+        return $this->belongsToMany(Requirement::class)->withPivot('file');
     }
 
     public function activity(){
@@ -41,6 +41,6 @@ class Postulation extends Model
     }
 
     public function states(){
-        return $this->belongsToMany(State::class)->withPivot('created_at')->withTimestamps();
+        return $this->belongsToMany(State::class)->withPivot(['created_at', 'description'])->withTimestamps();
     }
 }
