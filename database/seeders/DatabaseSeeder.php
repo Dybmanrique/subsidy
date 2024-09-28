@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Faculty;
+use App\Models\School;
 use App\Models\State;
+use App\Models\Student;
 use App\Models\User;
+use App\Models\Vicerrector;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,6 +24,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Deyber',
             'last_name' => 'Manrique',
             'email' => 'dmanriquea@unasam.edu.pe',
+            'is_admin' => true,
         ]);
 
         State::create(['name' => 'Inicio de la postulación']);
@@ -28,5 +33,23 @@ class DatabaseSeeder extends Seeder
         State::create(['name' => 'Denegado en la Dirección del Instituto de Investigación']);
         State::create(['name' => 'Aprobado en el Consejo Universitario']);
         State::create(['name' => 'Denegado en el Consejo Universitario']);
+
+        Faculty::create(['name' => 'Ciencias']);
+        School::create(['name' => 'Sistemas', 'faculty_id' => 1]);
+        Vicerrector::create(['name'=>'Teresa', 'last_name'=>'Vicerrectora']);
+
+        User::factory()->create([
+            'name' => 'Antonio',
+            'last_name' => 'Acuña',
+            'email' => 'antonio@unasam.edu.pe',
+        ]);
+
+        Student::create([
+            'dni' => '08451235',
+            'phone' => '954123456',
+            'school_id' => '1',
+            'user_id' => '2',
+            'condition' => '1',
+        ]);
     }
 }
