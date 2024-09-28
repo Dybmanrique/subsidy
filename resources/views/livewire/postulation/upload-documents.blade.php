@@ -130,7 +130,7 @@
                                     <x-input-error :messages="$errors->get('activity_id')" class="mt-2" />
 
                                     <label for="budget" class="mt-3 block text-gray-700 capitalize">Presupuesto*:</label>
-                                    <input id="budget" placeholder="Nombres y apellidos del asesor" type="number" step="0.01"
+                                    <input id="budget" placeholder="Cantidad de presupuesto - S/." type="number" step="0.01"
                                         wire:model='budget'
                                         class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                     <x-input-error :messages="$errors->get('budget')" class="mt-2" />

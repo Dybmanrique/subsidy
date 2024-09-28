@@ -30,10 +30,10 @@ class DatabaseSeeder extends Seeder
 
         State::create(['name' => 'Inicio de la postulación']);
         State::create(['name' => 'Subida de requerimientos']);
-        State::create(['name' => 'Aceptado en la Dirección del Instituto de Investigación']);
-        State::create(['name' => 'Denegado en la Dirección del Instituto de Investigación']);
-        State::create(['name' => 'Aprobado en el Consejo Universitario']);
-        State::create(['name' => 'Denegado en el Consejo Universitario']);
+        State::create(['name' => 'Evaluado']);
+        State::create(['name' => 'Observado']);
+        State::create(['name' => 'Aprobado']);
+        State::create(['name' => 'Denegado']);
 
         Faculty::create(['name' => 'Ciencias']);
         School::create(['name' => 'Sistemas', 'faculty_id' => 1]);
@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             'condition' => '1',
         ]);
 
-        Setting::create(['key' => 'max_postulation', 'value' => '1']);
+        Setting::create(['key' => 'limit_postulations', 'value' => '1']);
         Setting::create(['key' => 'regulation_link', 'value' => 'https://investigacion.unasam.edu.pe/noticia/reglamento-subvenciones-economicas-a-favor-de-graduados-y-estudiantes-de-pregrado-para-el-desarrollo-de-actividades-academicas-y-de-investigacion-formativa-unasam-2024']);
         Setting::create(['key' => 'cover_image', 'value' => 'https://www.unasam.edu.pe/web/noticiaunasam/noticia-11-04-2024-09-12-51.jpg']);
         Setting::create(['key' => 'unasam_link', 'value' => 'https://unasam.edu.pe/']);
