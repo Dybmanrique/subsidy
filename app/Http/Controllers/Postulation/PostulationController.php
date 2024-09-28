@@ -31,6 +31,10 @@ class PostulationController extends Controller
             abort(403, 'El registro ya no es editable.');
         }
 
+        if($postulation->student->user_id !== auth()->user()->id){
+            abort(403, 'No permitido.');
+        }
+
         return view('postulations.postulate', compact('postulation'));
     }
 
