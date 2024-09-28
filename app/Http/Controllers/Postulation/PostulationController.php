@@ -18,6 +18,10 @@ class PostulationController extends Controller
 
     public function my_postulations()
     {
+        if(auth()->user()->is_admin){
+            abort(403, 'Los administradores no pueden tener postulaciones.');
+        }
+
         return view('postulations.my_postulations');
     }
 

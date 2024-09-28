@@ -32,7 +32,7 @@
                     <form class="mt-5" wire:submit='postulate'>
                         <div>
                             <label for="name" class="mt-3 block text-gray-700 capitalize">Actividad*:</label>
-                            <input placeholder="Nombre de la actividad" type="text" wire:model='name'
+                            <input id="name" placeholder="Nombre de la actividad" type="text" wire:model='name'
                                 class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
 
@@ -98,7 +98,7 @@
     </div>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             @forelse ($announcements as $announcement)
                 <x-postulation.subvention-card title="{{ $announcement->name }}">
                     @php
