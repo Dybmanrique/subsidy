@@ -25,13 +25,14 @@ class UploadDocuments extends Component
     public function mount()
     {
         $this->requirements = $this->postulation->announcement->subsidy->requirements;
-        $this->activity_items = $this->postulation->announcement->subsidy->activities()->where('status','activo')->get();
+        $this->activity_items = $this->postulation->announcement->subsidy->activities()->where('status', 'activo')->get();
         $this->name = $this->postulation->name;
         $this->activity_id = $this->postulation->activity_id;
         $this->adviser = $this->postulation->adviser;
     }
 
-    public function updateGeneralData(){
+    public function updateGeneralData()
+    {
         $this->validate([
             'name' => 'required|string|max:255',
             'adviser' => 'nullable|string|max:255',
@@ -95,6 +96,9 @@ class UploadDocuments extends Component
         }
         // 2 = Pendiente de revisión
         $this->postulation->states()->attach('2');
+        $this->postulation->update([
+            'editable_up_to' => null
+        ]);
         redirect()->route('postulations.my_postulations');
     }
 
