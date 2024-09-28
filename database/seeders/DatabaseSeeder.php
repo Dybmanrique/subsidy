@@ -54,6 +54,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Setting::create(['key' => 'limit_postulations', 'value' => '1']);
+        Setting::create(['key' => 'subsidy_link', 'value' => 'https://investigacion.unasam.edu.pe/subvenciones']);
         Setting::create(['key' => 'regulation_link', 'value' => 'https://investigacion.unasam.edu.pe/noticia/reglamento-subvenciones-economicas-a-favor-de-graduados-y-estudiantes-de-pregrado-para-el-desarrollo-de-actividades-academicas-y-de-investigacion-formativa-unasam-2024']);
         Setting::create(['key' => 'cover_image', 'value' => 'https://www.unasam.edu.pe/web/noticiaunasam/noticia-11-04-2024-09-12-51.jpg']);
         Setting::create(['key' => 'unasam_link', 'value' => 'https://unasam.edu.pe/']);
