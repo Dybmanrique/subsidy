@@ -38,6 +38,11 @@ class SubventionsList extends Component
             'activity_id' => 'required|numeric',
         ]);
 
+        if(auth()->user()->is_admin){
+            //Restricción para el perfil de admin
+            return;
+        }
+
         $adviser = (trim($this->adviser) == "") ? null : $this->adviser;
         
         $postulation = Postulation::create([
