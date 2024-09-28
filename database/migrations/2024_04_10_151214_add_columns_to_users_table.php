@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('last_name');
+            $table->bool('is_admin')->default(false);
             $table->enum('status',['activo','inactivo'])->default('activo');
         });
     }
@@ -24,7 +25,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('last_name');
-            $table->boolean('is_admin')->default(false);
+            $table->dropColumn('is_admin');
+            $table->dropColumn('status');
         });
     }
 };
