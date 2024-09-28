@@ -52,7 +52,7 @@ class MyPostulations extends Component
         $this->model_open = false;
         return response()->streamDownload(
             fn() => print($pdf),
-            'Solicitud.pdf'
+            'Solicitud '. $postulation->name.'.pdf'
         );
     }
 
