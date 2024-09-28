@@ -16,7 +16,7 @@ class UploadDocuments extends Component
     public $requirements;
 
     public $activity_items;
-    public $name, $activity_id, $adviser;
+    public $name, $budget, $activity_id, $adviser;
 
     public $model_open = false;
     public $requirement_modal_id;
@@ -29,6 +29,7 @@ class UploadDocuments extends Component
         $this->name = $this->postulation->name;
         $this->activity_id = $this->postulation->activity_id;
         $this->adviser = $this->postulation->adviser;
+        $this->budget = $this->postulation->budget;
     }
 
     public function updateGeneralData()

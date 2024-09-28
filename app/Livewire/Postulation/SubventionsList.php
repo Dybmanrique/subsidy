@@ -16,7 +16,7 @@ class SubventionsList extends Component
     public $activity_items = [];
 
     public $announcement_selected;
-    public $name, $activity_id, $adviser, $subsidy_id;
+    public $name, $budget, $activity_id, $adviser, $subsidy_id;
 
     public function mount(){
         $this->subsidies = Subsidy::where('status','activo')->get();
@@ -34,6 +34,7 @@ class SubventionsList extends Component
     public function postulate(){
         $this->validate([
             'name' => 'required|string|max:255',
+            'budget' => 'required|numeric',
             'adviser' => 'nullable|string|max:255',
             'activity_id' => 'required|numeric',
         ]);
@@ -47,6 +48,7 @@ class SubventionsList extends Component
         
         $postulation = Postulation::create([
             'name' => $this->name,
+            'budget' => $this->budget,
             'adviser' => $adviser,
             'uuid' => Str::uuid()->toString(),
             'activity_id' => $this->activity_id,

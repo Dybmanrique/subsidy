@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('postulations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->decimal('budget', 9, 2);
             $table->string('adviser')->nullable();
             $table->uuid('uuid')->unique();
             $table->dateTime('editable_up_to')->nullable();

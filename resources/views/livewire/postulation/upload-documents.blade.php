@@ -112,15 +112,15 @@
 
                             <form class="mt-5" wire:submit='updateGeneralData'>
                                 <div>
-                                    <label for="user name"
+                                    <label for="name"
                                         class="mt-3 block text-gray-700 capitalize">Actividad*:</label>
-                                    <input placeholder="Nombre de la actividad" type="text" wire:model='name'
+                                    <input id="name" placeholder="Nombre de la actividad" type="text" wire:model='name'
                                         class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
 
 
-                                    <label for="user name" class="mt-3 block text-gray-700 capitalize">Tipo*:</label>
-                                    <select name="" id="" wire:model='activity_id'
+                                    <label for="activity_id" class="mt-3 block text-gray-700 capitalize">Tipo*:</label>
+                                    <select id="activity_id" wire:model='activity_id'
                                         class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                         <option value="">-- Seleccione --</option>
                                         @foreach ($activity_items as $activity)
@@ -129,8 +129,14 @@
                                     </select>
                                     <x-input-error :messages="$errors->get('activity_id')" class="mt-2" />
 
-                                    <label for="user name" class="mt-3 block text-gray-700 capitalize">Asesor:</label>
-                                    <input placeholder="Nombres y apellidos del asesor" type="text"
+                                    <label for="budget" class="mt-3 block text-gray-700 capitalize">Presupuesto*:</label>
+                                    <input id="budget" placeholder="Nombres y apellidos del asesor" type="number" step="0.01"
+                                        wire:model='budget'
+                                        class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                    <x-input-error :messages="$errors->get('budget')" class="mt-2" />
+                                    
+                                    <label for="adviser" class="mt-3 block text-gray-700 capitalize">Asesor:</label>
+                                    <input id="adviser" placeholder="Nombres y apellidos del asesor" type="text"
                                         wire:model='adviser'
                                         class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                     <x-input-error :messages="$errors->get('adviser')" class="mt-2" />

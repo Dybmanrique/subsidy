@@ -11,6 +11,7 @@ class Postulation extends Model
 
     protected $fillable = [
         'name',
+        'budget',
         'adviser',
         'status',
         'uuid',
