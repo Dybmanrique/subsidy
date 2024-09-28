@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('last_name');
-            $table->bool('is_admin')->default(false);
+            $table->boolean('is_admin')->default(false);
             $table->enum('status',['activo','inactivo'])->default('activo');
         });
     }
