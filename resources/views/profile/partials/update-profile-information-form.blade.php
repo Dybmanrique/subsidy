@@ -18,6 +18,15 @@
         @method('patch')
 
         <div>
+            <x-input-label for="condition" :value="__('Condición')" />
+            <select name="condition" id="condition" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                <option value="estudiante" {{ old('condition', $user->student->condition) === 'estudiante' ? 'selected' : '' }}>Estudiante</option>
+                <option value="egresado" {{ old('condition', $user->student->condition) === 'egresado' ? 'selected' : '' }}>Egresado</option>
+            </select>
+            <x-input-error class="mt-2" :messages="$errors->get('condition')" />
+        </div>
+
+        <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
