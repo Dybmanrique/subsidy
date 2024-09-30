@@ -90,8 +90,7 @@
                                         <h3 class=" font-semibold text-gray-900">{{ $state->name }}</h3>
                                         <time
                                             class="mb-1 text-sm font-normal leading-none text-gray-500">{{ $state->pivot->created_at->diffForHumans() }}</time>
-                                        <p class="mb-4 text-base font-normal text-gray-500">
-                                            {{ $state->pivot->description }}</p>
+                                        <p class="mb-4 text-base font-normal text-gray-500 whitespace-pre-line">{{ $state->pivot->description }}</p>
                                     </li>
                                 @endforeach
                             </ol>
