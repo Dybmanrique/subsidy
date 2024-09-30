@@ -1,12 +1,67 @@
 <div>
-    <!-- Modal -->
+    <!-- Modal change state -->
+    <div class="modal fade" id="addStateModal" tabindex="-1" role="dialog" aria-labelledby="addStateModalTitle"
+        aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form wire:submit='addState()'>
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">AGREGAR CAMBIO DE ESTADO
+                        </h5>
+                        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="state_id" class="font-weight-normal">Cambio*:</label>
+                            <select id="state_id" wire:model='state_id' class="form-control">
+                                <option value="">-- Seleccione --</option>
+                                @foreach ($states as $state)
+                                    <option value="{{ $state->id }}">{{ $state->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('state_id')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="font-weight-normal">Descripcion:</label>
+                            <textarea id="description" wire:model='description' rows="6" class="form-control"></textarea>
+                            @error('description')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="is_sendable" wire:model='is_sendable'
+                                    value="option1">
+                                <label for="is_sendable" class="custom-control-label font-weight-normal">Enviar un
+                                    correo electrónico también</label>
+                            </div>
+                            @error('is_sendable')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger text-uppercase font-weight-bold"
+                            data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary text-uppercase font-weight-bold">Aceptar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal message -->
     <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <form wire:submit='sendMessage'>
                     <div class="modal-header bg-primary">
-                        <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">MOTIVO</h5>
+                        <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">ENVIAR MENSAJE</h5>
                         <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -73,8 +128,9 @@
                         <td>{{ $postulation->student->school->faculty->name }}</td>
                     </tr>
                     <tr>
-                        <td class="text-bold">Estado:</td>
-                        <td>{{ $postulation->status }}</td>
+                        <td class="text-bold">Último estado:</td>
+                        <td>{{ $postulation->states()->orderBy('postulation_state.created_at', 'desc')->first()->name }}
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -86,176 +142,114 @@
                 <span>
                     ACCIONES
                 </span>
-                <button class="btn btn-sm btn-light font-weight-bold text-uppercase" data-toggle="modal"
-                    data-target="#messageModal">
-                    <i class="fas fa-envelope"></i> Enviar
-                    mensaje
-                </button>
             </div>
         </div>
         <div class="card-body">
-            @switch($postulation->status)
-                @case('Subiendo archivos')
-                    <button type="button" class="btn btn-danger font-weight-bold text-uppercase my-1 w-100"
-                        onclick="eliminar()"">Eliminar</button>
-                @break
-
-                @case('Pendiente de revisión')
-                    <button type="button" class="btn btn-primary font-weight-bold text-uppercase my-1 w-100"
-                        onclick="aprobarDII()">Aceptar en la Dirección del
-                        Instituto de
-                        Investigación</button>
-                    <button type="button" class="btn btn-danger font-weight-bold text-uppercase my-1 w-100"
-                        onclick="denegarDII()">Denegar en la Dirección del
-                        Instituto de
-                        Investigación</button>
-                @break
-
-                @case('Aceptado en la Dirección del Instituto de Investigación')
-                    <button type="button" class="btn btn-primary font-weight-bold text-uppercase my-1 w-100"
-                        onclick="aprobarConsejo()">Aprobar en el Consejo
-                        Universitario</button>
-                    <button type="button" class="btn btn-danger font-weight-bold text-uppercase my-1 w-100"
-                        onclick="denegarConsejo()">Denegar en el Consejo
-                        Universitario</button>
-                @break
-
-                @case('Denegado en la Dirección del Instituto de Investigación')
-                    <button type="button" class="btn btn-primary font-weight-bold text-uppercase my-1 w-100"
-                        onclick="reafirmar()">Volver a evaluar</button>
-                @break
-
-                @case('Aprobado en el Consejo Universitario')
-                    <button type="button" class="btn btn-primary font-weight-bold text-uppercase my-1 w-100"
-                        onclick="reafirmar()">Volver a evaluar</button>
-                @break
-
-                @case('Denegado en el Consejo Universitario')
-                    <button type="button" class="btn btn-primary font-weight-bold text-uppercase my-1 w-100"
-                        onclick="reafirmar()">Volver a evaluar</button>
-                @break
-
-                @default
-            @endswitch
+            <button class="btn btn-dark w-100 font-weight-bold text-uppercase" data-toggle="modal"
+                data-target="#addStateModal">
+                <i class="fas fa-exchange-alt"></i> Agregar cambio
+            </button>
+            <button class="btn btn-info w-100 font-weight-bold text-uppercase my-1" data-toggle="modal"
+                data-target="#messageModal">
+                <i class="fas fa-envelope"></i> Enviar
+                mensaje
+            </button>
+            <button type="button" class="btn btn-danger font-weight-bold text-uppercase w-100"
+                onclick="eliminar()""><i class="fas fa-trash"></i> Eliminar postulación</button>
         </div>
     </div>
-    @section('js')
-        <script src="{{ asset('js/admin/message_forms.js') }}"></script>
-        <script>
-            $(document).ready(function() {
-                $(".btn-documento").click(function(e) {
-                    $("#previsualizador").fadeOut()
-                    $('#previsualizador').attr('src', this.dataset.file);
-                    $("#previsualizador").fadeIn()
-                })
-            });
+    <div class="card card-primary">
+        <div class="card-header font-weight-bold">
+            HISTORIAL
+        </div>
+        <div class="card-body px-1">
+            <div class="timeline mb-1">
 
-            Livewire.on('close_modal', function(message) {
-                $('#messageModal').modal('hide')
-            })
+                @foreach ($postulation->states as $state)
+                    <div>
+                        <i class="fas bg-blue"></i>
+                        <div class="timeline-item">
+                            <div class="timeline-header">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <span class="time text-sm text-muted text-nowrap"><i
+                                                class="fas fa-calendar"></i>
+                                            {{ $state->created_at->format('d-m-Y') }}</span>
+                                        <span class="time text-sm text-muted text-nowrap"><i class="fas fa-clock"></i>
+                                            {{ $state->created_at->format('h:i A') }}</span>
+                                    </div>
+                                    <div>
+                                        <a class="text-primary"><i class="fas fa-edit"></i></a>
+                                        <a class="text-danger"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="timeline-body">
+                                <span class="font-weight-bold d-inline-block">{{ $state->name }}</span>
+                                <div>
+                                    {{ $state->pivot->description }}
+                                </div>
+                            </div>
 
-            function aprobarDII() {
-                Swal.fire({
-                    title: 'Estas seguro?',
-                    text: "Esta acción no se puede revertir!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si',
-                    cancelButtonText: 'No'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        @this.aprobarDII();
-                    }
-                })
-            }
+                        </div>
+                    </div>
+                @endforeach
 
-            function denegarDII() {
-                Swal.fire({
-                    title: 'Estas seguro?',
-                    text: "Esta acción no se puede revertir!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si',
-                    cancelButtonText: 'No'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        @this.denegarDII();
-                    }
-                })
-            }
-
-            function aprobarConsejo() {
-                Swal.fire({
-                    title: 'Estas seguro?',
-                    text: "Esta acción no se puede revertir!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si',
-                    cancelButtonText: 'No'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        @this.aprobarConsejo();
-                    }
-                })
-            }
-
-            function denegarConsejo() {
-                Swal.fire({
-                    title: 'Estas seguro?',
-                    text: "Esta acción no se puede revertir!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si',
-                    cancelButtonText: 'No'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        @this.denegarConsejo();
-                    }
-                })
-            }
-
-            function reafirmar() {
-                Swal.fire({
-                    title: 'Estas seguro?',
-                    text: "Esta acción no se puede revertir!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si',
-                    cancelButtonText: 'No'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        @this.reafirmar();
-                    }
-                })
-            }
-
-            function eliminar() {
-                Swal.fire({
-                    title: 'Estas seguro?',
-                    text: "Esta acción no se puede revertir!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si',
-                    cancelButtonText: 'No'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        @this.eliminar();
-                    }
-                })
-            }
-        </script>
-    @stop
-
+            </div>
+        </div>
+    </div>
 </div>
+
+@push('js')
+    <script src="{{ asset('js/admin/message_forms.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $(".btn-documento").click(function(e) {
+                $("#previsualizador").fadeOut()
+                $('#previsualizador').attr('src', this.dataset.file);
+                $("#previsualizador").fadeIn()
+            })
+        });
+
+        Livewire.on('close_modal', function(message) {
+            $('#messageModal').modal('hide')
+        })
+        Livewire.on('close_modal_change', function(message) {
+            $('#addChangeModal').modal('hide')
+        })
+
+        // function aprobarDII() {
+        //     Swal.fire({
+        //         title: '¿Estas seguro?',
+        //         text: "Esta acción no se puede revertir!",
+        //         icon: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#3085d6',
+        //         cancelButtonColor: '#d33',
+        //         confirmButtonText: 'Si',
+        //         cancelButtonText: 'No'
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             @this.aprobarDII();
+        //         }
+        //     })
+        // }
+
+        function eliminar() {
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "Esta acción puede tener consecuencias!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    @this.eliminar();
+                }
+            })
+        }
+    </script>
+@endpush
