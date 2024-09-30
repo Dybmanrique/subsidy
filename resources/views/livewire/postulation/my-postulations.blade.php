@@ -87,7 +87,7 @@
                         </div>
                         <div class="flex-1">
                             <h3 class="font-bold text-lg border-t-2 md:border-none mt-2 md:mt-0">Historial:</h3>
-                            <div class="px-2 py-1 overflow-y-auto max-h-52">
+                            <div class="px-2 py-1 overflow-y-auto max-h-44">
                                 <ol class="relative border-s border-gray-700">
                                     @foreach ($postulation->states as $state)
                                         <li class="mb-4 ms-4">
