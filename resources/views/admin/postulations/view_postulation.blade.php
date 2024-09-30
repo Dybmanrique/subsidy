@@ -32,6 +32,43 @@
                 </div>
             </div>
             @livewire('admin.postulations.form-actions', ['postulation' => $postulation])
+            <div class="card card-primary">
+                <div class="card-header font-weight-bold">
+                    HISTORIAL
+                </div>
+                <div class="card-body px-1">
+                    <div class="timeline mb-1">
+
+                        @foreach ($postulation->states as $state)
+                        <div>
+                            <i class="fas bg-blue"></i>
+                            <div class="timeline-item">
+                                <div class="timeline-header">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="time text-sm text-muted text-nowrap"><i class="fas fa-calendar"></i> {{ $state->created_at->format('d-m-Y') }}</span>
+                                            <span class="time text-sm text-muted text-nowrap"><i class="fas fa-clock"></i> {{ $state->created_at->format('h:i A') }}</span>
+                                        </div>
+                                        <div>
+                                            <a class="text-primary"><i class="fas fa-edit"></i></a>
+                                            <a class="text-danger"><i class="fas fa-trash"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-body">
+                                    <span class="font-weight-bold d-inline-block">{{ $state->name }}</span>
+                                    <div>
+                                        {{ $state->pivot->description }}
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        @endforeach
+
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-8">
             <div class="card card-primary">
@@ -65,5 +102,5 @@
 @stop
 
 @section('css')
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    
 @stop
