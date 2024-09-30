@@ -37,7 +37,7 @@
             DATOS GENERALES
         </div>
         <div class="card-body">
-            <table class="table table-sm">
+            <table class="table table-sm table-responsive">
                 <tbody>
                     <tr>
                         <td class="text-bold">Nombre actividad:</td>
