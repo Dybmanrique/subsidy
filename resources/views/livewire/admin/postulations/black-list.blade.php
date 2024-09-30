@@ -15,7 +15,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="">Buscar:</label>
+                        <label for="black_list_id">Buscar:</label>
                         <div wire:ignore>
                             <select id="black_list_id" class="form-control"
                                 data-placeholder="Buscar correo en lista negra">
