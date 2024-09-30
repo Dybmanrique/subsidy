@@ -23,6 +23,11 @@ class FormActions extends Component
 
     public function sendMessage()
     {
+        $this->validate([
+            'title' => 'required|string|max:255',
+            'message' => 'nullable|string|max:3500',
+        ]);
+
         try {
             Mail::to($this->postulation->student->user->email)->send(new GeneralMessageMailable($this->title, $this->message));
             $this->dispatch('message', code: '200', content: 'Hecho, se le envió el mensaje');
@@ -36,13 +41,12 @@ class FormActions extends Component
 
     public function addState()
     {
+        $this->validate([
+            'state_id' => 'required|numeric|min:3',
+            'description' => 'nullable|string|max:3500',
+            'is_sendable' => 'required|boolean',
+        ]);
         try {
-            $this->validate([
-                'state_id' => 'required|numeric',
-                'description' => 'required|string|max:3500',
-                'is_sendable' => 'required|boolean',
-            ]);
-    
             if (trim($this->description) === "") $this->description = null;
     
             $this->postulation->states()->attach($this->state_id, ['description' => $this->description]);
@@ -56,13 +60,18 @@ class FormActions extends Component
         } catch (Exception $ex) {
             $this->dispatch('message', code: '500', content: 'Algo salió mal');
         } finally {
-            $this->dispatch('close_modal');
+            $this->dispatch('close_modal_change');
         }
     }
 
     public function eliminar()
-    {
+    {   
         try {
+            if($this->postulation->states()->orderBy('postulation_state.created_at', 'desc')->first()->id >= 3){
+                $this->dispatch('message', code: '500', content: 'Esta postulación no se puede eliminar');
+                return;
+            }
+
             foreach ($this->postulation->requirements as $requirement) {
                 Storage::delete($requirement->pivot->file);
             }
@@ -75,7 +84,7 @@ class FormActions extends Component
     }
     public function mount()
     {
-        $this->states = State::all();
+        $this->states = State::where('id','>','2')->get();
     }
 
     public function render()

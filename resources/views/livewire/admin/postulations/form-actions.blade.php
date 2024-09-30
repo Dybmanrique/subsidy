@@ -56,7 +56,7 @@
 
     <!-- Modal message -->
     <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalTitle"
-        aria-hidden="true">
+        aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <form wire:submit='sendMessage'>
@@ -70,11 +70,17 @@
                         <div class="form-group">
                             <label for="title" class="font-weight-normal">ASUNTO*:</label>
                             <input type="text" wire:model="title" id="title" class="form-control">
+                            @error('title')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="message" class="font-weight-normal">Indique el motivo o la razón de la
                                 negación*:</label>
                             <textarea id="message" wire:model='message' rows="6" class="form-control"></textarea>
+                            @error('message')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -215,25 +221,8 @@
             $('#messageModal').modal('hide')
         })
         Livewire.on('close_modal_change', function(message) {
-            $('#addChangeModal').modal('hide')
+            $('#addStateModal').modal('hide')
         })
-
-        // function aprobarDII() {
-        //     Swal.fire({
-        //         title: '¿Estas seguro?',
-        //         text: "Esta acción no se puede revertir!",
-        //         icon: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonColor: '#3085d6',
-        //         cancelButtonColor: '#d33',
-        //         confirmButtonText: 'Si',
-        //         cancelButtonText: 'No'
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             @this.aprobarDII();
-        //         }
-        //     })
-        // }
 
         function eliminar() {
             Swal.fire({
