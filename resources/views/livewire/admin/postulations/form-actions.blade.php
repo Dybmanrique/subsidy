@@ -192,9 +192,7 @@
                             </div>
                             <div class="timeline-body">
                                 <span class="font-weight-bold d-inline-block">{{ $state->name }}</span>
-                                <div>
-                                    {{ $state->pivot->description }}
-                                </div>
+                                <div style="white-space: pre-line">{{ $state->pivot->description }}</div>
                             </div>
 
                         </div>
