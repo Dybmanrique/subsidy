@@ -58,42 +58,50 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg m-2 rounded">
                     <div class="p-6 text-gray-900 md:flex md:flex-row">
                         <div class="flex-1">
-                            <p><span class="font-bold">Nombre: </span>{{ $postulation->name ?? 'Sin nombre' }}</p>
-                            <p><span class="font-bold">Asesor: </span>{{ $postulation->adviser ?? 'Sin asesor' }}</p>
-                            <p><span class="font-bold">Convocatoria: </span>{{ $postulation->announcement->name }}</p>
-                            <p><span class="font-bold">Tipo de subvención:
-                                </span>{{ $postulation->announcement->subsidy->name }}</p>
-                            <div class="mt-2">
-                                @if ($postulation->editable_up_to !== null && $postulation->editable_up_to > now())
-                                    <x-primary-link
-                                        href="{{ route('postulations.postulate', $postulation) }}">Editar</x-primary-link>
-                                @else
-                                    <button
-                                        class="mb-1 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
-                                        wire:click = 'setPostulationId({{ $postulation->id }})'
-                                        @click="modelOpen =!modelOpen">Generar solicitud</button>
-                                @endif
-
-                                <x-success-link class="mb-1"
-                                    href="{{ route('postulations.view_documents', $postulation) }}" target="_blank">Ver
-                                    documentos</x-success-link>
+                            <div class="flex flex-col justify-between h-full">
+                                <div>
+                                    <p><span class="font-bold">Nombre: </span>{{ $postulation->name ?? 'Sin nombre' }}</p>
+                                    <p><span class="font-bold">Asesor: </span>{{ $postulation->adviser ?? 'Sin asesor' }}</p>
+                                    <p><span class="font-bold">Presupuesto: </span>S/. {{ $postulation->budget}}</p>
+                                    <p><span class="font-bold">Convocatoria: </span>{{ $postulation->announcement->name }}</p>
+                                    <p><span class="font-bold">Tipo de subvención:
+                                        </span>{{ $postulation->announcement->subsidy->name }}</p>
+                                </div>
+                                <div class="mt-2">
+                                    @if ($postulation->editable_up_to !== null && $postulation->editable_up_to > now())
+                                        <x-primary-link
+                                            href="{{ route('postulations.postulate', $postulation) }}">Editar</x-primary-link>
+                                    @else
+                                        <button
+                                            class="mb-1 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                            wire:click = 'setPostulationId({{ $postulation->id }})'
+                                            @click="modelOpen =!modelOpen">Generar solicitud</button>
+                                    @endif
+    
+                                    <x-success-link class="mb-1"
+                                        href="{{ route('postulations.view_documents', $postulation) }}" target="_blank">Ver
+                                        documentos</x-success-link>
+                                </div>
                             </div>
+
                         </div>
                         <div class="flex-1">
                             <h3 class="font-bold text-lg border-t-2 md:border-none mt-2 md:mt-0">Historial:</h3>
-                            <ol class="relative border-s border-gray-700">
-                                @foreach ($postulation->states as $state)
-                                    <li class="mb-4 ms-4">
-                                        <div
-                                            class="absolute w-3 h-3 bg-gray-700 rounded-full mt-1.5 -start-1.5 border border-white">
-                                        </div>
-                                        <h3 class=" font-semibold text-gray-900">{{ $state->name }}</h3>
-                                        <time
-                                            class="mb-1 text-sm font-normal leading-none text-gray-500">{{ $state->pivot->created_at->diffForHumans() }}</time>
-                                        <p class="mb-4 text-base font-normal text-gray-500 whitespace-pre-line">{{ $state->pivot->description }}</p>
-                                    </li>
-                                @endforeach
-                            </ol>
+                            <div class="px-2 py-1 overflow-y-auto max-h-52">
+                                <ol class="relative border-s border-gray-700">
+                                    @foreach ($postulation->states as $state)
+                                        <li class="mb-4 ms-4">
+                                            <div
+                                                class="absolute w-3 h-3 bg-gray-700 rounded-full mt-1.5 -start-1.5 border border-white">
+                                            </div>
+                                            <h3 class=" font-semibold text-gray-900">{{ $state->name }}</h3>
+                                            <time
+                                                class="mb-1 text-sm font-normal leading-none text-gray-500">{{ $state->pivot->created_at->diffForHumans() }}</time>
+                                            <p class="mb-4 text-base font-normal text-gray-500 whitespace-pre-line">{{ $state->pivot->description }}</p>
+                                        </li>
+                                    @endforeach
+                                </ol>
+                            </div>
                         </div>
                     </div>
                 </div>
