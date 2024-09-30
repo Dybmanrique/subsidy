@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Postulations;
 use App\Mail\GeneralMessageMailable;
 use App\Models\State;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -92,6 +93,17 @@ class FormActions extends Component
                 'editable_up_to' => null,
             ]);
 
+            $this->dispatch('message', code: '200', content: 'Hecho');
+        } catch (Exception $ex) {
+            $this->dispatch('message', code: '500', content: 'Algo salió mal');
+        }
+    }
+
+    public function deleteState($id)
+    {
+        try {    
+            DB::table('postulation_state')->where('id', $id)->delete();
+    
             $this->dispatch('message', code: '200', content: 'Hecho');
         } catch (Exception $ex) {
             $this->dispatch('message', code: '500', content: 'Algo salió mal');

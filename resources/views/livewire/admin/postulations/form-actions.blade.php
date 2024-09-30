@@ -142,6 +142,10 @@
                         <td>{{ $postulation->announcement->name }}</td>
                     </tr>
                     <tr>
+                        <td class="text-bold">Presupuesto:</td>
+                        <td>S/. {{ $postulation->budget}}</td>
+                    </tr>
+                    <tr>
                         <td class="text-bold">Asesor:</td>
                         <td>{{ $postulation->adviser ?? 'No tiene' }}</td>
                     </tr>
@@ -232,7 +236,7 @@
                                     <div>
                                         {{-- <a class="text-primary"><i class="fas fa-edit"></i></a> --}}
                                         @if ($state->id >= 3)
-                                            <a class="btn p-0 m-0 text-danger"><i class="fas fa-times"></i></a>
+                                            <button class="btn m-0 p-0 text-danger" onclick="deleteState({{ $state->pivot->id }})"><i class="fas fa-times"></i></button>
                                         @endif
                                     </div>
                                 </div>
@@ -302,6 +306,23 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     @this.removeDeadline();
+                }
+            })
+        }
+
+        function deleteState(id) {
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "Esta acción puede tener consecuencias!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    @this.deleteState(id);
                 }
             })
         }
