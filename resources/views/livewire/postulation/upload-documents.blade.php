@@ -152,10 +152,10 @@
                                     x-on:click="openTab = 0">Siguiente</x-dark-button>
                             </div>
                         </div>
-                        @foreach ($requirements as $index => $requirement)
+                        @foreach ($subsidy->requirements as $index => $requirement)
                             <div x-show="openTab === {{ $index }}"
                                 class="border shadow transition-all duration-300 p-6 bg-gray-50 text-medium text-gray-500  rounded-lg w-full">
-                                <h3 class="text-lg font-bold text-gray-900  mb-2">{{ $requirement->name }}</h3>
+                                <h3 class="text-lg font-bold text-gray-900  mb-2">{{ $requirement->name }} ({{ $requirement->pivot->is_required === 1 ? 'Obligatorio' : 'Opcional' }})</h3>
                                 <p class="mb-2">{{ $requirement->description }}</p>
 
                                 @php

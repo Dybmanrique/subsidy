@@ -13,6 +13,7 @@ class UploadDocuments extends Component
     use WithFileUploads;
 
     public $postulation;
+    public $subsidy;
     public $requirements;
 
     public $activity_items;
@@ -24,6 +25,7 @@ class UploadDocuments extends Component
 
     public function mount()
     {
+        $this->subsidy = $this->postulation->announcement->subsidy;
         $this->requirements = $this->postulation->announcement->subsidy->requirements;
         $this->activity_items = $this->postulation->announcement->subsidy->activities()->where('status', 'activo')->get();
         $this->name = $this->postulation->name;
