@@ -180,9 +180,9 @@
                                     <div>
                                         <span class="time text-sm text-muted text-nowrap"><i
                                                 class="fas fa-calendar"></i>
-                                            {{ $state->created_at->format('d-m-Y') }}</span>
+                                            {{ $state->pivot->created_at->format('d-m-Y') }}</span>
                                         <span class="time text-sm text-muted text-nowrap"><i class="fas fa-clock"></i>
-                                            {{ $state->created_at->format('h:i A') }}</span>
+                                            {{ $state->pivot->created_at->format('h:i A') }}</span>
                                     </div>
                                     <div>
                                         <a class="text-primary"><i class="fas fa-edit"></i></a>
