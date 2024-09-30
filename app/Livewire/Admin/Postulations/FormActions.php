@@ -21,6 +21,8 @@ class FormActions extends Component
     public $description;
     public $is_sendable = false;
 
+    public $deadline;
+
     public function sendMessage()
     {
         $this->validate([
@@ -61,6 +63,38 @@ class FormActions extends Component
             $this->dispatch('message', code: '500', content: 'Algo salió mal');
         } finally {
             $this->dispatch('close_modal_change');
+        }
+    }
+
+    public function setDeadline()
+    {
+        $this->validate([
+            'deadline' => 'required|date',
+        ]);
+        try {    
+            $this->postulation->update([
+                'editable_up_to' => $this->deadline,
+            ]);
+
+            $this->reset(['deadline']);
+            $this->dispatch('message', code: '200', content: 'Hecho');
+        } catch (Exception $ex) {
+            $this->dispatch('message', code: '500', content: 'Algo salió mal');
+        } finally {
+            $this->dispatch('close_modal_deadline');
+        }
+    }
+
+    public function removeDeadline()
+    {
+        try {    
+            $this->postulation->update([
+                'editable_up_to' => null,
+            ]);
+
+            $this->dispatch('message', code: '200', content: 'Hecho');
+        } catch (Exception $ex) {
+            $this->dispatch('message', code: '500', content: 'Algo salió mal');
         }
     }
 

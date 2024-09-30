@@ -34,8 +34,8 @@
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" id="is_sendable" wire:model='is_sendable'
-                                    value="option1">
+                                <input class="custom-control-input" type="checkbox" id="is_sendable"
+                                    wire:model='is_sendable' value="option1">
                                 <label for="is_sendable" class="custom-control-label font-weight-normal">Enviar un
                                     correo electrónico también</label>
                             </div>
@@ -79,14 +79,47 @@
                                 negación*:</label>
                             <textarea id="message" wire:model='message' rows="6" class="form-control"></textarea>
                             @error('message')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger text-uppercase font-weight-bold"
                             data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary text-uppercase font-weight-bold">Aceptar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal message -->
+    <div class="modal fade" id="solvingModal" tabindex="-1" role="dialog" aria-labelledby="solvingModalTitle"
+        aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form wire:submit='setDeadline()'>
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">ASINGANAR PLAZO DE
+                            SOLVENTACIÓN</h5>
+                        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="deadline" class="font-weight-normal">PLAZO*:</label>
+                            <input type="datetime-local" wire:model="deadline" id="deadline" class="form-control">
+                            @error('deadline')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger text-uppercase font-weight-bold"
+                            data-dismiss="modal">Cancelar</button>
+                        <button type="submit"
+                            class="btn btn-primary text-uppercase font-weight-bold">Aceptar</button>
                     </div>
                 </form>
             </div>
@@ -138,6 +171,11 @@
                         <td>{{ $postulation->states()->orderBy('postulation_state.created_at', 'desc')->first()->name }}
                         </td>
                     </tr>
+                    <tr>
+                        <td class="text-bold">Editable hasta:</td>
+                        <td>{{ ($postulation->editable_up_to) ? date('d-m-Y  h:i A', strtotime($postulation->editable_up_to)) : 'No editable'}}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -160,8 +198,15 @@
                 <i class="fas fa-envelope"></i> Enviar
                 mensaje
             </button>
+            <button class="btn btn-secondary w-100 font-weight-bold text-uppercase" data-toggle="modal"
+                data-target="#solvingModal">
+                <i class="fas fa-stopwatch"></i> Asignar plazo de solventación
+            </button>
+            <button class="btn btn-warning w-100 font-weight-bold text-uppercase my-1" onclick="removeDeadline()">
+                <i class="fas fa-ban"></i> Quitar plazo de solventación
+            </button>
             <button type="button" class="btn btn-danger font-weight-bold text-uppercase w-100"
-                onclick="eliminar()""><i class="fas fa-trash"></i> Eliminar postulación</button>
+                onclick="eliminar()"><i class="fas fa-trash-alt"></i> Eliminar postulación</button>
         </div>
     </div>
     <div class="card card-primary">
@@ -185,8 +230,10 @@
                                             {{ $state->pivot->created_at->format('h:i A') }}</span>
                                     </div>
                                     <div>
-                                        <a class="text-primary"><i class="fas fa-edit"></i></a>
-                                        <a class="text-danger"><i class="fas fa-trash"></i></a>
+                                        {{-- <a class="text-primary"><i class="fas fa-edit"></i></a> --}}
+                                        @if ($state->id >= 3)
+                                            <a class="btn p-0 m-0 text-danger"><i class="fas fa-times"></i></a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -221,6 +268,9 @@
         Livewire.on('close_modal_change', function(message) {
             $('#addStateModal').modal('hide')
         })
+        Livewire.on('close_modal_deadline', function(message) {
+            $('#solvingModal').modal('hide')
+        })
 
         function eliminar() {
             Swal.fire({
@@ -235,6 +285,23 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     @this.eliminar();
+                }
+            })
+        }
+
+        function removeDeadline() {
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "Esta acción puede tener consecuencias!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    @this.removeDeadline();
                 }
             })
         }
