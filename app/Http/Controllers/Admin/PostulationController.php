@@ -18,7 +18,7 @@ class PostulationController extends Controller
 
     public function all_data(Subsidy $subsidy)
     {
-        return DB::select("SELECT postulations.id, postulations.name as postulation, postulations.status,
+        return DB::select("SELECT postulations.id, postulations.name as postulation, states.name as state,
             announcements.name as announcement, 
             users.name, users.last_name, users.email, schools.name as school, faculties.name as faculty
             from postulations
@@ -27,7 +27,14 @@ class PostulationController extends Controller
             join users on user_id = users.id
             join schools on school_id = schools.id
             join faculties on faculty_id = faculties.id
-            where announcements.subsidy_id = :subsidy_id order by postulations.id desc", ['subsidy_id' => $subsidy->id]);
+            join postulation_state on postulation_state.postulation_id = postulations.id
+			join states on postulation_state.state_id = states.id
+            where announcements.subsidy_id = :subsidy_id 
+            and postulation_state.created_at =  (
+				select max(postulation_state.created_at)
+				from postulation_state
+				where postulation_state.postulation_id = postulations.id
+			) order by postulations.id desc", ['subsidy_id' => $subsidy->id]);
     }
 
     public function view_postulation($postulation_id)
@@ -62,8 +69,8 @@ class PostulationController extends Controller
 
         if ($last_announcement) {
             return DB::select(
-                "SELECT postulations.id, postulations.name as postulation, postulations.status,
-            announcements.name as announcement, 
+                "SELECT postulations.id, postulations.name as postulation,
+            announcements.name as announcement, states.name as state,
             users.name, users.last_name, users.email, schools.name as school, faculties.name as faculty
             from postulations
             join students on student_id = students.id
@@ -71,7 +78,15 @@ class PostulationController extends Controller
             join users on user_id = users.id
             join schools on school_id = schools.id
             join faculties on faculty_id = faculties.id
-            where announcements.subsidy_id = :subsidy_id and announcements.id = :announcement_id order by postulations.id desc",
+            join postulation_state on postulation_state.postulation_id = postulations.id
+			join states on postulation_state.state_id = states.id
+            where announcements.subsidy_id = :subsidy_id 
+            and announcements.id = :announcement_id 
+            and postulation_state.created_at =  (
+				select max(postulation_state.created_at)
+				from postulation_state
+				where postulation_state.postulation_id = postulations.id
+			) order by postulations.id desc",
                 ['subsidy_id' => $subsidy->id, 'announcement_id' => $last_announcement->id]
             );
         } else {

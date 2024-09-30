@@ -75,7 +75,7 @@
                     "data": "postulation",
                 },
                 {
-                    "data": "status",
+                    "data": "state",
                 },
                 {
                     "data": null,
