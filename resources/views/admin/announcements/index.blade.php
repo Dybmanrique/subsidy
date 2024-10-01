@@ -110,7 +110,31 @@
                     url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json'
                 },
                 columnDefs: columnDefs,
-                responsive: true
+                buttons: [{
+                        extend: 'copy',
+                        footer: false,
+                        exportOptions: {
+                            columns: [0, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        footer: false,
+                        exportOptions: {
+                            columns: [0, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        footer: false,
+                        exportOptions: {
+                            columns: [0, 2, 3, 4, 5]
+                        }
+                    },
+                ],
+                layout: {
+                    topStart: 'buttons'
+                },
             });
 
             $(`#table tbody`).on('click', '.btn-delete', function() {

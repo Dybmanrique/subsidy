@@ -97,7 +97,31 @@
                     url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json'
                 },
                 columnDefs: columnDefs,
-                responsive: true
+                buttons: [{
+                        extend: 'copy',
+                        footer: false,
+                        exportOptions: {
+                            columns: [0, 1, 2]
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        footer: false,
+                        exportOptions: {
+                            columns: [0, 1, 2]
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        footer: false,
+                        exportOptions: {
+                            columns: [0, 1, 2]
+                        }
+                    },
+                ],
+                layout: {
+                    topStart: 'buttons'
+                },
             });
 
             $(`#table tbody`).on('click', '.btn-delete', function() {
