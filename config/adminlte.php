@@ -320,6 +320,12 @@ return [
         //The options in this section are added dynamically in AppServiceProvider
         ['header' => 'SUBVENCIONES', 'classes' => 'font-weight-bold'],
         [
+            'text' => 'Convocatorias',
+            'route' => 'admin.announcements.index',
+            'icon' => 'fas fa-fw fa-calendar-alt',
+            'classes' => 'text-uppercase'
+        ],
+        [
             'text' => 'Subvenciones',
             'route' => 'admin.subsidies.index',
             'icon' => 'fas fa-fw fa-wallet',
@@ -329,12 +335,6 @@ return [
             'text' => 'Requisitos',
             'route' => 'admin.requirements.index',
             'icon' => 'fas fa-fw fa-folder-open',
-            'classes' => 'text-uppercase'
-        ],
-        [
-            'text' => 'Convocatorias',
-            'route' => 'admin.announcements.index',
-            'icon' => 'fas fa-fw fa-calendar-alt',
             'classes' => 'text-uppercase'
         ],
         [
