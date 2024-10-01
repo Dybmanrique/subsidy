@@ -16,6 +16,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('budget', 9, 2);
+            $table->integer('student_members');
+            $table->integer('graduated_members');
             $table->string('adviser')->nullable();
             $table->uuid('uuid')->unique();
             $table->dateTime('editable_up_to')->nullable();

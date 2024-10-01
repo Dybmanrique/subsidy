@@ -18,7 +18,7 @@ class SubventionsList extends Component
     public $activity_items = [];
 
     public $announcement_selected;
-    public $name, $budget, $activity_id, $adviser, $subsidy_id;
+    public $name, $budget, $activity_id, $student_members = 1, $graduated_members = 0,  $adviser, $subsidy_id;
 
     public $limit_postulations;
 
@@ -43,6 +43,8 @@ class SubventionsList extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'budget' => 'required|numeric',
+            'student_members' => 'required|numeric|max:200',
+            'graduated_members' => 'required|numeric|max:200',
             'adviser' => 'nullable|string|max:255',
             'activity_id' => 'required|numeric',
         ]);
@@ -71,6 +73,8 @@ class SubventionsList extends Component
         $postulation = Postulation::create([
             'name' => $this->name,
             'budget' => $this->budget,
+            'student_members' => $this->student_members,
+            'graduated_members' => $this->graduated_members,
             'adviser' => $adviser,
             'uuid' => Str::uuid()->toString(),
             'activity_id' => $this->activity_id,

@@ -129,6 +129,18 @@
                                     </select>
                                     <x-input-error :messages="$errors->get('activity_id')" class="mt-2" />
 
+                                    <label for="student_members" class="mt-3 block text-gray-700 capitalize">N° de postulantes estudiantes*:</label>
+                                    <input id="student_members" placeholder="Cantidad de postulantes estudiantes" type="number"
+                                        wire:model='student_members'
+                                        class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                    <x-input-error :messages="$errors->get('student_members')" class="mt-2" />
+                                    
+                                    <label for="graduated_members" class="mt-3 block text-gray-700 capitalize">N° de postulantes egresados*:</label>
+                                    <input id="graduated_members" placeholder="Cantidad de postulantes egresados" type="number"
+                                        wire:model='graduated_members'
+                                        class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                    <x-input-error :messages="$errors->get('graduated_members')" class="mt-2" />
+                                    
                                     <label for="budget" class="mt-3 block text-gray-700 capitalize">Presupuesto*:</label>
                                     <input id="budget" placeholder="Cantidad de presupuesto - S/." type="number" step="0.01"
                                         wire:model='budget'

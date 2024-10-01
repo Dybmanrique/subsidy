@@ -17,7 +17,7 @@ class UploadDocuments extends Component
     public $requirements;
 
     public $activity_items;
-    public $name, $budget, $activity_id, $adviser;
+    public $name, $budget, $student_members, $graduated_members, $activity_id, $adviser;
 
     public $model_open = false;
     public $requirement_modal_id;
@@ -32,6 +32,8 @@ class UploadDocuments extends Component
         $this->activity_id = $this->postulation->activity_id;
         $this->adviser = $this->postulation->adviser;
         $this->budget = $this->postulation->budget;
+        $this->student_members = $this->postulation->student_members;
+        $this->graduated_members = $this->postulation->graduated_members;
     }
 
     public function updateGeneralData()
@@ -39,6 +41,9 @@ class UploadDocuments extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'adviser' => 'nullable|string|max:255',
+            'budget' => 'required|numeric',
+            'student_members' => 'required|numeric|max:200',
+            'graduated_members' => 'required|numeric|max:200',
             'activity_id' => 'required|numeric',
         ]);
 
@@ -47,6 +52,9 @@ class UploadDocuments extends Component
         $this->postulation->update([
             'name' => $this->name,
             'activity_id' => $this->activity_id,
+            'budget' => $this->budget,
+            'student_members' => $this->student_members,
+            'graduated_members' => $this->graduated_members,
             'adviser' => $adviser,
         ]);
 

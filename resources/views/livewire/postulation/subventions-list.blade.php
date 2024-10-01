@@ -47,7 +47,19 @@
                             </select>
                             <x-input-error :messages="$errors->get('activity_id')" class="mt-2" />
 
-                            <label for="budget" class="mt-3 block text-gray-700 capitalize">Presupuesto*:</label>
+                            <label for="student_members" class="mt-3 block text-gray-700">N° de postulantes estudiantes*:</label>
+                            <input placeholder="Ingrese la cantidad de estudiantes postulantes" type="number"
+                                wire:model='student_members' id="student_members"
+                                class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                            <x-input-error :messages="$errors->get('student_members')" class="mt-2" />
+                            
+                            <label for="graduated_members" class="mt-3 block text-gray-700">N° de postulantes egresados*:</label>
+                            <input placeholder="Ingrese la cantidad de egresados postulantes" type="number"
+                                wire:model='graduated_members' id="graduated_members"
+                                class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                            <x-input-error :messages="$errors->get('graduated_members')" class="mt-2" />
+                            
+                            <label for="budget" class="mt-3 block text-gray-700 capitalize">Presupuesto (S/.)*:</label>
                             <input placeholder="Cantidad de presupuesto - S/." type="number" step="0.01"
                                 wire:model='budget' id="budget"
                                 class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">

@@ -60,10 +60,17 @@
                         <div class="flex-1">
                             <div class="flex flex-col justify-between h-full">
                                 <div>
-                                    <p><span class="font-bold">Nombre: </span>{{ $postulation->name ?? 'Sin nombre' }}</p>
-                                    <p><span class="font-bold">Asesor: </span>{{ $postulation->adviser ?? 'Sin asesor' }}</p>
-                                    <p><span class="font-bold">Presupuesto: </span>S/. {{ $postulation->budget}}</p>
-                                    <p><span class="font-bold">Convocatoria: </span>{{ $postulation->announcement->name }}</p>
+                                    <p><span class="font-bold">Nombre: </span>{{ $postulation->name ?? 'Sin nombre' }}
+                                    </p>
+                                    <p><span class="font-bold">Asesor:
+                                        </span>{{ $postulation->adviser ?? 'Sin asesor' }}</p>
+                                    <p><span class="font-bold">Integrantes:
+                                        </span>{{ $postulation->student_members + $postulation->graduated_members }}
+                                        (Estudiantes: {{ $postulation->student_members }}; Egresados:
+                                        {{ $postulation->graduated_members }})</p>
+                                    <p><span class="font-bold">Presupuesto: </span>S/. {{ $postulation->budget }}</p>
+                                    <p><span class="font-bold">Convocatoria:
+                                        </span>{{ $postulation->announcement->name }}</p>
                                     <p><span class="font-bold">Tipo de subvención:
                                         </span>{{ $postulation->announcement->subsidy->name }}</p>
                                 </div>
@@ -77,9 +84,10 @@
                                             wire:click = 'setPostulationId({{ $postulation->id }})'
                                             @click="modelOpen =!modelOpen">Generar solicitud</button>
                                     @endif
-    
+
                                     <x-success-link class="mb-1"
-                                        href="{{ route('postulations.view_documents', $postulation) }}" target="_blank">Ver
+                                        href="{{ route('postulations.view_documents', $postulation) }}"
+                                        target="_blank">Ver
                                         documentos</x-success-link>
                                 </div>
                             </div>
@@ -90,7 +98,7 @@
                             <div class="px-2 py-1 overflow-y-auto max-h-44">
                                 <ol class="relative border-s border-gray-700">
                                     @foreach ($postulation->states as $state)
-                                        <li class="mb-4 ms-4">
+                                        <li class="mb-2 ms-4">
                                             <div
                                                 class="absolute w-3 h-3 bg-gray-700 rounded-full mt-1.5 -start-1.5 border border-white">
                                             </div>
@@ -115,7 +123,8 @@
                     </svg>
                     <span class="sr-only">Info</span>
                     <div>
-                        <span class="font-medium">¡Usted no tiene postulaciones!</span> Puede postular en el caso que hayan convocatorias disponibles.
+                        <span class="font-medium">¡Usted no tiene postulaciones!</span> Puede postular en el caso que
+                        hayan convocatorias disponibles.
                     </div>
                 </div>
             @endforelse
