@@ -60,7 +60,8 @@ class PostulationController extends Controller
 
     public function last_index(Subsidy $subsidy)
     {
-        return view('admin.postulations.last_index', compact('subsidy'));
+        $last_announcement = Announcement::where('subsidy_id', $subsidy->id)->orderByDesc('id')->first();
+        return view('admin.postulations.last_index', compact('subsidy', 'last_announcement'));
     }
 
     public function last_data(Subsidy $subsidy)
@@ -70,7 +71,7 @@ class PostulationController extends Controller
         if ($last_announcement) {
             return DB::select(
                 "SELECT postulations.id, postulations.name as postulation,
-            announcements.name as announcement, states.name as state,
+            states.name as state,
             users.name, users.last_name, users.email, schools.name as school, faculties.name as faculty
             from postulations
             join students on student_id = students.id
