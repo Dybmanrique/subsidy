@@ -55,6 +55,6 @@ class Postulation extends Model
 
     public function states()
     {
-        return $this->belongsToMany(State::class)->withPivot(['id', 'description'])->withTimestamps()->orderBy('id', 'desc');
+        return $this->belongsToMany(State::class)->withPivot(['id', 'description'])->withTimestamps()->orderBy('pivot_id', 'desc');
     }
 }
