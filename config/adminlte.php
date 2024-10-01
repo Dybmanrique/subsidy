@@ -364,6 +364,12 @@ return [
         ],
         ['header' => 'SISTEMA', 'classes' => 'font-weight-bold'],
         [
+            'text' => 'Reportes',
+            'route' => 'admin.reports.index',
+            'icon' => 'fas fa-fw fa-folder',
+            'classes' => 'text-uppercase'
+        ],
+        [
             'text' => 'Usuarios admin',
             'url' => 'admin/dashboard',
             'icon' => 'fas fa-fw fa-users-cog',

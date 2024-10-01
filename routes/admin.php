@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\PostulationController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\RequirementController;
 use App\Http\Controllers\Admin\SchoolController;
 use App\Http\Controllers\Admin\StudentController;
@@ -61,3 +62,5 @@ Route::get('/postulaciones-subvencion/{subsidy}/data', [PostulationController::c
 Route::get('/postulacion/{id}/ver', [PostulationController::class, 'view_postulation'])->middleware(['auth', 'verified'])->name('admin.postulations.view_postulation');
 Route::get('/postulaciones-subvencion/{subsidy}/ultima-convocatoria', [PostulationController::class, 'last_index'])->middleware(['auth', 'verified'])->name('admin.postulations.last_index');
 Route::get('/postulaciones-subvencion/{subsidy}/ultima-convocatoria/data', [PostulationController::class, 'last_data'])->middleware(['auth', 'verified'])->name('admin.postulations.last_data');
+
+Route::get('/reportes', [ReportController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.reports.index');
