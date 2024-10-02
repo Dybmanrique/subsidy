@@ -12,8 +12,10 @@ use Maatwebsite\Excel\Concerns\FromView;
 class GeneralExport implements FromView
 {
     private $activity; 
-    public function __construct(Activity $activity) {
+    private $year; 
+    public function __construct(Activity $activity, int $year) {
         $this->activity = $activity;
+        $this->year = $year;
     }
 
     /**
@@ -25,12 +27,14 @@ class GeneralExport implements FromView
             ->selectRaw('SUM(student_members) as students, SUM(graduated_members) as graduates, SUM(budget) as budget')
             ->where('activity_id', $this->activity->id)
             ->where('postulation_state.state_id', 5)
+            ->whereYear('postulations.created_at', $this->year)
             ->first();
 
         $activities_disapproved = Postulation::join('postulation_state', 'postulation_state.postulation_id', '=', 'postulations.id')
             ->selectRaw('SUM(student_members) as students, SUM(graduated_members) as graduates')
             ->where('activity_id', $this->activity->id)
             ->where('postulation_state.state_id', 6)
+            ->whereYear('postulations.created_at', $this->year)
             ->first();
 
         return view('admin.reports.general', [

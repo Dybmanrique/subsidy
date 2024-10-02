@@ -25,6 +25,10 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="year">Año:</label>
+                            <input type="text" id="year" name="year" class="datepicker form-control"/>
+                        </div>
                         <button class="btn btn-primary" type="submit">Generar</button>
                     </form>
 
