@@ -138,6 +138,16 @@
                         <td>{{ $postulation->name }}</td>
                     </tr>
                     <tr>
+                        <td class="text-bold">Tipo de actividad:</td>
+                        <td>{{ $postulation->activity->name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-bold">Integrantes:</td>
+                        <td>{{ $postulation->student_members + $postulation->graduated_members }} 
+                            (Estudiantes: {{ $postulation->student_members }}; Graduados: {{ $postulation->graduated_members }})
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="text-bold">Convocatoria:</td>
                         <td>{{ $postulation->announcement->name }}</td>
                     </tr>
