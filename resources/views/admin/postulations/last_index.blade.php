@@ -25,6 +25,7 @@
                             <th></th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </tfoot>
                     <thead class="thead-dark">
@@ -33,8 +34,9 @@
                             <th scope="col">ACCIONES</th>
                             <th scope="col">NOMBRE</th>
                             <th scope="col">ESTADO</th>
-                            <th scope="col">POSTULANTE</th>
-                            <th scope="col">CORREO I.</th>
+                            <th scope="col">ACTIVIDAD</th>
+                            <th scope="col">INTEGRANTES</th>
+                            <th scope="col">REPRESENTANTE</th>
                             <th scope="col">ESCUELA</th>
                             <th scope="col">FACULTAD</th>
                         </tr>
@@ -93,13 +95,19 @@
                     "data": "state",
                 },
                 {
+                    "data": "activity",
+                },
+                {
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        return `${data.student_members + data.graduated_members} (E:${data.student_members}; G:${data.graduated_members}) `
+                    }
+                },
+                {
                     "data": null,
                     "render": function(data, type, row, meta) {
                         return `${data.last_name} ${data.name}`
                     }
-                },
-                {
-                    "data": "email",
                 },
                 {
                     "data": "school",
@@ -130,21 +138,21 @@
                         extend: 'copy',
                         footer: false,
                         exportOptions: {
-                            columns: [0, 2, 3, 4, 5, 6, 7]
+                            columns: [0, 2, 3, 4, 5, 6, 7, 8]
                         }
                     },
                     {
                         extend: 'excel',
                         footer: false,
                         exportOptions: {
-                            columns: [0, 2, 3, 4, 5, 6, 7]
+                            columns: [0, 2, 3, 4, 5, 6, 7, 8]
                         }
                     },
                     {
                         extend: 'print',
                         footer: false,
                         exportOptions: {
-                            columns: [0, 2, 3, 4, 5, 6, 7]
+                            columns: [0, 2, 3, 4, 5, 6, 7, 8]
                         }
                     },
                 ],
@@ -153,7 +161,7 @@
                 },
                 initComplete: function() {
                     this.api()
-                        .columns([2, 4, 5])
+                        .columns([2, 6,])
                         .every(function() {
                             let column = this;
                             let title = column.footer().textContent;
@@ -173,7 +181,7 @@
                         });
 
                     this.api()
-                        .columns([3, 6, 7])
+                        .columns([3, 4, 7, 8])
                         .every(function() {
                             let column = this;
 

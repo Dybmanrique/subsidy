@@ -19,7 +19,7 @@ class PostulationController extends Controller
     public function all_data(Subsidy $subsidy)
     {
         return DB::select("SELECT postulations.id, postulations.name as postulation, states.name as state,
-            announcements.name as announcement, 
+            announcements.name as announcement, activities.name as activity, postulations.student_members, postulations.graduated_members,
             users.name, users.last_name, users.email, schools.name as school, faculties.name as faculty
             from postulations
             join students on student_id = students.id
@@ -27,6 +27,7 @@ class PostulationController extends Controller
             join users on user_id = users.id
             join schools on school_id = schools.id
             join faculties on faculty_id = faculties.id
+            join activities on activity_id = activities.id
             join postulation_state on postulation_state.postulation_id = postulations.id
 			join states on postulation_state.state_id = states.id
             where announcements.subsidy_id = :subsidy_id 
@@ -70,8 +71,8 @@ class PostulationController extends Controller
 
         if ($last_announcement) {
             return DB::select(
-                "SELECT postulations.id, postulations.name as postulation,
-            states.name as state,
+                "SELECT postulations.id, postulations.name as postulation, activities.name as activity,
+            states.name as state, postulations.student_members, postulations.graduated_members,
             users.name, users.last_name, users.email, schools.name as school, faculties.name as faculty
             from postulations
             join students on student_id = students.id
@@ -79,6 +80,7 @@ class PostulationController extends Controller
             join users on user_id = users.id
             join schools on school_id = schools.id
             join faculties on faculty_id = faculties.id
+            join activities on activity_id = activities.id
             join postulation_state on postulation_state.postulation_id = postulations.id
 			join states on postulation_state.state_id = states.id
             where announcements.subsidy_id = :subsidy_id 
