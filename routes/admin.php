@@ -64,3 +64,4 @@ Route::get('/postulaciones-subvencion/{subsidy}/ultima-convocatoria', [Postulati
 Route::get('/postulaciones-subvencion/{subsidy}/ultima-convocatoria/data', [PostulationController::class, 'last_data'])->middleware(['auth', 'verified'])->name('admin.postulations.last_data');
 
 Route::get('/reportes', [ReportController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.reports.index');
+Route::post('/reporte-general', [ReportController::class, 'general'])->middleware(['auth', 'verified'])->name('admin.reports.general');
