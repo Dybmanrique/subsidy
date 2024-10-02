@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ByFacultyExport;
 use App\Exports\GeneralExport;
 use App\Exports\HistoricalExport;
 use App\Exports\UsersExport;
@@ -32,5 +33,13 @@ class ReportController extends Controller
             'year' => 'required|digits:4|integer|min:1900',
         ]);
         return Excel::download(new HistoricalExport($request->year), 'Reporte Historico.xlsx');
+    }
+    public function by_faculty(Request $request){
+        $request->validate([
+            'activity_id' => 'required|integer',
+            'year' => 'required|digits:4|integer|min:1900',
+        ]);
+        $activity = Activity::findOrFail($request->activity_id);
+        return Excel::download(new ByFacultyExport($request->year, $activity), 'Reporte por Facultades.xlsx');
     }
 }
