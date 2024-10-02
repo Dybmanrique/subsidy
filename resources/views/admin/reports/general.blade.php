@@ -1,7 +1,7 @@
 <table>
     <tbody>
         <tr>
-            <td colspan="4">{{ $activity->name }}</td>
+            <td colspan="4">{{ $activity->name }} ({{ $year }})</td>
         </tr>
         <tr>
             <td width="100px">Modalidad</td>

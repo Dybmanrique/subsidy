@@ -39,6 +39,7 @@ class GeneralExport implements FromView
 
         return view('admin.reports.general', [
             'activity' => $this->activity,
+            'year' => $this->year,
             'activities_approved' => $activities_approved,
             'activities_disapproved' => $activities_disapproved,
         ]);
