@@ -67,3 +67,4 @@ Route::get('/reportes', [ReportController::class, 'index'])->middleware(['auth',
 Route::post('/reporte-general', [ReportController::class, 'general'])->middleware(['auth', 'verified'])->name('admin.reports.general');
 Route::post('/reporte-historico', [ReportController::class, 'historical'])->middleware(['auth', 'verified'])->name('admin.reports.historical');
 Route::post('/reporte-por-facultad', [ReportController::class, 'by_faculty'])->middleware(['auth', 'verified'])->name('admin.reports.by_faculty');
+Route::post('/reporte-por-escuelas', [ReportController::class, 'by_school'])->middleware(['auth', 'verified'])->name('admin.reports.by_school');

@@ -27,7 +27,7 @@
                         </div>
                         <div class="form-group">
                             <label for="year">Año:</label>
-                            <input type="text" id="year" name="year" class="datepicker form-control"/>
+                            <input type="text" id="year" name="year" class="datepicker form-control" autocomplete="off"/>
                         </div>
                         <button class="btn btn-primary" type="submit">Generar</button>
                     </form>
@@ -54,7 +54,43 @@
                         </div>
                         <div class="form-group">
                             <label for="year">Año:</label>
-                            <input type="text" id="year" name="year" class="datepicker form-control"/>
+                            <input type="text" id="year" name="year" class="datepicker form-control" autocomplete="off"/>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Generar</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-primary">
+                <div class="card-header">
+                    REPORTE DE ESCUELAS
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('admin.reports.by_school') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="activity_id">Actividad:</label>
+                            <select name="activity_id" id="activity_id" class="form-control">
+                                <option>-- Seleccione --</option>
+                                @foreach ($activities as $activity)
+                                    <option value="{{ $activity->id }}">{{ $activity->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="faculty_id">Facultad:</label>
+                            <select name="faculty_id" id="faculty_id" class="form-control">
+                                <option>-- Seleccione --</option>
+                                @foreach ($faculties as $faculty)
+                                    <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="year">Año:</label>
+                            <input type="text" id="year" name="year" class="datepicker form-control" autocomplete="off"/>
                         </div>
                         <button class="btn btn-primary" type="submit">Generar</button>
                     </form>
@@ -72,7 +108,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="year">Año:</label>
-                            <input type="text" id="year" name="year" class="datepicker form-control"/>
+                            <input type="text" id="year" name="year" class="datepicker form-control" autocomplete="off"/>
                         </div>
                         <button class="btn btn-primary" type="submit">Generar</button>
                     </form>

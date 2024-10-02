@@ -1,40 +1,29 @@
 <table>
     <tr>
-        <td colspan="3">NOMBRE DE LA SUBVENCIÓN</td>
+        <td>{{ $activity->name }} ({{ $year }})</td>
+        <td>Beneficiarios</td>
+        <td>Presupuesto</td>
     </tr>
     <tr>
-        <td>FACULTAD</td>
-        <td>123</td>
-        <td>1000</td>
+        <td style="font-weight: 700" width="400px">{{ $faculty->name }}</td>
+        <td style="font-weight: 700" width="100px">{{ $total_students }}</td>
+        <td style="font-weight: 700" width="100px">{{ $total_budget }}</td>
     </tr>
-    <tr>
-        <td X</td>
-        <td>32</td>
-        <td>1000</td>
-    </tr>
-    <tr>
-        <td>ESTUDIANTES</td>
-        <td>32</td>
-        <td>1000</td>
-    </tr>
-    <tr>
-        <td>GRADUADOS</td>
-        <td>12</td>
-        <td>1000</td>
-    </tr>
-    <tr>
-        <td Y</td>
-        <td>12</td>
-        <td>1000</td>
-    </tr>
-    <tr>
-        <td>ESTUDIANTES</td>
-        <td>12</td>
-        <td>1000</td>
-    </tr>
-    <tr>
-        <td>GRADUADOS</td>
-        <td>12</td>
-        <td>1000</td>
-    </tr>
+    @foreach ($records as $record)
+        <tr>
+            <td style="font-weight: 700">{{ $record->school }}</td>
+            <td style="font-weight: 700">{{ $record->total_students + $record->total_graduates }}</td>
+            <td style="font-weight: 700">{{ $record->total_budget }}</td>
+        </tr>
+        <tr>
+            <td>Estudiantes</td>
+            <td>{{ $record->total_students }}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Graduados</td>
+            <td>{{ $record->total_graduates }}</td>
+            <td></td>
+        </tr>
+    @endforeach
 </table>
