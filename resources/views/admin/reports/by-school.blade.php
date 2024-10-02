@@ -1,0 +1,40 @@
+<table>
+    <tr>
+        <td colspan="3">NOMBRE DE LA SUBVENCIÓN</td>
+    </tr>
+    <tr>
+        <td>FACULTAD</td>
+        <td>123</td>
+        <td>1000</td>
+    </tr>
+    <tr>
+        <td X</td>
+        <td>32</td>
+        <td>1000</td>
+    </tr>
+    <tr>
+        <td>ESTUDIANTES</td>
+        <td>32</td>
+        <td>1000</td>
+    </tr>
+    <tr>
+        <td>GRADUADOS</td>
+        <td>12</td>
+        <td>1000</td>
+    </tr>
+    <tr>
+        <td Y</td>
+        <td>12</td>
+        <td>1000</td>
+    </tr>
+    <tr>
+        <td>ESTUDIANTES</td>
+        <td>12</td>
+        <td>1000</td>
+    </tr>
+    <tr>
+        <td>GRADUADOS</td>
+        <td>12</td>
+        <td>1000</td>
+    </tr>
+</table>

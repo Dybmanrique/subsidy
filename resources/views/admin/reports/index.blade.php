@@ -31,13 +31,38 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="card card-primary">
+                <div class="card-header">
+                    REPORTE HISTÓRICO
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('admin.reports.historical') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="year">Año:</label>
+                            <input type="text" id="year" name="year" class="datepicker form-control"/>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Generar</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
     </div>
 @stop
 
 @section('css')
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
 @stop
 
 @section('js')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+    <script>
+        $(".datepicker").datepicker({
+            format: " yyyy", // Notice the Extra space at the beginning
+            viewMode: "years",
+            minViewMode: "years"
+        });
+    </script>
 @stop

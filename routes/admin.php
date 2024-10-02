@@ -65,3 +65,4 @@ Route::get('/postulaciones-subvencion/{subsidy}/ultima-convocatoria/data', [Post
 
 Route::get('/reportes', [ReportController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.reports.index');
 Route::post('/reporte-general', [ReportController::class, 'general'])->middleware(['auth', 'verified'])->name('admin.reports.general');
+Route::post('/reporte-historico', [ReportController::class, 'historical'])->middleware(['auth', 'verified'])->name('admin.reports.historical');
