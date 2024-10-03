@@ -377,7 +377,7 @@ return [
         ],
         [
             'text' => 'Usuarios admin',
-            'url' => 'admin/dashboard',
+            'route' => 'admin.users.index',
             'icon' => 'fas fa-fw fa-users-cog',
             'classes' => 'text-uppercase'
         ],

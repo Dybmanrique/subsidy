@@ -9,12 +9,13 @@ use App\Http\Controllers\Admin\SchoolController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\SubsidyController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VicerrectorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('admin.dashboard.index');
-})->name('admin.dashboard');
+})->middleware(['auth', 'verified'])->name('admin.dashboard');
 
 Route::get('/requisitos', [RequirementController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.requirements.index');
 Route::get('/requisitos/data', [RequirementController::class, 'data'])->middleware(['auth', 'verified'])->name('admin.requirements.data');
@@ -71,3 +72,9 @@ Route::post('/reporte-por-facultad', [ReportController::class, 'by_faculty'])->m
 Route::post('/reporte-por-escuelas', [ReportController::class, 'by_school'])->middleware(['auth', 'verified'])->name('admin.reports.by_school');
 
 Route::get('/parametros', [SettingController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.settings.index');
+
+Route::get('/usuarios', [UserController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.users.index');
+Route::get('/usuarios/data', [UserController::class, 'data'])->middleware(['auth', 'verified'])->name('admin.users.data');
+Route::get('/usuarios/crear', [UserController::class, 'create'])->middleware(['auth', 'verified'])->name('admin.users.create');
+Route::get('/usuarios/{user}/editar', [UserController::class, 'edit'])->middleware(['auth', 'verified'])->name('admin.users.edit');
+Route::post('/usuarios/eliminar', [UserController::class, 'destroy'])->middleware(['auth', 'verified'])->name('admin.users.destroy');
