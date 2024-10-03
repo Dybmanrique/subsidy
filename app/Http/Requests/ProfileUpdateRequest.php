@@ -15,6 +15,13 @@ class ProfileUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        if (auth()->user()->is_admin) {
+            return [
+                'name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+            ];
+        }
+        
         return [
             'name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],

@@ -16,12 +16,13 @@
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
-
-        <div>
-            <x-input-label for="dni" :value="__('DNI')" />
-            <x-text-input id="dni" name="dni" type="text" class="mt-1 block w-full text-gray-700" :value="old('dni', $user->student->dni)" disabled autocomplete="dni" />
-            <x-input-error class="mt-2" :messages="$errors->get('dni')" />
-        </div>
+        @if (!$user->is_admin)
+            <div>
+                <x-input-label for="dni" :value="__('DNI')" />
+                <x-text-input id="dni" name="dni" type="text" class="mt-1 block w-full text-gray-700" :value="old('dni', $user->student->dni)" disabled autocomplete="dni" />
+                <x-input-error class="mt-2" :messages="$errors->get('dni')" />
+            </div>
+        @endif
 
         <div>
             <x-input-label for="email" :value="__('Correo Institucional')" />
@@ -58,7 +59,7 @@
             <x-text-input id="last_name" name="last_name" type="text" class="mt-1 block w-full" :value="old('last_name', $user->last_name)" required autofocus autocomplete="last_name" />
             <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
         </div>
-
+        @if (!$user->is_admin)
         <div>
             <x-input-label for="phone" :value="__('Celular')" />
             <x-text-input id="phone" name="phone" type="number" class="mt-1 block w-full" :value="old('phone', $user->student->phone)" required autofocus autocomplete="phone" />
@@ -85,6 +86,8 @@
             </select>
             <x-input-error class="mt-2" :messages="$errors->get('school_id')" />
         </div>
+        @endif
+        
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
