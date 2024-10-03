@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\PostulationController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\RequirementController;
 use App\Http\Controllers\Admin\SchoolController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\SubsidyController;
 use App\Http\Controllers\Admin\VicerrectorController;
@@ -68,3 +69,5 @@ Route::post('/reporte-general', [ReportController::class, 'general'])->middlewar
 Route::post('/reporte-historico', [ReportController::class, 'historical'])->middleware(['auth', 'verified'])->name('admin.reports.historical');
 Route::post('/reporte-por-facultad', [ReportController::class, 'by_faculty'])->middleware(['auth', 'verified'])->name('admin.reports.by_faculty');
 Route::post('/reporte-por-escuelas', [ReportController::class, 'by_school'])->middleware(['auth', 'verified'])->name('admin.reports.by_school');
+
+Route::get('/parametros', [SettingController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.settings.index');

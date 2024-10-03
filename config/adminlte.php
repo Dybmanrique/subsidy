@@ -370,6 +370,12 @@ return [
             'classes' => 'text-uppercase'
         ],
         [
+            'text' => 'Parámetros',
+            'route' => 'admin.settings.index',
+            'icon' => 'fas fa-fw fa-cog',
+            'classes' => 'text-uppercase'
+        ],
+        [
             'text' => 'Usuarios admin',
             'url' => 'admin/dashboard',
             'icon' => 'fas fa-fw fa-users-cog',
@@ -378,7 +384,7 @@ return [
         [
             'text' => 'Roles',
             'url' => 'admin/dashboard',
-            'icon' => 'fas fa-fw fa-cogs',
+            'icon' => 'fas fa-fw fa-key',
             'classes' => 'text-uppercase'
         ],
     ],
