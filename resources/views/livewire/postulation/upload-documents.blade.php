@@ -58,8 +58,10 @@
                                             <x-primary-button>Aceptar</x-primary-button>
                                         </div> --}}
                                         <div class="flex justify-between mt-4">
-                                            <button type="submit" wire:loading.attr="disabled" wire:loading.class="opacity-20 cursor-wait"
-                                                class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Aceptar</button>
+                                            <div wire:target='uploadFile' wire:loading.remove>
+                                                <button type="submit" wire:target='file_modal' wire:loading.attr="disabled" wire:loading.class="opacity-20 cursor-wait"
+                                                    class="inline-flex items-center px-4 py-2 bg-blue-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Aceptar</button>
+                                            </div>
                                             <div wire:loading.flex wire:target='uploadFile' class="flex items-center justify-end">
                                                 <div role="status">
                                                     <svg aria-hidden="true"
@@ -168,7 +170,7 @@
                             <div x-show="openTab === {{ $index }}"
                                 class="border shadow transition-all duration-300 p-6 bg-gray-50 text-medium text-gray-500  rounded-lg w-full">
                                 <h3 class="text-lg font-bold text-gray-900  mb-2">{{ $requirement->name }} ({{ $requirement->pivot->is_required === 1 ? 'Obligatorio' : 'Opcional' }})</h3>
-                                <p class="mb-2">{{ $requirement->description }}</p>
+                                <p class="mb-2">{{ $requirement->description }} (Peso máximo: {{ $requirement->max_megabytes }}Mb)</p>
 
                                 @php
                                     $file_requirement = $postulation->requirements()->where('requirement_id', $requirement->id)->first();

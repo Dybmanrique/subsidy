@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Postulation;
 
+use App\Models\Requirement;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -69,10 +70,11 @@ class UploadDocuments extends Component
     public function uploadFile()
     {
         $this->validate([
-            'file_modal' => 'mimes:pdf,bin'
+            'file_modal' => 'mimes:pdf,bin|max:' . ((Requirement::findOrFail($this->requirement_modal_id)->max_megabytes) * 1024)
         ]);
 
         $requirement = $this->postulation->requirements()->where('requirement_id', $this->requirement_modal_id)->first();
+
         if ($requirement) {
             Storage::delete($requirement->pivot->file);
             $file_location = $this->file_modal->storeAS("public/requirements/$this->requirement_modal_id", Uuid::uuid1()->toString() . '.pdf');
@@ -83,6 +85,7 @@ class UploadDocuments extends Component
             $this->postulation->requirements()->attach([$this->requirement_modal_id => ['file' => $file_location]]);
         }
         $this->model_open = false;
+        $this->reset('file_modal');
     }
 
     public function deleteFile($requirement_id)
