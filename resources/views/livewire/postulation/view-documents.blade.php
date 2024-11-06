@@ -28,7 +28,7 @@
                                 <h3 class="text-lg font-bold text-gray-900  mb-2">{{ $requirement->name }}</h3>
                                 <p class="mb-2">{{ $requirement->description }}</p>
 
-                                <iframe src="{{ Storage::url($requirement->pivot->file) }}"
+                                <iframe src="https://docs.google.com/viewer?url={{ Storage::url($requirement->pivot->file) }}&embedded=true"
                                     {{-- src="https://docs.google.com/viewer?url=https://www.infor.uva.es/~felix/datos/tprg/tr_holamundo.pdf&embedded=true" --}} frameborder="0" class="w-full rounded"
                                     style="height: 25em"></iframe>
 
