@@ -26,7 +26,7 @@ class ByFacultyExport implements FromView
             ->join('postulation_state', 'postulation_state.postulation_id', '=', 'postulations.id')
             ->where('state_id', 5)
             ->where('activity_id', $this->activity->id)
-            ->groupBy('faculties.id')
+            ->groupBy('faculties.id', 'faculties.name')
             ->whereYear('postulations.created_at', $this->year)
             ->get();
 
