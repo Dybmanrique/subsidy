@@ -33,7 +33,7 @@ class BySchoolExport implements FromView
             ->where('state_id', 5)
             ->where('activity_id', $this->activity->id)
             ->where('faculties.id', $this->faculty->id)
-            ->groupBy('schools.id')
+            ->groupBy('school_id')
             ->whereYear('postulations.created_at', $this->year)
             ->get();
 
